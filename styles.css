@@ -22,8 +22,11 @@
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
-  --measure: 68ch;
-  --wrap: 940px;
+  /* Reading measure for prose, and the outer container. The container is wide
+     enough to fill a desktop screen properly; the measure keeps line length
+     readable inside it. */
+  --measure: 76ch;
+  --wrap: 1280px;
 }
 
 /* System dark, unless the user explicitly chose light */
@@ -222,7 +225,7 @@ code {
 
 h1 {
   margin: 0 0 1.5rem;
-  font-size: clamp(2rem, 6.4vw, 3.4rem);
+  font-size: clamp(2rem, 6.4vw, 4.15rem);
   line-height: 1.1;
   letter-spacing: -.028em;
   font-weight: 650;
@@ -235,9 +238,9 @@ h1 em {
 }
 
 .lede {
-  max-width: var(--measure);
+  max-width: 68ch;
   margin: 0;
-  font-size: clamp(1.02rem, 2.1vw, 1.16rem);
+  font-size: clamp(1.02rem, 2.1vw, 1.22rem);
   color: var(--muted);
 }
 
@@ -309,9 +312,9 @@ h2 {
 
 .project {
   display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  gap: 1.75rem;
-  padding: 1.9rem 0;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 2.25rem;
+  padding: 2.1rem 0;
   border-top: 1px solid var(--border);
 }
 .project:last-child { border-bottom: 1px solid var(--border); }
@@ -483,6 +486,27 @@ h2 {
   gap: .4rem 1.5rem;
 }
 .site-footer p { margin: 0; }
+
+/* ---------- wide screens ----------
+   Past this width the bullet list would otherwise leave a long empty gutter,
+   so it runs in two columns. Bullets are self-contained, so splitting them
+   across columns reads fine as long as none is broken in half. */
+
+@media (min-width: 1180px) {
+  .project-points {
+    max-width: none;
+    columns: 2;
+    column-gap: 2.5rem;
+    display: block;
+  }
+  .project-points li {
+    break-inside: avoid;
+    margin-bottom: .8rem;
+  }
+  .project-points li:last-child { margin-bottom: 0; }
+
+  .project-tagline { max-width: 88ch; }
+}
 
 /* ---------- narrow screens ---------- */
 

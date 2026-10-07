@@ -1,6 +1,6 @@
 /* Marine bot demo — specifics on top of ../demo.css */
 
-:root { --wrap: 820px; }
+:root { --wrap: 1180px; }
 
 /* ---------- controls ---------- */
 
@@ -96,6 +96,12 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: .8rem;
+}
+
+/* There are exactly four activities, so pin them to 2x2 on desktop rather than
+   letting auto-fit produce a row of three and an orphan. */
+@media (min-width: 900px) {
+  .activities { grid-template-columns: repeat(2, 1fr); }
 }
 
 .activity {

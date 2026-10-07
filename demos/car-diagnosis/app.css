@@ -1,5 +1,9 @@
 /* Car diagnosis demo — specifics on top of ../demo.css */
 
+/* A one-question-at-a-time flow reads better in a narrower column than the
+   data-heavy demos, so this one overrides the shared container width. */
+:root { --wrap: 900px; }
+
 .loading { color: var(--muted); font-size: .95rem; }
 .muted { color: var(--muted); }
 
@@ -19,6 +23,7 @@
 }
 
 .question-text {
+  max-width: 40ch;
   margin: 0 0 1.3rem;
   font-size: clamp(1.1rem, 3vw, 1.3rem);
   line-height: 1.35;
@@ -31,6 +36,7 @@
 .options {
   display: grid;
   gap: .55rem;
+  max-width: 640px;
 }
 
 .option {

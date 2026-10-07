@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mohamed Amar Selmani — AI &amp; Software Engineer</title>
+<meta name="description" content="Computer science graduate building AI systems with guardrails: role-scoped LLM platforms, deterministic safety engines, and applied machine learning.">
+<meta name="author" content="Mohamed Amar Selmani">
+<link rel="canonical" href="https://amarselmani.github.io/">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mohamed Amar Selmani — AI &amp; Software Engineer">
+<meta property="og:description" content="I build AI systems that are careful about what they claim.">
+<meta property="og:url" content="https://amarselmani.github.io/">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#work">Skip to projects</a>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">MS</span>
+      <span class="brand-name">Mohamed Amar Selmani</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+      <span aria-hidden="true">&#9686;</span>
+    </button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="eyebrow">Computer Science &middot; Algeria</p>
+    <h1>I build AI systems that are<br><em>careful about what they claim.</em></h1>
+    <p class="lede">
+      Most of my work sits where machine learning meets real consequences &mdash; a safety rating
+      someone acts on, a report a manager trusts, a permission boundary that must not leak.
+      I like putting deterministic code in charge of the decision, and letting the model do only
+      the part it is actually good at.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#work">See the work</a>
+      <a class="btn" href="https://github.com/AmarSELMANI" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="section">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <p class="section-sub">Four projects, in the order I would want you to read them.</p>
+    </div>
+
+    <!-- Project 1 - NAFTAL -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="tag-year">2026</span>
+        <span class="project-kind">Full-stack AI platform</span>
+      </div>
+      <div class="project-body">
+        <h3>NAFTAL &mdash; Espace IA Interne</h3>
+        <p class="project-tagline">
+          A role-scoped internal AI platform for Naftal, Algeria's national fuel distributor.
+          Employees sign in, the backend resolves their role, district and centre, and a
+          <strong>fully local</strong> model produces grounded, cited French reports from the
+          company's own operational data &mdash; nothing ever leaves the machine.
+        </p>
+        <ul class="project-points">
+          <li>
+            <strong>The permission boundary is the product.</strong> A dedicated security test suite
+            runs against the real database and proves that no user &mdash; and no prompt-injected
+            instruction to the AI &mdash; can read data outside their own district or centre.
+          </li>
+          <li>
+            <strong>Grounded, not merely fluent.</strong> The agent calls tools for real figures and
+            cites them, rather than narrating plausible-sounding numbers.
+          </li>
+          <li>
+            <strong>A whole product, not a notebook.</strong> Auth with OTP, brute-force lockout,
+            password reset, an admin account lifecycle in which an applicant never chooses their own
+            scope, analytics with PDF export, and 57 tests.
+          </li>
+        </ul>
+        <ul class="stack" aria-label="Technologies used">
+          <li>FastAPI</li><li>React</li><li>TypeScript</li><li>Tailwind</li>
+          <li>Ollama &middot; qwen2.5:14b</li><li>bge-m3</li><li>Qdrant</li><li>SQL Server</li><li>JWT</li>
+        </ul>
+        <div class="project-links">
+          <span class="badge badge-wip">Public demo in progress</span>
+          <span class="muted-note">Private repository &mdash; walkthrough available on request</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 2 - Marine bot -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="tag-year">2026</span>
+        <span class="project-kind">LLM system design</span>
+      </div>
+      <div class="project-body">
+        <h3>Algerian Coast Marine Weather Bot</h3>
+        <p class="project-tagline">
+          A Telegram bot that rates conditions for sailing, fishing and swimming across six cities on
+          the Algerian Mediterranean coast, every morning at 07:00. Marine forecasts are easy to find
+          and hard to read &mdash; &ldquo;1.2&nbsp;m at 4&nbsp;s&rdquo; and &ldquo;1.2&nbsp;m at
+          9&nbsp;s&rdquo; are the same number and completely different days on the water.
+        </p>
+        <ul class="project-points">
+          <li>
+            <strong>Code decides, the model writes.</strong> Every rating comes from plain JavaScript
+            over the forecast data. The LLM receives an assessment that is already final and turns it
+            into readable prose &mdash; it cannot change a rating, because the ratings are re-stamped
+            from the deterministic assessment after the response is parsed.
+          </li>
+          <li>
+            <strong>Four gates on the model's output,</strong> including numeric traceability: any
+            number in the prose that matches no real measurement rejects the response. Failing a gate
+            costs nothing, because the deterministic report was rendered before the model was called.
+          </li>
+          <li>
+            <strong>One model's number is not the answer.</strong> Asked about the same hour at the
+            same point, four wave models disagreed by 0.62&nbsp;m at worst &mdash; against a swimming
+            caution band 0.50&nbsp;m wide. The bot combines curated models in whichever direction is
+            conservative for each variable, and says so when they disagree.
+          </li>
+          <li>
+            <strong>Measuring it found two real bugs.</strong> Combining WMO weather codes by
+            <code>max</code> ranks snow above heavy rain and lets a single model outvote the rest
+            &mdash; one model produced 32 of 33 forecast thunderstorm hours. Together with a spread
+            computed over the wrong hours, these had the bot rating AVOID on 67&ndash;72% of samples.
+            A report that never says yes gets ignored, which is a safety failure of its own.
+          </li>
+        </ul>
+        <ul class="stack" aria-label="Technologies used">
+          <li>Node.js</li><li>n8n</li><li>Open-Meteo</li><li>Gemini</li>
+          <li>Supabase &middot; Postgres</li><li>Telegram API</li><li>183 tests</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-small" href="https://github.com/AmarSELMANI/algerian-coast-marine-bot" target="_blank" rel="noopener noreferrer">Source &#8599;</a>
+          <span class="badge badge-wip">Live bot in progress</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 3 - Expert system -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="tag-year">2026</span>
+        <span class="project-kind">Symbolic AI</span>
+      </div>
+      <div class="project-body">
+        <h3>Car Diagnosis Expert System</h3>
+        <p class="project-tagline">
+          A rule-based expert system that diagnoses car faults by asking the questions a mechanic
+          would. A forward-chaining inference engine walks a JSON rule base, choosing what to ask
+          next from what it has already established.
+        </p>
+        <ul class="project-points">
+          <li>
+            <strong>Knowledge separated from code.</strong> Rules and questions live in JSON, so the
+            knowledge base can grow without anyone touching the engine.
+          </li>
+          <li>
+            <strong>Explainable by construction.</strong> Every conclusion traces back through the
+            rules that fired &mdash; the opposite of a black box.
+          </li>
+        </ul>
+        <ul class="stack" aria-label="Technologies used">
+          <li>Python</li><li>Forward chaining</li><li>JSON rule base</li><li>Tkinter</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-small" href="https://github.com/AmarSELMANI/Car_Diagnosis_Expert_System" target="_blank" rel="noopener noreferrer">Source &#8599;</a>
+          <span class="badge badge-wip">Browser version in progress</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 4 - CNN -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="tag-year">2025</span>
+        <span class="project-kind">Deep learning</span>
+      </div>
+      <div class="project-body">
+        <h3>Moths vs. Butterflies &mdash; CNN Image Classifier</h3>
+        <p class="project-tagline">
+          A convolutional neural network that separates two visually similar classes, trained on a
+          Kaggle set of 40 butterfly and moth species relabelled for binary classification. Built
+          during my third year of bachelor studies.
+        </p>
+        <ul class="project-points">
+          <li>
+            <strong>The interesting part is the class boundary.</strong> Moths and butterflies are
+            close enough that the network has to learn wing posture and texture, not just colour.
+          </li>
+          <li>
+            Preprocessing, normalisation and data augmentation; binary cross-entropy with Adam;
+            stable training and validation performance.
+          </li>
+        </ul>
+        <ul class="stack" aria-label="Technologies used">
+          <li>TensorFlow</li><li>Keras</li><li>NumPy</li><li>Matplotlib</li><li>Colab</li>
+        </ul>
+        <div class="project-links">
+          <a class="btn btn-small" href="https://github.com/AmarSELMANI/CNN_Moth_VS_Butterflie_imageclassifier" target="_blank" rel="noopener noreferrer">Notebook &#8599;</a>
+          <span class="badge badge-wip">Interactive demo in progress</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="section-head">
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <p>Python &middot; JavaScript &middot; TypeScript &middot; SQL</p>
+      </div>
+      <div class="skill-group">
+        <h3>AI &amp; ML</h3>
+        <p>LLM application design &middot; RAG &middot; agents and tool use &middot; output validation and guardrails &middot; prompt-injection defence &middot; TensorFlow / Keras &middot; local inference with Ollama &middot; embeddings and vector search</p>
+      </div>
+      <div class="skill-group">
+        <h3>Backend</h3>
+        <p>FastAPI &middot; Node.js &middot; REST API design &middot; JWT auth and authorisation scoping &middot; PostgreSQL &middot; SQL Server &middot; pytest</p>
+      </div>
+      <div class="skill-group">
+        <h3>Frontend</h3>
+        <p>React &middot; Vite &middot; Tailwind CSS &middot; semantic, accessible HTML and CSS</p>
+      </div>
+      <div class="skill-group">
+        <h3>Practice</h3>
+        <p>Git &middot; automated testing &middot; n8n workflow automation &middot; technical writing and documentation</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="section-head">
+      <h2>About</h2>
+    </div>
+    <div class="prose">
+      <p>
+        I'm Mohamed Amar Selmani, a computer science graduate of Saad Dahlab
+        University&nbsp;&ndash;&nbsp;Blida&nbsp;1.
+      </p>
+      <p>
+        What runs through my projects is a preference for systems that know the limits of their own
+        evidence. The marine bot refuses to say &ldquo;safe&rdquo; in any language, and reports an
+        unchecked warning source as unchecked rather than as clear. The Naftal platform proves its
+        permission boundary in a test suite instead of asserting it in a README. The expert system can
+        show you exactly which rules produced its answer. I would rather ship something that says
+        &ldquo;I don't know&rdquo; correctly than something that is confidently wrong.
+      </p>
+      <p>
+        I also write things down. Each repository documents not only what the system does, but what it
+        does <em>not</em> establish &mdash; usually the more useful half.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section section-contact">
+    <div class="section-head">
+      <h2>Get in touch</h2>
+      <p class="section-sub">Open to engineering roles, internships and collaboration.</p>
+    </div>
+    <div class="contact-links">
+      <a class="btn btn-primary" href="mailto:REPLACE_WITH_YOUR_EMAIL">Email me</a>
+      <a class="btn" href="https://github.com/AmarSELMANI" target="_blank" rel="noopener noreferrer">GitHub &#8599;</a>
+      <a class="btn" href="REPLACE_WITH_YOUR_LINKEDIN" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year">2026</span> Mohamed Amar Selmani</p>
+  <p class="footer-note">Built as plain HTML and CSS. No framework, no build step, no tracking.</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

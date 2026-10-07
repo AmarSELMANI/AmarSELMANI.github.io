@@ -94,14 +94,20 @@
             password reset, an admin account lifecycle in which an applicant never chooses their own
             scope, analytics with PDF export, and 57 tests.
           </li>
+          <li>
+            <strong>About the public demo:</strong> it is the real frontend on synthetic data, with
+            scope filtering applied per request so the isolation can be seen by switching accounts.
+            A 14B-parameter local model will not run on free hosting, so the assistant's prose is
+            pre-written there &mdash; the figures it quotes are still computed from the seeded data.
+          </li>
         </ul>
         <ul class="stack" aria-label="Technologies used">
           <li>FastAPI</li><li>React</li><li>TypeScript</li><li>Tailwind</li>
           <li>Ollama &middot; qwen2.5:14b</li><li>bge-m3</li><li>Qdrant</li><li>SQL Server</li><li>JWT</li>
         </ul>
         <div class="project-links">
-          <span class="badge badge-wip">Public demo in progress</span>
-          <span class="muted-note">Private repository &mdash; walkthrough available on request</span>
+          <a class="btn btn-small btn-primary" href="demos/naftal/">Live demo &#8594;</a>
+          <span class="muted-note">Sign in as <code>com212</code>, <code>cdd208g</code> or <code>Admin</code> &mdash; synthetic data, OTP shown on screen</span>
         </div>
       </div>
     </article>

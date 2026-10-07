@@ -60,3 +60,23 @@ site. No backend and no API keys.
 Both demos copy data or code from their source repositories rather than
 importing across repos. If the knowledge base or the engine changes upstream,
 re-copy the files listed above.
+
+### Naftal demo
+
+`demos/naftal/` is a production build of the platform's real React frontend with
+`VITE_DEMO=1`. In that mode:
+
+- `src/lib/api.ts` answers every request from `src/lib/demo-api.ts` in the
+  browser instead of calling the FastAPI backend;
+- `src/lib/assistant.ts` streams a pre-written answer through the same SSE
+  callback sequence the real endpoint uses;
+- the router switches to `HashRouter`, because GitHub Pages has no SPA rewrite
+  and a refresh on `/admin` would otherwise 404.
+
+All data is synthetic and lives in `src/lib/demo-data.ts`. Scope filtering is
+computed from that centre table, so signing in as a different demo account
+genuinely changes the aggregates. The sources for this build are kept in the
+platform repository, not here — this folder holds only the compiled output.
+
+To rebuild it: `VITE_DEMO=1 npm run build` in the platform's `frontend/`, then
+copy `dist/` over `demos/naftal/`.

@@ -1,0 +1,252 @@
+[
+  {
+    "id": "main_symptom",
+    "text": "What general symptom are you experiencing?",
+    "options": [
+      {"text": "Starting issues", "fact": {"main_symptom": "starting_issues"}},
+      {"text": "Abnormal noises", "fact": {"main_symptom": "abnormal_noises"}},
+      {"text": "Performance loss", "fact": {"main_symptom": "performance_loss"}},
+      {"text": "Electrical issues", "fact": {"main_symptom": "electrical_issues"}},
+      {"text": "Overheating", "fact": {"main_symptom": "overheating"}},
+      {"text": "Smoke / Exhaust", "fact": {"main_symptom": "smoke_exhaust"}},
+      {"text": "Brakes / Steering", "fact": {"main_symptom": "braking_steering"}},
+      {"text": "Transmission", "fact": {"main_symptom": "transmission"}}
+    ],
+    "prerequisite": {}
+  },
+
+  {
+    "id": "engine_does_not_crank",
+    "text": "Does the engine crank when you turn the key?",
+    "options": [
+      {"text": "No, engine does not crank", "fact": {"engine_does_not_crank": true}},
+      {"text": "Yes, engine cranks", "fact": {"engine_does_not_crank": false}}
+    ],
+    "prerequisite": {"main_symptom": "starting_issues"}
+  },
+  {
+    "id": "headlights_dim",
+    "text": "Are the headlights dim or very weak?",
+    "options": [
+      {"text": "Yes", "fact": {"headlights_dim": true}},
+      {"text": "No", "fact": {"headlights_dim": false}}
+    ],
+    "prerequisite": {"main_symptom": ["starting_issues", "electrical_issues"]}
+  },
+  {
+    "id": "clicking_sound",
+    "text": "Do you hear a clicking sound when trying to start?",
+    "options": [
+      {"text": "Yes", "fact": {"clicking_sound": true}},
+      {"text": "No", "fact": {"clicking_sound": false}}
+    ],
+    "prerequisite": {"main_symptom": ["starting_issues", "abnormal_noises"]}
+  },
+  {
+    "id": "engine_cranks",
+    "text": "Does the engine crank (turn over) when you try to start it?",
+    "options": [
+      {"text": "Yes", "fact": {"engine_cranks": true}},
+      {"text": "No", "fact": {"engine_cranks": false}}
+    ],
+    "prerequisite": {"main_symptom": "starting_issues"}
+  },
+  {
+    "id": "engine_wont_start",
+    "text": "Even though it cranks, won't the engine actually start and run?",
+    "options": [
+      {"text": "Yes, it won't start", "fact": {"engine_wont_start": true}},
+      {"text": "No, it starts fine", "fact": {"engine_wont_start": false}}
+    ],
+    "prerequisite": {"main_symptom": "starting_issues"}
+  },
+  {
+    "id": "fuel_smell",
+    "text": "Do you smell fuel/gasoline?",
+    "options": [
+      {"text": "Yes", "fact": {"fuel_smell": true}},
+      {"text": "No", "fact": {"fuel_smell": false}}
+    ],
+    "prerequisite": {"main_symptom": ["starting_issues", "performance_loss"]}
+  },
+  {
+    "id": "no_spark",
+    "text": "Is there no spark at the spark plugs?",
+    "options": [
+      {"text": "Yes, no spark", "fact": {"no_spark": true}},
+      {"text": "No, spark is present", "fact": {"no_spark": false}}
+    ],
+    "prerequisite": {"main_symptom": ["starting_issues", "performance_loss"]}
+  },
+  {
+    "id": "battery_warning_light_on",
+    "text": "Is the battery/warning light illuminated on the dash?",
+    "options": [
+      {"text": "Yes", "fact": {"battery_warning_light_on": true}},
+      {"text": "No", "fact": {"battery_warning_light_on": false}}
+    ],
+    "prerequisite": {"main_symptom": ["starting_issues", "electrical_issues", "performance_loss"]}
+  },
+  {
+    "id": "engine_stalls",
+    "text": "Does the engine stall or cut out while driving or idling?",
+    "options": [
+      {"text": "Yes", "fact": {"engine_stalls": true}},
+      {"text": "No", "fact": {"engine_stalls": false}}
+    ],
+    "prerequisite": {"main_symptom": ["performance_loss", "starting_issues"]}
+  },
+  {
+    "id": "overheating",
+    "text": "Is the engine overheating?",
+    "options": [
+      {"text": "Yes", "fact": {"overheating": true}},
+      {"text": "No", "fact": {"overheating": false}}
+    ],
+    "prerequisite": {"main_symptom": "overheating"}
+  },
+  {
+    "id": "coolant_low",
+    "text": "Is the coolant level low?",
+    "options": [
+      {"text": "Yes", "fact": {"coolant_low": true}},
+      {"text": "No", "fact": {"coolant_low": false}}
+    ],
+    "prerequisite": {"main_symptom": "overheating"}
+  },
+  {
+    "id": "radiator_fan_not_working",
+    "text": "Is the radiator cooling fan not working?",
+    "options": [
+      {"text": "Yes, fan not working", "fact": {"radiator_fan_not_working": true}},
+      {"text": "No, fan works", "fact": {"radiator_fan_not_working": false}}
+    ],
+    "prerequisite": {"main_symptom": "overheating"}
+  },
+  {
+    "id": "oil_warning_light_on",
+    "text": "Is the oil pressure warning light on?",
+    "options": [
+      {"text": "Yes", "fact": {"oil_warning_light_on": true}},
+      {"text": "No", "fact": {"oil_warning_light_on": false}}
+    ],
+    "prerequisite": {"main_symptom": ["performance_loss", "overheating"]}
+  },
+  {
+    "id": "smoke_exhaust",
+    "text": "Is there smoke coming from the exhaust?",
+    "options": [
+      {"text": "Yes", "fact": {"smoke_exhaust": true}},
+      {"text": "No", "fact": {"smoke_exhaust": false}}
+    ],
+    "prerequisite": {"main_symptom": "smoke_exhaust"}
+  },
+  {
+    "id": "rough_idle",
+    "text": "Does the engine have a rough idle (shaking at standstill)?",
+    "options": [
+      {"text": "Yes", "fact": {"rough_idle": true}},
+      {"text": "No", "fact": {"rough_idle": false}}
+    ],
+    "prerequisite": {"main_symptom": "performance_loss"}
+  },
+  {
+    "id": "misfire",
+    "text": "Does the engine misfire or run unevenly?",
+    "options": [
+      {"text": "Yes", "fact": {"misfire": true}},
+      {"text": "No", "fact": {"misfire": false}}
+    ],
+    "prerequisite": {"main_symptom": "performance_loss"}
+  },
+  {
+    "id": "check_engine_light",
+    "text": "Is the check engine light illuminated?",
+    "options": [
+      {"text": "Yes", "fact": {"check_engine_light": true}},
+      {"text": "No", "fact": {"check_engine_light": false}}
+    ],
+    "prerequisite": {"main_symptom": "performance_loss"}
+  },
+  {
+    "id": "poor_fuel_economy",
+    "text": "Is the fuel economy worse than normal?",
+    "options": [
+      {"text": "Yes", "fact": {"poor_fuel_economy": true}},
+      {"text": "No", "fact": {"poor_fuel_economy": false}}
+    ],
+    "prerequisite": {"main_symptom": "performance_loss"}
+  },
+  {
+    "id": "gear_slipping",
+    "text": "Does the transmission slip or fail to hold gears?",
+    "options": [
+      {"text": "Yes", "fact": {"gear_slipping": true}},
+      {"text": "No", "fact": {"gear_slipping": false}}
+    ],
+    "prerequisite": {"main_symptom": "transmission"}
+  },
+  {
+    "id": "delayed_acceleration",
+    "text": "Is acceleration delayed or sluggish?",
+    "options": [
+      {"text": "Yes", "fact": {"delayed_acceleration": true}},
+      {"text": "No", "fact": {"delayed_acceleration": false}}
+    ],
+    "prerequisite": {"main_symptom": "transmission"}
+  },
+  {
+    "id": "brake_pedal_soft",
+    "text": "Is the brake pedal soft or goes to the floor?",
+    "options": [
+      {"text": "Yes", "fact": {"brake_pedal_soft": true}},
+      {"text": "No", "fact": {"brake_pedal_soft": false}}
+    ],
+    "prerequisite": {"main_symptom": "braking_steering"}
+  },
+  {
+    "id": "brake_fluid_low",
+    "text": "Is the brake fluid level low?",
+    "options": [
+      {"text": "Yes", "fact": {"brake_fluid_low": true}},
+      {"text": "No", "fact": {"brake_fluid_low": false}}
+    ],
+    "prerequisite": {"main_symptom": "braking_steering"}
+  },
+  {
+    "id": "steering_vibration",
+    "text": "Does the steering wheel vibrate at certain speeds?",
+    "options": [
+      {"text": "Yes", "fact": {"steering_vibration": true}},
+      {"text": "No", "fact": {"steering_vibration": false}}
+    ],
+    "prerequisite": {"main_symptom": "braking_steering"}
+  },
+  {
+    "id": "uneven_tire_wear",
+    "text": "Is there uneven wear on the tires?",
+    "options": [
+      {"text": "Yes", "fact": {"uneven_tire_wear": true}},
+      {"text": "No", "fact": {"uneven_tire_wear": false}}
+    ],
+    "prerequisite": {"main_symptom": "braking_steering"}
+  },
+  {
+    "id": "loud_exhaust_noise",
+    "text": "Is there loud noise from the exhaust?",
+    "options": [
+      {"text": "Yes", "fact": {"loud_exhaust_noise": true}},
+      {"text": "No", "fact": {"loud_exhaust_noise": false}}
+    ],
+    "prerequisite": {"main_symptom": ["abnormal_noises", "performance_loss", "smoke_exhaust"]}
+  },
+  {
+    "id": "poor_acceleration",
+    "text": "Is acceleration poor or weak?",
+    "options": [
+      {"text": "Yes", "fact": {"poor_acceleration": true}},
+      {"text": "No", "fact": {"poor_acceleration": false}}
+    ],
+    "prerequisite": {"main_symptom": ["performance_loss", "transmission"]}
+  }
+]

@@ -46,3 +46,17 @@ Two placeholders in `index.html` need real values:
 
 - `REPLACE_WITH_YOUR_EMAIL` — the address you want publicly visible.
 - `REPLACE_WITH_YOUR_LINKEDIN` — your profile URL, or delete that `<a>` block.
+
+## Live demos
+
+Each demo is a static page under `demos/`, served from the same GitHub Pages
+site. No backend and no API keys.
+
+| Demo | What runs | Path |
+|---|---|---|
+| Car diagnosis | `engine.js`, a direct port of `inference_engine.py`, over the same `rules.json` and `questions.json` the desktop app reads. Verified against the Python original across all 2,612 answer paths — identical diagnosis and identical rule-firing order on every one. | `demos/car-diagnosis/` |
+| Marine bot | The bot's own `src/` modules, copied verbatim into `demos/marine-bot/engine/`, fetching a live forecast from Open-Meteo in the browser. Deterministic assessment only — no LLM, so no key is needed. | `demos/marine-bot/` |
+
+Both demos copy data or code from their source repositories rather than
+importing across repos. If the knowledge base or the engine changes upstream,
+re-copy the files listed above.

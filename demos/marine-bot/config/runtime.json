@@ -1,0 +1,49 @@
+{
+  "_comment": "Operational settings the workflows read. Changing the model or the batch sizes is a config edit plus `npm run build` - no node editing in n8n.",
+  "llm": {
+    "provider": "google-gemini",
+    "_model_note": "Verified against the live API on 2026-08-29 with scripts/check-gemini-models.mjs. Google rotates model IDs and free-tier quotas - re-check if reports start falling back.",
+    "model": "gemini-3.5-flash",
+    "temperature": 0.2,
+    "timeout_ms": 25000,
+    "_token_note": "Gemini bills internal reasoning against maxOutputTokens. Measured on this prompt with thinking on: 1148 thinking tokens of a 1200 budget, 37 left for the answer, response truncated. With thinking off the report needs ~570. Re-measure with scripts/test-llm-call.mjs after changing the prompt or the model.",
+    "max_output_tokens": 2048,
+    "thinking_budget": 0
+  },
+  "cache": {
+    "_comment": "How long a stored report may be reused. Short enough that an afternoon /report reflects a newer model run; long enough to keep the free tier comfortable.",
+    "hours": 3
+  },
+  "broadcast": {
+    "_comment": "generation_* paces report generation against the LLM free tier (~10-15 requests/minute). send_* paces Telegram delivery, which allows roughly 30 messages/second globally but is far happier below that.",
+    "generation_batch_size": 2,
+    "generation_delay_seconds": 5,
+    "send_batch_size": 20,
+    "send_delay_seconds": 1
+  },
+  "telegram": {
+    "parse_mode": "HTML",
+    "max_message_chars": 4096
+  },
+  "ensemble": {
+    "_comment": "Several independent models are queried and combined conservatively, because measured disagreement between them is wider than the rating boundaries it feeds: 0.33 m mean on wave height against a 0.50 m CAUTION band, and 10.9 kt mean on peak gust against a 5 kt band (scripts/model-spread.mjs, scripts/wind-spread.mjs, 2026-08-29).",
+
+    "_marine_note": "All four are credible for the western Mediterranean. mfwam is rejected by the API and meteofrance_wave is the same product under its supported name.",
+    "marine_models": ["ewam", "gwam", "ecmwf_wam025", "meteofrance_wave"],
+
+    "_atmospheric_note": "Deliberately excludes gfs_seamless, which averaged 12.1 kt where the others averaged 20-22 kt across the same six sites - at ~25 km resolution it cannot resolve this coastline, so it is an outlier rather than a peer. Also excludes icon_seamless, which returned values identical to icon_eu: counting the same model twice would manufacture false agreement.",
+    "atmospheric_models": ["icon_eu", "ecmwf_ifs025", "ukmo_seamless"]
+  },
+
+  "api": {
+    "forecast_url": "https://api.open-meteo.com/v1/forecast",
+    "marine_url": "https://marine-api.open-meteo.com/v1/marine",
+    "forecast_days": 2,
+    "timeout_ms": 20000,
+    "forecast_hourly": "temperature_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_direction_10m,wind_gusts_10m",
+
+    "_marine_split_note": "The pinned wave models carry sea state only - no sea-surface temperature and no currents. Requesting them alongside the wave variables returns nulls, which capped swimming at CAUTION every day for a self-inflicted missing-data reason. They therefore come from a second, unpinned request and are merged by timestamp.",
+    "marine_hourly": "wave_height,wave_direction,wave_period,wind_wave_height,wind_wave_direction,wind_wave_period,swell_wave_height,swell_wave_direction,swell_wave_period",
+    "sea_state_hourly": "sea_surface_temperature,ocean_current_velocity,ocean_current_direction"
+  }
+}

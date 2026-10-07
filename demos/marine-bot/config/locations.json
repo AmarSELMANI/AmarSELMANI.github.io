@@ -1,0 +1,97 @@
+{
+  "_comment": "Nearshore forecast points for the Algerian Mediterranean coast. Each point is moved 3-6 km offshore of the city so the marine model returns sea-state rather than nulls or land-contaminated values. 'exposure' records which swell directions reach the site unobstructed - it is the single biggest reason two points 10 km apart can behave completely differently. THESE ARE DESK ESTIMATES: before relying on them, review each against the actual beach, marina and bay with someone who sails there.",
+  "version": "1.0.0",
+  "timezone": "Africa/Algiers",
+  "locations": [
+    {
+      "id": "algiers",
+      "name_en": "Algiers",
+      "name_fr": "Alger",
+      "name_ar": "الجزائر",
+      "latitude": 36.8200,
+      "longitude": 3.1000,
+      "city_latitude": 36.7525,
+      "city_longitude": 3.0420,
+      "exposure": {
+        "open_sectors_deg": [340, 90],
+        "sheltered_from": "W and SW swell (Cap Caxine headland)",
+        "notes": "Bay of Algiers opens NE. The commercial port and Sidi Fredj marina are far better sheltered than the open beaches east of the bay."
+      }
+    },
+    {
+      "id": "oran",
+      "name_en": "Oran",
+      "name_fr": "Oran",
+      "name_ar": "وهران",
+      "latitude": 35.7550,
+      "longitude": -0.6250,
+      "city_latitude": 35.6970,
+      "city_longitude": -0.6300,
+      "exposure": {
+        "open_sectors_deg": [300, 60],
+        "sheltered_from": "S and SE",
+        "notes": "Gulf of Oran opens N/NW. Strong exposure to NW swell; Mers el-Kebir is markedly more sheltered than the eastern gulf."
+      }
+    },
+    {
+      "id": "bejaia",
+      "name_en": "Bejaia",
+      "name_fr": "Béjaïa",
+      "name_ar": "بجاية",
+      "latitude": 36.7900,
+      "longitude": 5.1000,
+      "city_latitude": 36.7509,
+      "city_longitude": 5.0567,
+      "exposure": {
+        "open_sectors_deg": [20, 130],
+        "sheltered_from": "W and NW swell (Cap Carbon / Mont Gouraya)",
+        "notes": "The bay opens E/SE. Cap Carbon blocks the dominant NW swell, so Bejaia is often workable when Algiers is not. claude.md listed 36.7525 here, identical to the Algiers latitude - corrected."
+      }
+    },
+    {
+      "id": "annaba",
+      "name_en": "Annaba",
+      "name_fr": "Annaba",
+      "name_ar": "عنابة",
+      "latitude": 36.9600,
+      "longitude": 7.7800,
+      "city_latitude": 36.9000,
+      "city_longitude": 7.7667,
+      "exposure": {
+        "open_sectors_deg": [330, 90],
+        "sheltered_from": "S and SW",
+        "notes": "Gulf of Annaba opens N/NE, bounded W by Cap de Garde. Long fetch to the NE."
+      }
+    },
+    {
+      "id": "skikda",
+      "name_en": "Skikda",
+      "name_fr": "Skikda",
+      "name_ar": "سكيكدة",
+      "latitude": 36.9300,
+      "longitude": 6.9100,
+      "city_latitude": 36.8700,
+      "city_longitude": 6.9100,
+      "exposure": {
+        "open_sectors_deg": [300, 80],
+        "sheltered_from": "S",
+        "notes": "Straight, north-facing coast with little natural shelter outside the port. Fully exposed to N and NW swell."
+      }
+    },
+    {
+      "id": "mostaganem",
+      "name_en": "Mostaganem",
+      "name_fr": "Mostaganem",
+      "name_ar": "مستغانم",
+      "latitude": 35.9800,
+      "longitude": 0.0900,
+      "city_latitude": 35.9300,
+      "city_longitude": 0.0900,
+      "exposure": {
+        "open_sectors_deg": [300, 70],
+        "sheltered_from": "S and SE",
+        "notes": "Eastern side of the Gulf of Arzew, north-facing. Exposed to NW swell wrapping into the gulf."
+      }
+    }
+  ]
+}

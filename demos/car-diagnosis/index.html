@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Car Diagnosis Expert System — live demo</title>
+<meta name="description" content="A rule-based expert system that diagnoses car faults and shows exactly which rules produced its answer. Runs entirely in your browser.">
+<link rel="icon" href="../../favicon.svg">
+<link rel="stylesheet" href="../demo.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="demo-header">
+  <div class="demo-header-inner">
+    <a class="back-link" href="../../">&#8592; Mohamed Amar Selmani</a>
+    <a class="repo-link" href="https://github.com/AmarSELMANI/Car_Diagnosis_Expert_System" target="_blank" rel="noopener noreferrer">Source &#8599;</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="demo-intro">
+    <p class="eyebrow">Live demo &middot; Symbolic AI</p>
+    <h1>Car Diagnosis Expert System</h1>
+    <p>
+      Answer the questions a mechanic would ask. A forward-chaining inference engine walks a
+      knowledge base of 30 rules and tells you not just what it thinks is wrong, but exactly which
+      rules fired to get there. Everything runs in your browser &mdash; no server, no network calls.
+    </p>
+  </div>
+
+  <!-- Question wizard -->
+  <section id="quiz" class="card" aria-live="polite">
+    <div id="loading" class="loading">Loading the knowledge base&hellip;</div>
+
+    <div id="question-view" hidden>
+      <div class="progress-row">
+        <span id="progress-label" class="mono progress-label"></span>
+        <button id="restart-top" class="btn btn-ghost btn-small" type="button">Start over</button>
+      </div>
+      <h2 id="question-text" class="question-text"></h2>
+      <div id="options" class="options"></div>
+      <div class="nav-row">
+        <button id="back-btn" class="btn btn-ghost btn-small" type="button">&#8592; Back</button>
+      </div>
+    </div>
+
+    <div id="error-view" hidden>
+      <h2 class="question-text">The knowledge base could not be loaded.</h2>
+      <p class="muted">Reload the page to try again.</p>
+    </div>
+  </section>
+
+  <!-- Result -->
+  <section id="result" class="result" hidden>
+    <div id="verdict" class="card verdict"></div>
+
+    <details id="trace-details" class="trace">
+      <summary>Show the reasoning &mdash; which rules fired, and why</summary>
+      <div id="trace-body" class="trace-body"></div>
+    </details>
+
+    <div class="result-actions">
+      <button id="restart-btn" class="btn btn-primary" type="button">Diagnose another fault</button>
+      <a class="btn" href="../../#work">Back to portfolio</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="demo-footer">
+  <p>
+    <strong>This is a student project, not a mechanic.</strong> It reasons over a small hand-written
+    knowledge base and can only recognise the faults that base describes. Do not act on it for
+    anything that matters.
+  </p>
+  <p>
+    The rules and questions are the same JSON files the original Python desktop application reads;
+    the inference engine is a direct port of <code>inference_engine.py</code>.
+  </p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

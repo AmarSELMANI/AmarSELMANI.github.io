@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Algerian Coast Marine Bot — live demo</title>
+<meta name="description" content="Live marine safety ratings for six cities on the Algerian Mediterranean coast, produced by the bot's real deterministic engine running in your browser.">
+<link rel="icon" href="../../favicon.svg">
+<link rel="stylesheet" href="../demo.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="demo-header">
+  <div class="demo-header-inner">
+    <a class="back-link" href="../../">&#8592; Mohamed Amar Selmani</a>
+    <a class="repo-link" href="https://github.com/AmarSELMANI/algerian-coast-marine-bot" target="_blank" rel="noopener noreferrer">Source &#8599;</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="demo-intro">
+    <p class="eyebrow">Live demo &middot; LLM system design</p>
+    <h1>Algerian Coast Marine Bot</h1>
+    <p>
+      Pick a city and this runs a <strong>real forecast, fetched right now</strong>, through the
+      bot's actual assessment engine &mdash; the same <code>src/</code> modules the Telegram bot
+      runs, unmodified, executing in your browser. Every rating below comes from plain JavaScript
+      over the numbers. No model is involved in deciding anything.
+    </p>
+  </div>
+
+  <!-- Controls -->
+  <section class="controls card">
+    <div class="control-row">
+      <span class="control-label" id="city-label">City</span>
+      <div class="chips" role="group" aria-labelledby="city-label" id="cities"></div>
+    </div>
+
+    <div class="control-row control-row-split">
+      <div>
+        <span class="control-label" id="profile-label">Experience</span>
+        <div class="chips" role="group" aria-labelledby="profile-label" id="profiles"></div>
+      </div>
+      <div>
+        <span class="control-label" id="lang-label">Language</span>
+        <div class="chips" role="group" aria-labelledby="lang-label" id="languages"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Status -->
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+
+  <!-- Report -->
+  <section id="report" hidden>
+
+    <div class="report-head">
+      <h2 id="report-title"></h2>
+      <p id="report-sub" class="report-sub"></p>
+    </div>
+
+    <div id="activities" class="activities"></div>
+
+    <div class="panel">
+      <h3>Key forecast</h3>
+      <div id="metrics" class="metrics"></div>
+    </div>
+
+    <div class="panel" id="flags-panel">
+      <h3>Flags raised</h3>
+      <div id="flags"></div>
+    </div>
+
+    <div class="panel" id="ensemble-panel">
+      <h3>What the models actually disagree about</h3>
+      <p class="panel-note">
+        One model's number is not the answer. The engine queries several and combines them in
+        whichever direction is conservative for each variable &mdash; highest waves, shortest
+        period, strongest gusts. Where they disagree beyond a threshold, the rating is held at
+        CAUTION and the report says so.
+      </p>
+      <div id="ensemble"></div>
+    </div>
+
+    <div class="panel">
+      <h3>Through the day</h3>
+      <div class="table-scroll">
+        <table id="windows-table" class="windows-table">
+          <thead>
+            <tr>
+              <th scope="col">Window</th>
+              <th scope="col">Gust</th>
+              <th scope="col">Wave</th>
+              <th scope="col">Period</th>
+              <th scope="col">Sailing</th>
+              <th scope="col">Swimming</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>The message a subscriber receives</h3>
+      <p class="panel-note">
+        In production a model rewrites the reason lines into better prose &mdash; and cannot change
+        a rating, because the ratings are re-stamped from this assessment after its response is
+        parsed. This is the deterministic rendering, which is also what gets sent whenever the model
+        fails any of its four output gates.
+      </p>
+      <div id="telegram" class="telegram"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="demo-footer">
+  <p>
+    <strong>Forecast only, not an observed sea state, and not a safety authority.</strong>
+    It does not replace official marine warnings, harbour guidance, lifeguard flags, or your own
+    judgement at the water's edge. Algeria's ONM publishes no machine-readable warning feed, so
+    official warnings are <em>not</em> checked here &mdash; reported as unchecked rather than clear.
+  </p>
+  <p>
+    Weather and marine data from <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
+    (CC&nbsp;BY&nbsp;4.0). Thresholds are starting assumptions from Beaufort and Douglas conventions,
+    not local observation. Wave height, period and sea temperature have no public observation on this
+    coast and remain unverified.
+  </p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

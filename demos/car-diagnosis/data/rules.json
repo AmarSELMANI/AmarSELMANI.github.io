@@ -1,0 +1,319 @@
+[
+  {
+    "id": "R1",
+    "conditions": {
+      "engine_does_not_crank": true,
+      "headlights_dim": true
+    },
+    "conclusion": {
+      "battery_discharged": true
+    },
+    "description": "Engine does not crank AND headlights dim"
+  },
+  {
+    "id": "R2",
+    "conditions": {
+      "battery_discharged": true
+    },
+    "conclusion": {
+      "problem": "Battery Failure"
+    },
+    "description": "Battery discharged"
+  },
+  {
+    "id": "R3",
+    "conditions": {
+      "engine_does_not_crank": true,
+      "clicking_sound": true
+    },
+    "conclusion": {
+      "starter_motor_fault": true
+    },
+    "description": "Engine does not crank AND clicking sound"
+  },
+  {
+    "id": "R4",
+    "conditions": {
+      "starter_motor_fault": true
+    },
+    "conclusion": {
+      "problem": "Starter Motor Failure"
+    },
+    "description": "Starter motor fault"
+  },
+  {
+    "id": "R5",
+    "conditions": {
+      "engine_stalls": true,
+      "battery_warning_light_on": true
+    },
+    "conclusion": {
+      "alternator_fault": true
+    },
+    "description": "Engine stalls AND battery warning light on"
+  },
+  {
+    "id": "R6",
+    "conditions": {
+      "alternator_fault": true
+    },
+    "conclusion": {
+      "problem": "Alternator Failure"
+    },
+    "description": "Alternator fault"
+  },
+  {
+    "id": "R7",
+    "conditions": {
+      "engine_cranks": true,
+      "engine_wont_start": true
+    },
+    "conclusion": {
+      "fuel_or_ignition_problem": true
+    },
+    "description": "Engine cranks AND engine won't start"
+  },
+  {
+    "id": "R8",
+    "conditions": {
+      "fuel_or_ignition_problem": true,
+      "fuel_smell": true
+    },
+    "conclusion": {
+      "flooded_engine": true
+    },
+    "description": "Fuel or ignition problem AND fuel smell"
+  },
+  {
+    "id": "R9",
+    "conditions": {
+      "flooded_engine": true
+    },
+    "conclusion": {
+      "problem": "Fuel Flooding"
+    },
+    "description": "Flooded engine"
+  },
+  {
+    "id": "R10",
+    "conditions": {
+      "fuel_or_ignition_problem": true,
+      "no_spark": true
+    },
+    "conclusion": {
+      "ignition_system_fault": true
+    },
+    "description": "Fuel or ignition problem AND no spark"
+  },
+  {
+    "id": "R11",
+    "conditions": {
+      "ignition_system_fault": true
+    },
+    "conclusion": {
+      "problem": "Ignition Coil or Spark Plug Failure"
+    },
+    "description": "Ignition system fault"
+  },
+  {
+    "id": "R12",
+    "conditions": {
+      "overheating": true,
+      "coolant_low": true
+    },
+    "conclusion": {
+      "coolant_leak": true
+    },
+    "description": "Overheating AND coolant low"
+  },
+  {
+    "id": "R13",
+    "conditions": {
+      "coolant_leak": true
+    },
+    "conclusion": {
+      "problem": "Cooling System Leak"
+    },
+    "description": "Coolant leak"
+  },
+  {
+    "id": "R14",
+    "conditions": {
+      "overheating": true,
+      "radiator_fan_not_working": true
+    },
+    "conclusion": {
+      "cooling_fan_fault": true
+    },
+    "description": "Overheating AND radiator fan not working"
+  },
+  {
+    "id": "R15",
+    "conditions": {
+      "cooling_fan_fault": true
+    },
+    "conclusion": {
+      "problem": "Radiator Fan Failure"
+    },
+    "description": "Cooling fan fault"
+  },
+  {
+    "id": "R16",
+    "conditions": {
+      "oil_warning_light_on": true,
+      "engine_stalls": true
+    },
+    "conclusion": {
+      "low_oil_pressure": true
+    },
+    "description": "Oil warning light on AND engine stalls"
+  },
+  {
+    "id": "R17",
+    "conditions": {
+      "low_oil_pressure": true
+    },
+    "conclusion": {
+      "problem": "Critical Oil Pressure Failure"
+    },
+    "description": "Low oil pressure"
+  },
+  {
+    "id": "R18",
+    "conditions": {
+      "smoke_exhaust": true,
+      "overheating": true
+    },
+    "conclusion": {
+      "head_gasket_failure": true
+    },
+    "description": "Smoke from exhaust AND overheating"
+  },
+  {
+    "id": "R19",
+    "conditions": {
+      "head_gasket_failure": true
+    },
+    "conclusion": {
+      "problem": "Blown Head Gasket"
+    },
+    "description": "Head gasket failure"
+  },
+  {
+    "id": "R20",
+    "conditions": {
+      "rough_idle": true,
+      "misfire": true,
+      "check_engine_light": true
+    },
+    "conclusion": {
+      "ignition_misfire_fault": true
+    },
+    "description": "Rough idle AND misfire AND check engine light"
+  },
+  {
+    "id": "R21",
+    "conditions": {
+      "ignition_misfire_fault": true
+    },
+    "conclusion": {
+      "problem": "Engine Misfire"
+    },
+    "description": "Ignition misfire fault"
+  },
+  {
+    "id": "R22",
+    "conditions": {
+      "check_engine_light": true,
+      "poor_fuel_economy": true
+    },
+    "conclusion": {
+      "oxygen_sensor_fault": true
+    },
+    "description": "Check engine light AND poor fuel economy"
+  },
+  {
+    "id": "R23",
+    "conditions": {
+      "oxygen_sensor_fault": true
+    },
+    "conclusion": {
+      "problem": "Oxygen Sensor Failure"
+    },
+    "description": "Oxygen sensor fault"
+  },
+  {
+    "id": "R24",
+    "conditions": {
+      "gear_slipping": true,
+      "delayed_acceleration": true
+    },
+    "conclusion": {
+      "transmission_fault": true
+    },
+    "description": "Gear slipping AND delayed acceleration"
+  },
+  {
+    "id": "R25",
+    "conditions": {
+      "transmission_fault": true
+    },
+    "conclusion": {
+      "problem": "Transmission System Failure"
+    },
+    "description": "Transmission fault"
+  },
+  {
+    "id": "R26",
+    "conditions": {
+      "brake_pedal_soft": true,
+      "brake_fluid_low": true
+    },
+    "conclusion": {
+      "brake_hydraulic_leak": true
+    },
+    "description": "Brake pedal soft AND brake fluid low"
+  },
+  {
+    "id": "R27",
+    "conditions": {
+      "brake_hydraulic_leak": true
+    },
+    "conclusion": {
+      "problem": "Brake System Leak"
+    },
+    "description": "Brake hydraulic leak"
+  },
+  {
+    "id": "R28",
+    "conditions": {
+      "steering_vibration": true,
+      "uneven_tire_wear": true
+    },
+    "conclusion": {
+      "wheel_alignment_problem": true
+    },
+    "description": "Steering vibration AND uneven tire wear"
+  },
+  {
+    "id": "R29",
+    "conditions": {
+      "wheel_alignment_problem": true
+    },
+    "conclusion": {
+      "problem": "Wheel Alignment Fault"
+    },
+    "description": "Wheel alignment problem"
+  },
+  {
+    "id": "R30",
+    "conditions": {
+      "loud_exhaust_noise": true,
+      "poor_acceleration": true
+    },
+    "conclusion": {
+      "exhaust_leak": true
+    },
+    "description": "Loud exhaust noise AND poor acceleration"
+  }
+]

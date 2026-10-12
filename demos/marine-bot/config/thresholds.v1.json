@@ -1,0 +1,180 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-08-27",
+  "_comment": "STARTING ASSUMPTIONS, NOT MARITIME SAFETY RULES. These are desk-derived from Beaufort force and Douglas sea-state conventions plus common recreational practice, and are meant to be tuned against real observations and local expert feedback (see docs/thresholds.md). Every value is editable here without touching code; the version string is written into every stored report so a rating can always be traced back to the table that produced it.",
+
+  "units": {
+    "gust_kt": "knots, maximum forecast gust in the window",
+    "wind_kt": "knots, mean sustained wind at 10 m",
+    "wave_m": "metres, maximum combined significant wave height in the window",
+    "period_s": "seconds, mean wave period",
+    "current_ms": "metres per second",
+    "sst_c": "degrees Celsius, mean sea surface temperature",
+    "precip_prob_pct": "percent"
+  },
+
+  "activities": {
+    "sailing": {
+      "beginner": {
+        "gust_kt": { "good_max": 15, "avoid_above": 21 },
+        "wave_m": { "good_max": 0.6, "avoid_above": 1.0 },
+        "period_s": { "comfort_min": 5, "applies_above_wave_m": 0.5 },
+        "wind_kt": { "light_below": 5 }
+      },
+      "recreational": {
+        "gust_kt": { "good_max": 22, "avoid_above": 27 },
+        "wave_m": { "good_max": 1.0, "avoid_above": 1.5 },
+        "period_s": { "comfort_min": 5, "applies_above_wave_m": 0.5 },
+        "wind_kt": { "light_below": 5 }
+      },
+      "experienced": {
+        "gust_kt": { "good_max": 25, "avoid_above": 33 },
+        "wave_m": { "good_max": 1.5, "avoid_above": 2.5 },
+        "period_s": { "comfort_min": 4, "applies_above_wave_m": 0.7 },
+        "wind_kt": { "light_below": 4 }
+      }
+    },
+
+    "fishing_shore": {
+      "beginner": {
+        "gust_kt": { "good_max": 18, "avoid_above": 27 },
+        "wave_m": { "good_max": 0.6, "avoid_above": 1.2 },
+        "precip_prob_pct": { "good_max": 50 }
+      },
+      "recreational": {
+        "gust_kt": { "good_max": 22, "avoid_above": 30 },
+        "wave_m": { "good_max": 0.8, "avoid_above": 1.5 },
+        "precip_prob_pct": { "good_max": 60 }
+      },
+      "experienced": {
+        "gust_kt": { "good_max": 25, "avoid_above": 33 },
+        "wave_m": { "good_max": 1.0, "avoid_above": 1.8 },
+        "precip_prob_pct": { "good_max": 70 }
+      }
+    },
+
+    "fishing_small_boat": {
+      "beginner": {
+        "gust_kt": { "good_max": 12, "avoid_above": 18 },
+        "wave_m": { "good_max": 0.5, "avoid_above": 0.8 },
+        "period_s": { "comfort_min": 5, "applies_above_wave_m": 0.5 },
+        "current_ms": { "good_max": 0.5, "avoid_above": 1.0 }
+      },
+      "recreational": {
+        "gust_kt": { "good_max": 16, "avoid_above": 22 },
+        "wave_m": { "good_max": 0.7, "avoid_above": 1.2 },
+        "period_s": { "comfort_min": 5, "applies_above_wave_m": 0.5 },
+        "current_ms": { "good_max": 0.5, "avoid_above": 1.0 }
+      },
+      "experienced": {
+        "gust_kt": { "good_max": 20, "avoid_above": 27 },
+        "wave_m": { "good_max": 1.0, "avoid_above": 1.8 },
+        "period_s": { "comfort_min": 4, "applies_above_wave_m": 0.7 },
+        "current_ms": { "good_max": 0.75, "avoid_above": 1.25 }
+      }
+    },
+
+    "swimming": {
+      "beginner": {
+        "gust_kt": { "good_max": 16, "avoid_above": 25 },
+        "wave_m": { "good_max": 0.4, "avoid_above": 0.8 },
+        "current_ms": { "good_max": 0.4, "avoid_above": 0.75 },
+        "sst_c": { "good_min": 22, "avoid_below": 18 }
+      },
+      "recreational": {
+        "gust_kt": { "good_max": 20, "avoid_above": 28 },
+        "wave_m": { "good_max": 0.5, "avoid_above": 1.0 },
+        "current_ms": { "good_max": 0.5, "avoid_above": 0.75 },
+        "sst_c": { "good_min": 22, "avoid_below": 18 }
+      },
+      "experienced": {
+        "gust_kt": { "good_max": 22, "avoid_above": 30 },
+        "wave_m": { "good_max": 0.7, "avoid_above": 1.2 },
+        "current_ms": { "good_max": 0.6, "avoid_above": 0.9 },
+        "sst_c": { "good_min": 20, "avoid_below": 16 }
+      }
+    }
+  },
+
+  "gust_policy": {
+    "_comment": "Which gust number drives a rating. Measured against live Open-Meteo data for all six sites (scripts/threshold-report.mjs, 2026-08-27): the median gust factor was 3.8x the sustained wind and the maximum 10.9x, where real-world factors are 1.3-2.0x. Rating a whole day from a single anomalous hour produced AVOID or CAUTION for sailing 94% of the time - a report that never says yes is a report people stop reading.",
+    "_policy": "'sustained' rates on the strongest gust actually held for min_sustained_hours; 'peak' rates on the single worst hour. Either way the peak is NEVER hidden: it is shown in the report, it raises the GUST_SPIKE flag, and a peak above the caution threshold still forces at least CAUTION - so a spiky day can never be rated GOOD.",
+    "rating_basis": "sustained",
+    "min_sustained_hours": 2
+  },
+
+  "flags": {
+    "HIGH_WIND": {
+      "caution_gust_kt": 22,
+      "high_risk_gust_kt": 30,
+      "affects": ["sailing", "fishing_shore", "fishing_small_boat", "swimming"]
+    },
+    "HIGH_WAVES": {
+      "caution_wave_m": 1.0,
+      "high_risk_wave_m": 2.0,
+      "affects": ["sailing", "fishing_shore", "fishing_small_boat", "swimming"]
+    },
+    "SHORT_PERIOD_CHOP": {
+      "caution": { "wave_m": 0.8, "period_s": 5 },
+      "high_risk": { "wave_m": 1.5, "period_s": 5 },
+      "affects": ["sailing", "fishing_small_boat", "swimming"]
+    },
+    "STRONG_CURRENT": {
+      "caution_ms": 0.5,
+      "high_risk_ms": 0.75,
+      "affects": ["fishing_small_boat", "swimming"]
+    },
+    "THUNDERSTORM_OR_SEVERE_WEATHER": {
+      "weather_codes": [95, 96, 99],
+      "severity": "high_risk",
+      "affects": ["sailing", "fishing_shore", "fishing_small_boat", "swimming"]
+    },
+    "HEAVY_PRECIPITATION": {
+      "weather_codes": [65, 67, 75, 82, 86],
+      "severity": "caution",
+      "affects": ["sailing", "fishing_shore", "fishing_small_boat", "swimming"]
+    },
+    "COLD_WATER": {
+      "caution_below_c": 20,
+      "high_risk_below_c": 18,
+      "affects": ["swimming"]
+    },
+    "LIGHT_WIND": {
+      "severity": "info",
+      "affects": ["sailing"]
+    },
+    "FORECAST_UNCERTAIN": {
+      "_comment": "Ratings already use the conservative end of the ensemble, which guards against under-calling. This flag guards against over-confidence: when the models disagree this widely, even the conservative figure is unreliable, so nothing may be rated GOOD. Thresholds sit above the measured mean disagreement (0.33 m / 10.9 kt raw) so the flag marks genuinely wide splits rather than firing every day.",
+      "wave_spread_m": 0.4,
+      "gust_spread_kt": 10,
+      "severity": "caution",
+      "affects": ["sailing", "fishing_shore", "fishing_small_boat", "swimming"]
+    },
+    "GUST_SPIKE": {
+      "_comment": "A gust factor of 1.3-2.0 over the sustained wind is normal, up to ~3 in convective conditions. Above 4 for only an hour or two is usually a model artefact. The peak still drives the rating - this flag only lets the report say the peak is brief.",
+      "min_gust_factor": 4,
+      "max_peak_hours": 2,
+      "severity": "info",
+      "affects": ["sailing", "fishing_shore", "fishing_small_boat", "swimming"]
+    }
+  },
+
+  "data_quality": {
+    "_comment": "Essential fields gate the whole report: missing any of them forces AVOID everywhere, per the spec's 'insufficient essential data' rule. Currents and sea temperature are deliberately NOT essential - coastal marine models return them inconsistently, and treating them as essential would produce a permanently useless AVOID. Missing sea temperature instead caps swimming at CAUTION.",
+    "essential": ["wind_speed_10m", "wind_gusts_10m", "wave_height", "wave_period"],
+    "degrading": {
+      "sea_surface_temperature": { "caps_at": "CAUTION", "activities": ["swimming"] },
+      "ocean_current_velocity": { "caps_at": "CAUTION", "activities": ["swimming", "fishing_small_boat"] }
+    },
+    "min_hours_per_window": 3,
+    "min_completeness_score": 0.75
+  },
+
+  "windows": {
+    "_comment": "Local Africa/Algiers hours. 'day' is the headline window and spans the practical daylight activity period.",
+    "morning": { "start_hour": 6, "end_hour": 11 },
+    "midday": { "start_hour": 11, "end_hour": 15 },
+    "afternoon": { "start_hour": 15, "end_hour": 19 },
+    "day": { "start_hour": 6, "end_hour": 19 }
+  }
+}

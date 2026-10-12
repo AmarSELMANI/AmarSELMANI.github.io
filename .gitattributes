@@ -1,0 +1,2 @@
+# The demos are build output, served byte for byte: never rewrite their line endings.
+demos/** -text

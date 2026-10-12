@@ -1,0 +1,258 @@
+body{margin:0;background:#070910}
+a{color:inherit}a:hover{color:inherit}
+
+/* ================= THEME TOKENS ================= */
+.pf{--ease:cubic-bezier(.16,1,.3,1)}
+.theme-dark{--bg:#070910;--ink:#F2F4FA;--text:#E8EBF4;--body:#A7ADBD;--mute:#7C8295;--line:rgba(255,255,255,.07);--hair:rgba(255,255,255,.14);--accent-ink:var(--sapphire);
+--nav-bg:linear-gradient(180deg,rgba(7,9,16,.86),rgba(7,9,16,.55));--nav-line:rgba(255,255,255,.05);
+--card-bg:linear-gradient(180deg,rgba(255,255,255,.042),rgba(255,255,255,.012));--card-line:rgba(255,255,255,.07);--card-line-hover:rgba(255,255,255,.15);--card-glow:color-mix(in oklab,var(--sapphire) 70%,transparent);
+--media:#0A0D17;--frame:#0E1220;--frame-line:rgba(255,255,255,.1);--frame-sub:rgba(255,255,255,.06);--dot:#2A3042;--pill:rgba(255,255,255,.045);--deep:rgba(0,0,0,.85);
+--mark-a:#F4F6FB;--grain:.045;--atmos:.07;--glow:1;--floor:color-mix(in oklab,var(--sapphire) 30%,transparent);--floor-line:rgba(255,255,255,.38)}
+.theme-light{--bg:#F1F2F6;--ink:#0B0E18;--text:#1A1E2B;--body:#4A5063;--mute:#626879;--line:rgba(11,14,24,.08);--hair:rgba(11,14,24,.16);--accent-ink:color-mix(in oklab,var(--sapphire) 64%,#0B0E18);
+--nav-bg:linear-gradient(180deg,rgba(241,242,246,.9),rgba(241,242,246,.62));--nav-line:rgba(11,14,24,.06);
+--card-bg:linear-gradient(180deg,#FFFFFF,rgba(255,255,255,.55));--card-line:rgba(11,14,24,.07);--card-line-hover:rgba(11,14,24,.14);--card-glow:rgba(60,78,170,.32);
+--media:#E7E9F0;--frame:#FFFFFF;--frame-line:rgba(11,14,24,.09);--frame-sub:rgba(11,14,24,.06);--dot:#D6D9E2;--pill:rgba(11,14,24,.05);--deep:rgba(40,50,95,.28);
+--mark-a:#0B0E18;--grain:.03;--atmos:.09;--glow:.62;--floor:rgba(30,38,80,.22);--floor-line:rgba(11,14,24,.2)}
+.pf{background:var(--bg);color:var(--text);transition:background-color .8s var(--ease),color .8s var(--ease)}
+.pf *{box-sizing:border-box}
+.pf :focus-visible{outline:2px solid var(--accent-ink);outline-offset:4px;border-radius:999px}
+
+/* theme switch: circular reveal from the toggle (View Transitions API) */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-new(root){animation:themeReveal 1.25s cubic-bezier(.16,1,.3,1)}
+@keyframes themeReveal{from{clip-path:circle(0px at var(--vt-x,92%) var(--vt-y,42px))}to{clip-path:circle(170vmax at var(--vt-x,92%) var(--vt-y,42px))}}
+
+/* ================= ENTRANCE ================= */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes rise{from{transform:translateY(108%)}to{transform:translateY(0)}}
+@keyframes sculptIn{from{opacity:0;transform:translateY(56px) scale(.9);filter:blur(16px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes bloom{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:scale(1)}}
+@keyframes veil{from{opacity:1}to{opacity:0}}
+@keyframes iconIn{from{opacity:0;transform:rotate(-90deg) scale(.6)}to{opacity:1;transform:none}}
+.a-down{animation:fadeDown 1.1s var(--ease) both}
+.a-up{animation:fadeUp 1.2s var(--ease) both}
+.mask{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.a-rise{display:block;animation:rise 1.35s var(--ease) both}
+.a-sculpt{animation:sculptIn 2.4s var(--ease) both}
+.a-bloom{animation:bloom 3s var(--ease) both}
+.veil{background:var(--bg);animation:veil 1.4s ease-out .05s both}
+.icon-in{display:grid;animation:iconIn .8s var(--ease) both}
+
+/* ================= AMBIENT ================= */
+@keyframes spin{to{transform:rotateZ(360deg)}}
+@keyframes spinRev{to{transform:rotateZ(-360deg)}}
+@keyframes precessA{0%,100%{transform:rotateZ(-22deg) rotateX(71deg)}50%{transform:rotateZ(-10deg) rotateX(61deg)}}
+@keyframes precessB{0%,100%{transform:rotateZ(28deg) rotateY(66deg)}50%{transform:rotateZ(40deg) rotateY(80deg)}}
+@keyframes precessC{0%,100%{transform:rotateZ(14deg) rotateX(79deg)}50%{transform:rotateZ(4deg) rotateX(74deg)}}
+@keyframes breathe{0%,100%{opacity:.62;transform:scale(1)}50%{opacity:.9;transform:scale(1.07)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-26deg)}50%{transform:translateY(-16px) rotate(-21deg)}}
+@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+@keyframes sweep{0%{transform:translateX(-140%) skewX(-18deg);opacity:0}4%{opacity:1}18%{transform:translateX(340%) skewX(-18deg);opacity:0}100%{transform:translateX(340%) skewX(-18deg);opacity:0}}
+@keyframes chromeShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes glint{from{transform:translateX(-100%)}to{transform:translateX(360%)}}
+.amb-precessA{animation:precessA 16s ease-in-out infinite}
+.amb-precessB{animation:precessB 21s ease-in-out infinite}
+.amb-precessC{animation:precessC 26s ease-in-out infinite}
+.amb-spin18{animation:spin 18s linear infinite}
+.amb-spin34{animation:spin 34s linear infinite}
+.amb-rev24{animation:spinRev 24s linear infinite}
+.amb-rev14{animation:spinRev 14s linear infinite}
+.amb-breathe{animation:breathe 9s ease-in-out infinite}
+.amb-float{animation:float 9s ease-in-out infinite}
+.amb-floatB{animation:floatB 7s ease-in-out infinite}
+.amb-sweep{animation:sweep 12s var(--ease) 1.9s infinite}
+.amb-chrome{background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:chromeShift 9s ease-in-out infinite}
+.theme-dark .amb-chrome{background-image:linear-gradient(100deg,#8C95AD 0%,#F4F6FB 20%,#9AA3BB 38%,var(--violet) 56%,#EEF1FA 74%,var(--sapphire) 100%)}
+.theme-light .amb-chrome{background-image:linear-gradient(100deg,#1A1E2B 0%,#5E6679 20%,#0B0E18 38%,color-mix(in oklab,var(--violet) 55%,#0B0E18) 56%,#3A4052 74%,var(--accent-ink) 100%)}
+.amb-cue{animation:cue 2.6s var(--ease) 2.2s infinite}
+.amb-glint{animation:glint 8s ease-in-out infinite}
+.motion-off [class*="amb-"]{animation-play-state:paused}
+
+/* ================= SCULPTURE ================= */
+.p3d{transform-style:preserve-3d}
+.glow-layer{opacity:var(--glow);transition:opacity .9s var(--ease),transform 2s var(--ease)}
+.band-a{position:absolute;inset:0;border-radius:50%;
+-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 30px),#000 calc(100% - 29px));mask:radial-gradient(farthest-side,transparent calc(100% - 30px),#000 calc(100% - 29px))}
+.theme-dark .band-a{background:conic-gradient(from 20deg,#0C0E15 0deg,#3A4052 24deg,#EEF1F8 48deg,#8A93A8 62deg,#1A1E2A 96deg,#5B6378 128deg,#DFE5F3 158deg,var(--sapphire) 182deg,#262B3D 210deg,#0C0E15 236deg,#9AA3B8 266deg,#FFFFFF 290deg,var(--violet) 306deg,#3A4052 332deg,#0C0E15 360deg)}
+.theme-light .band-a{background:conic-gradient(from 20deg,#3A4052 0deg,#9AA3B8 24deg,#FFFFFF 48deg,#B8C0D0 62deg,#2A2F3D 96deg,#7C849A 128deg,#F6F8FC 158deg,var(--sapphire) 182deg,#5B6378 210deg,#1E2230 236deg,#C9D0DE 266deg,#FFFFFF 290deg,var(--violet) 306deg,#8A93A8 332deg,#3A4052 360deg)}
+.band-b{position:absolute;inset:0;border-radius:50%;
+-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 15px),#000 calc(100% - 14px));mask:radial-gradient(farthest-side,transparent calc(100% - 15px),#000 calc(100% - 14px))}
+.theme-dark .band-b{background:conic-gradient(from 90deg,#1B1F2B,#A9B1C4 14%,#4B5266 28%,#E9EDF6 44%,#262B39 58%,#8D96AB 72%,var(--violet) 84%,#C9D0E0 92%,#1B1F2B)}
+.theme-light .band-b{background:conic-gradient(from 90deg,#5B6276,#E4E8F1 14%,#7C849A 28%,#FFFFFF 44%,#3A4052 58%,#B8C0D0 72%,var(--violet) 84%,#EEF1F8 92%,#5B6276)}
+.band-c{position:absolute;inset:0;border-radius:50%;
+background:conic-gradient(from 0deg,transparent,var(--hair) 20%,var(--sapphire) 35%,transparent 50%,var(--violet) 70%,var(--hair) 85%,transparent);
+-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),#000 calc(100% - 1px));mask:radial-gradient(farthest-side,transparent calc(100% - 1.5px),#000 calc(100% - 1px))}
+.core{position:absolute;left:50%;top:50%;width:250px;height:250px;margin:-125px 0 0 -125px;border-radius:50%;transform:translateZ(0)}
+.theme-dark .core{background:radial-gradient(circle at 32% 24%,rgba(255,255,255,.62) 0,rgba(255,255,255,.14) 11%,transparent 28%),radial-gradient(circle at 68% 80%,color-mix(in oklab,var(--violet) 45%,transparent),transparent 46%),radial-gradient(circle at 50% 50%,rgba(113,139,255,.06) 0,rgba(113,139,255,.16) 58%,rgba(214,222,255,.42) 97%);
+box-shadow:inset 0 0 44px color-mix(in oklab,var(--violet) 28%,transparent),inset -24px -34px 70px rgba(7,9,16,.45),inset 10px 14px 30px rgba(255,255,255,.08),0 0 90px color-mix(in oklab,var(--sapphire) 30%,transparent)}
+.theme-light .core{background:radial-gradient(circle at 32% 24%,rgba(255,255,255,.95) 0,rgba(255,255,255,.45) 12%,transparent 30%),radial-gradient(circle at 68% 80%,color-mix(in oklab,var(--violet) 40%,transparent),transparent 46%),radial-gradient(circle at 50% 50%,rgba(113,139,255,.04) 0,rgba(113,139,255,.12) 60%,rgba(52,64,128,.32) 97%);
+box-shadow:inset 0 0 40px color-mix(in oklab,var(--violet) 25%,transparent),inset -22px -32px 60px rgba(40,50,95,.16),inset 10px 14px 30px rgba(255,255,255,.65),0 34px 70px -24px rgba(40,52,120,.38)}
+.sphere-rim{position:absolute;inset:0;border-radius:50%;padding:1.5px;
+background:conic-gradient(from 0deg,var(--sapphire),#FFFFFF,var(--violet),#CFE0FF,var(--sapphire));
+-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.chrome-ball{border-radius:50%;background:radial-gradient(circle at 34% 28%,#FFFFFF 0,#DDE3F0 14%,#6F7890 42%,#141824 70%,#3B4256 88%,#9AA3B8 100%);box-shadow:0 10px 24px -6px var(--deep)}
+.capsule{width:132px;height:40px;border-radius:999px;background:linear-gradient(180deg,#FFFFFF 0%,#C9D0DE 30%,#4A5166 55%,#141824 72%,#8C95AD 100%);box-shadow:0 20px 40px -12px var(--deep),0 0 40px -10px color-mix(in oklab,var(--sapphire) 60%,transparent)}
+
+/* ================= BUTTONS ================= */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:14px;height:56px;border-radius:999px;font:500 15px/1 'Geist','Helvetica Neue',system-ui,sans-serif;letter-spacing:-.005em;text-decoration:none;cursor:pointer;transition:transform .6s var(--ease),box-shadow .8s var(--ease),background .5s,color .4s}
+.btn:active{transform:scale(.97)}
+.btn-primary{padding:0 9px 0 26px}
+.theme-dark .btn-primary{color:#070910;background:linear-gradient(180deg,#F6F7FB 0%,#D4D9E4 46%,#B4BBCB 54%,#E4E8F1 100%);box-shadow:inset 0 1px 0 #FFFFFF,inset 0 -1px 0 rgba(7,9,16,.25),0 0 0 1px rgba(255,255,255,.12),0 14px 44px -14px color-mix(in oklab,var(--sapphire) 70%,transparent)}
+.theme-dark .btn-primary:hover{color:#070910;transform:translateY(-2px);box-shadow:inset 0 1px 0 #FFFFFF,inset 0 -1px 0 rgba(7,9,16,.25),0 0 0 1px rgba(255,255,255,.2),0 22px 64px -12px color-mix(in oklab,var(--sapphire) 85%,transparent),0 0 90px -20px color-mix(in oklab,var(--violet) 70%,transparent)}
+.theme-light .btn-primary{color:#F2F4FA;background:linear-gradient(180deg,#323848 0%,#151925 48%,#0B0E18 54%,#1E2330 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(0,0,0,.4),0 14px 40px -14px color-mix(in oklab,var(--sapphire) 75%,transparent)}
+.theme-light .btn-primary:hover{color:#FFFFFF;transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.4),0 22px 56px -14px color-mix(in oklab,var(--sapphire) 90%,transparent),0 0 80px -24px color-mix(in oklab,var(--violet) 80%,transparent)}
+.btn-sheen{position:absolute;inset:0;pointer-events:none;transform:translateX(-130%);transition:transform 1s var(--ease)}
+.theme-dark .btn-sheen{background:linear-gradient(112deg,transparent 30%,rgba(255,255,255,.95) 48%,rgba(255,255,255,0) 64%)}
+.theme-light .btn-sheen{background:linear-gradient(112deg,transparent 30%,rgba(178,161,255,.35) 46%,rgba(255,255,255,.3) 50%,rgba(255,255,255,0) 64%)}
+.btn-primary:hover .btn-sheen{transform:translateX(130%)}
+.btn-ico{position:relative;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;transition:transform .7s var(--ease),color .4s}
+.theme-dark .btn-ico{background:#070910;color:var(--sapphire)}
+.theme-light .btn-ico{background:linear-gradient(180deg,#F6F7FB,#C9CFDD);color:var(--accent-ink)}
+.btn-primary:hover .btn-ico{transform:rotate(-45deg)}
+.btn-ghost{padding:0 24px;color:var(--text);border:1px solid transparent}
+.theme-dark .btn-ghost{background:linear-gradient(#0B0E18,#0B0E18) padding-box,linear-gradient(120deg,rgba(255,255,255,.3),color-mix(in oklab,var(--sapphire) 60%,transparent),color-mix(in oklab,var(--violet) 60%,transparent),rgba(255,255,255,.1)) border-box}
+.theme-dark .btn-ghost:hover{color:#FFFFFF;transform:translateY(-2px);background:linear-gradient(#131829,#131829) padding-box,linear-gradient(120deg,rgba(255,255,255,.55),var(--sapphire),var(--violet),rgba(255,255,255,.25)) border-box;box-shadow:0 18px 50px -20px color-mix(in oklab,var(--violet) 60%,transparent)}
+.theme-light .btn-ghost{background:linear-gradient(#FFFFFF,#FFFFFF) padding-box,linear-gradient(120deg,rgba(11,14,24,.22),color-mix(in oklab,var(--sapphire) 70%,transparent),color-mix(in oklab,var(--violet) 70%,transparent),rgba(11,14,24,.08)) border-box;box-shadow:0 8px 24px -16px rgba(30,40,90,.4)}
+.theme-light .btn-ghost:hover{color:#0B0E18;transform:translateY(-2px);background:linear-gradient(#F7F8FD,#F7F8FD) padding-box,linear-gradient(120deg,rgba(11,14,24,.35),var(--sapphire),var(--violet),rgba(11,14,24,.15)) border-box;box-shadow:0 18px 44px -20px color-mix(in oklab,var(--violet) 80%,transparent)}
+.btn-ghost .nudge{transition:transform .6s var(--ease)}
+.btn-ghost:hover .nudge{transform:translateX(4px)}
+
+/* ================= NAV ================= */
+.nav-bar{background:var(--nav-bg);border-bottom:1px solid var(--nav-line);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.nav-link{position:relative;color:var(--body);text-decoration:none;font-size:14px;letter-spacing:.005em;padding:14px 2px;transition:color .4s}
+.nav-link::after{content:'';position:absolute;left:0;right:0;bottom:8px;height:1px;background:linear-gradient(90deg,var(--sapphire),var(--violet));transform:scaleX(0);transform-origin:right;transition:transform .7s var(--ease)}
+.nav-link:hover{color:var(--ink)}
+.nav-link:hover::after{transform:scaleX(1);transform-origin:left}
+.toggle{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--text);border:1px solid var(--hair);transition:border-color .5s,transform .8s var(--ease),box-shadow .6s}
+.theme-dark .toggle{background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.14),rgba(255,255,255,.02) 70%)}
+.theme-light .toggle{background:radial-gradient(circle at 30% 25%,#FFFFFF,rgba(255,255,255,.4) 70%)}
+.toggle:hover{transform:rotate(-24deg);border-color:color-mix(in oklab,var(--violet) 70%,transparent);box-shadow:0 0 30px -6px color-mix(in oklab,var(--violet) 60%,transparent)}
+
+/* ================= PROJECT CARDS ================= */
+.work-list .card-wrap{transition:opacity .7s var(--ease)}
+.work-list:has(.card:hover) .card-wrap:not(:has(.card:hover)){opacity:.5}
+.card{position:relative;display:block;height:100%;text-decoration:none;color:inherit;border-radius:32px;padding:12px;border:1px solid var(--card-line);background:var(--card-bg);transition:transform 1s var(--ease),border-color .7s,box-shadow 1s var(--ease)}
+.theme-light .card{box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 20px 50px -36px rgba(30,40,90,.35)}
+.card:hover{color:inherit;transform:translateY(-6px);border-color:var(--card-line-hover);box-shadow:0 50px 90px -50px var(--card-glow)}
+.card:focus-visible{border-radius:32px}
+.media{position:relative;overflow:hidden;border-radius:22px;background:var(--media)}
+.media-inner{position:absolute;inset:0;transition:transform 1.6s var(--ease)}
+.card:hover .media-inner{transform:scale(1.045)}
+.media-light{position:absolute;inset:0;opacity:.55;transition:opacity 1s var(--ease)}
+.card:hover .media-light{opacity:1}
+.frame{background:var(--frame);border:1px solid var(--frame-line);box-shadow:0 50px 90px -24px var(--deep);overflow:hidden}
+.frame-bar{display:flex;align-items:center;border-bottom:1px solid var(--frame-sub)}
+.dot{border-radius:50%;background:var(--dot)}
+.screen{background:var(--frame)}
+.titanium{background:linear-gradient(145deg,#DDE2EC,#5B6276 30%,#1A1E2A 55%,#9AA3B8 82%,#EEF1F8);box-shadow:0 40px 70px -20px var(--deep)}
+.titanium-b{background:linear-gradient(145deg,#EEF1F8,#9AA3B8 22%,#1A1E2A 50%,#5B6276 75%,#DDE2EC);box-shadow:-20px 40px 70px -20px var(--deep)}
+.sheen{position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 34%,rgba(255,255,255,.12) 47%,color-mix(in oklab,var(--violet) 14%,transparent) 53%,transparent 66%);transform:translateX(-115%);transition:transform 1.5s var(--ease)}
+.card:hover .sheen{transform:translateX(115%)}
+.title-u{background-image:linear-gradient(90deg,var(--sapphire),var(--violet));background-size:0% 1px;background-repeat:no-repeat;background-position:0 100%;padding-bottom:4px;transition:background-size 1s var(--ease)}
+.card:hover .title-u{background-size:100% 1px}
+.arrow{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:var(--text);border:1px solid var(--hair);transition:background .6s,color .5s,transform .8s var(--ease),border-color .6s}
+.arrow svg{transition:transform .8s var(--ease)}
+.theme-dark .card:hover .arrow{color:#070910;border-color:transparent;background:linear-gradient(180deg,#F6F7FB,#B9C0D0)}
+.theme-light .card:hover .arrow{color:#F2F4FA;border-color:transparent;background:linear-gradient(180deg,#323848,#0B0E18)}
+.card:hover .arrow svg{transform:rotate(-45deg)}
+.chip{font:500 11px/1 'Geist Mono',ui-monospace,monospace;letter-spacing:.06em;color:var(--body);padding:8px 12px;border-radius:999px;border:1px solid var(--line)}
+.text-link{display:inline-flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-size:14px;padding:12px 0;border-bottom:1px solid var(--hair);transition:border-color .5s,gap .6s var(--ease)}
+.text-link:hover{border-color:var(--accent-ink);gap:16px}
+
+/* ================= SCROLL-DRIVEN (progressive) ================= */
+/* ================= SCROLL REVEALS (IntersectionObserver — works on touch) ================= */
+.rv-on .rv{transition:opacity 1.1s var(--ease),transform 1.3s var(--ease),filter 1.1s var(--ease)}
+.rv-on .rv-up:not(.in){opacity:0;transform:translateY(46px);filter:blur(10px)}
+.rv-on .rv-fade:not(.in){opacity:0;transform:translateY(16px)}
+.rv-on .rv-lines .ln{display:block;transition:transform 1.35s var(--ease)}
+.rv-on .rv-lines:not(.in) .ln{transform:translateY(108%)}
+.rv-on .rv-rule{transform-origin:left;transition:transform 1.8s var(--ease)}
+.rv-on .rv-rule:not(.in){transform:scaleX(0)}
+.rv-on .rv-card{transition:opacity 1.2s var(--ease),transform 1.5s var(--ease)}
+.rv-on .rv-card:not(.in){opacity:0;transform:translateY(80px)}
+.rv-on .rv-card .media{clip-path:inset(0% 0% 0% 0% round 22px);transition:clip-path 1.7s var(--ease)}
+.rv-on .rv-card:not(.in) .media{clip-path:inset(12% 9% 12% 9% round 22px)}
+.rv-on .rv-card:not(.in) .media-inner{transform:scale(1.2)}
+.rv-on .rv-card .rv-child{transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.rv-on .rv-card:not(.in) .rv-child{opacity:0;transform:translateY(22px)}
+@keyframes btnSheen{0%{transform:translateX(-130%)}22%,100%{transform:translateX(130%)}}
+/* touch screens have no hover: the hover moments play once as each card scrolls in */
+@media (hover:none){
+.rv-card.in .media-light{opacity:1;transition-delay:.4s}
+.rv-card.in .sheen{transform:translateX(115%);transition-delay:.55s}
+.rv-card.in .title-u{background-size:100% 1px;transition-delay:.9s}
+.rv-card.in .arrow svg{transform:rotate(-45deg);transition-delay:1s}
+.card:active{transform:scale(.985)}
+.btn-primary .btn-sheen{animation:btnSheen 6s var(--ease) 2.6s infinite}
+}
+
+@supports (animation-timeline: view()){
+@keyframes heroOut{to{transform:translateY(140px) scale(.92);opacity:.25}}
+@keyframes textOut{to{transform:translateY(-60px);opacity:0}}
+.sv-hero{animation:heroOut linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+.sv-text{animation:textOut linear both;animation-timeline:view();animation-range:exit 10% exit 90%}
+
+/* ---- scrubbed reveals: progress follows the scroll in both directions ----
+   in = rising from below as it enters; out = lifting away as it leaves past the top.
+   Scroll back up and everything plays in reverse. Individual translate/scale props
+   are used so these never fight the hover transforms. */
+@keyframes sdUpIn{from{opacity:0;translate:0 46px;filter:blur(10px)}to{opacity:1;translate:0 0;filter:blur(0)}}
+@keyframes sdUpOut{from{opacity:1;translate:0 0;filter:blur(0)}to{opacity:0;translate:0 -40px;filter:blur(8px)}}
+@keyframes sdFadeIn{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+@keyframes sdFadeOut{from{opacity:1;translate:0 0}to{opacity:0;translate:0 -16px}}
+@keyframes sdLineIn{from{translate:0 108%}to{translate:0 0}}
+@keyframes sdLineOut{from{translate:0 0}to{translate:0 -108%}}
+@keyframes sdRuleIn{from{scale:0 1}to{scale:1 1}}
+@keyframes sdRuleOut{from{scale:1 1}to{scale:0 1}}
+@keyframes sdCardIn{from{opacity:0;translate:0 90px}to{opacity:1;translate:0 0}}
+@keyframes sdCardOut{from{opacity:1;translate:0 0}to{opacity:0;translate:0 -70px}}
+@keyframes sdClipIn{from{clip-path:inset(12% 9% 12% 9% round 22px)}to{clip-path:inset(0% 0% 0% 0% round 22px)}}
+@keyframes sdClipOut{from{clip-path:inset(0% 0% 0% 0% round 22px)}to{clip-path:inset(10% 8% 10% 8% round 22px)}}
+@keyframes sdZoomIn{from{scale:1.2}to{scale:1}}
+@keyframes sdZoomOut{from{scale:1}to{scale:1.12}}
+@keyframes sdChildIn{from{opacity:0;translate:0 24px}to{opacity:1;translate:0 0}}
+@keyframes sdChildOut{from{opacity:1;translate:0 0}to{opacity:0;translate:0 -18px}}
+@keyframes sdSheen{from{transform:translateX(-115%)}to{transform:translateX(115%)}}
+@keyframes sdUnderline{from{background-size:0% 1px}to{background-size:100% 1px}}
+@keyframes sdArrow{from{rotate:0deg}to{rotate:-45deg}}
+@keyframes sdLight{from{opacity:.55}to{opacity:1}}
+.sd-on .rv-fade{animation:sdFadeIn linear both,sdFadeOut linear forwards;animation-timeline:view(),view();animation-range:cover 0% cover 22%,cover 80% cover 100%}
+.sd-on footer.rv-fade{animation-range:entry 0% entry 100%,cover 80% cover 100%}
+.sd-on .rv-up{animation:sdUpIn linear both,sdUpOut linear forwards;animation-timeline:view(),view();animation-range:cover 4% cover 28%,cover 76% cover 98%}
+.sd-on .rv-lines{view-timeline-name:--wt}
+.sd-on .rv-lines .ln{animation:sdLineIn linear both,sdLineOut linear forwards;animation-timeline:--wt,--wt;animation-range:cover 0% cover 24%,cover 78% cover 96%}
+.sd-on .rv-lines .mask:nth-child(2) .ln{animation-range:cover 4% cover 28%,cover 74% cover 92%}
+.sd-on .rv-rule{transform-origin:left;animation:sdRuleIn linear both,sdRuleOut linear forwards;animation-timeline:view(),view();animation-range:cover 0% cover 40%,cover 70% cover 100%}
+.sd-on .rv-card{view-timeline-name:--card;animation:sdCardIn linear both,sdCardOut linear forwards;animation-timeline:view(),view();animation-range:entry 0% entry 55%,exit 25% exit 100%}
+.sd-on .rv-card .media{animation:sdClipIn linear both,sdClipOut linear forwards;animation-timeline:--card,--card;animation-range:entry 10% entry 90%,exit 10% exit 85%}
+.sd-on .rv-card .media-inner{animation:sdZoomIn linear both,sdZoomOut linear forwards;animation-timeline:--card,--card;animation-range:entry 0% cover 50%,exit 0% exit 100%}
+.sd-on .rv-card .rv-child{animation:sdChildIn linear both,sdChildOut linear forwards;animation-timeline:--card,--card;animation-range:entry 35% entry 90%,exit 0% exit 55%}
+.sd-on .rv-card .rv-child:nth-child(2){animation-range:entry 45% entry 100%,exit 5% exit 60%}
+.sd-on .rv-card .rv-child:nth-child(3){animation-range:entry 55% cover 55%,exit 10% exit 65%}
+@media (hover:none){
+.sd-on .rv-card .media-light{animation:sdLight linear both;animation-timeline:--card;animation-range:entry 20% cover 45%}
+.sd-on .rv-card .sheen{animation:sdSheen linear both;animation-timeline:--card;animation-range:entry 30% cover 60%}
+.sd-on .rv-card .title-u{animation:sdUnderline linear both;animation-timeline:--card;animation-range:entry 60% cover 50%}
+.sd-on .rv-card .arrow svg{animation:sdArrow linear both;animation-timeline:--card;animation-range:entry 70% cover 50%}
+}
+}
+
+@media (max-width:760px){
+.stage-scale{transform:scale(.52);transform-origin:top center;margin-bottom:-330px}
+.nav-links{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+.pf *,.pf *::before,.pf *::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+}
+
+/* ================= ADDITIONS (not in the mockup) ================= */
+/* The theme lives on .pf; the page behind it follows, so light mode never overscrolls into dark. */
+html.pf-light body{background:#F1F2F6}
+/* The design's runtime mounted one toggle icon at a time; here both exist and one is hidden. */
+.pf [hidden]{display:none !important}
+/* The design hides the nav links on phones (max-width:760px above), but the list's inline
+   display:flex outranks that rule, so in the mockup they stay and push the theme toggle
+   off-screen. Let the design's own rule apply. */
+@media (max-width:760px){.pf .nav-links{display:none !important}}

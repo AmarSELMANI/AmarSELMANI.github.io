@@ -11,10 +11,10 @@ mockup. There is no build step; GitHub Pages serves the repository root from
 | File | What it is |
 |---|---|
 | `index.html` | The design's markup, unchanged except for content: my copy, the card screenshots, and the About and Contact sections (built only from parts the design already has). |
-| `styles.css` | The design's CSS, verbatim, plus three short additions at the end, each explained in a comment. |
-| `main.js` | The theme switch with its circular reveal, the hero parallax, and the scroll reveals — ported from the design's component logic. |
+| `styles.css` | The design's CSS, verbatim, plus additions at the end, each explained in a comment: three small fixes, and a PERFORMANCE section that keeps the page smooth on phones. |
+| `main.js` | The theme switch with its circular reveal, the hero parallax, and the scroll reveals — ported from the design's component logic — plus pausing the hero's motion off screen and the phone version of the headline shimmer. |
 | `favicon.svg` | The design's ring mark. |
-| `img/` | Screenshots inside the card mockups, taken from the live demos, and the social preview (`og.jpg`). |
+| `img/` | Screenshots inside the card mockups, taken from the live demos; the social preview (`og.jpg`); and `grain.webp`, the design's film-grain filter rendered once into a tile. |
 | `demos/` | The live demos the cards open. |
 
 ## Local preview

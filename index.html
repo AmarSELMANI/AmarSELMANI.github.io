@@ -40,10 +40,8 @@
 </script>
 
   <div aria-hidden="true" style="position: absolute; inset: 0 0 auto 0; height: 1100px; pointer-events: none; opacity: calc(var(--atmos) * 14); background: radial-gradient(70% 60% at 72% 30%, rgba(113,139,255,.07), transparent 70%), radial-gradient(50% 40% at 50% 0%, rgba(178,161,255,.04), transparent 70%)"></div>
-  <svg aria-hidden="true" width="100%" height="100%" style="position: absolute; inset: 0; pointer-events: none; opacity: var(--grain); z-index: 60">
-    <filter id="pf-grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
-    <rect width="100%" height="100%" filter="url(#pf-grain)"></rect>
-  </svg>
+  <!-- grain: the design's noise filter (fractalNoise .85, 2 octaves, desaturated), pre-rendered into a tile -->
+  <div aria-hidden="true" style="position: fixed; inset: 0; pointer-events: none; opacity: var(--grain); z-index: 60; background: url(img/grain.webp) 0 0 / 200px 200px repeat"></div>
 
   <!-- ============ NAV ============ -->
   <header class="nav-bar a-down" style="position: sticky; top: 0; z-index: 50; animation-delay: .35s">

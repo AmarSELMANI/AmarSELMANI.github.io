@@ -256,3 +256,58 @@ html.pf-light body{background:#F1F2F6}
    display:flex outranks that rule, so in the mockup they stay and push the theme toggle
    off-screen. Let the design's own rule apply. */
 @media (max-width:760px){.pf .nav-links{display:none !important}}
+
+/* ================= PERFORMANCE (not in the mockup) =================
+   Measured on a 390px-wide, 3x-density phone profile. Every change keeps the design's
+   look; the two that differ slightly, and only on phones and tablets, say so. */
+
+/* The scroll cue animated transform-origin, which only the main thread can do, so it
+   re-rendered the page on every frame, forever. The same motion in transforms alone: */
+@keyframes cue{0%{transform:translateY(0) scaleY(0)}45%{transform:translateY(0) scaleY(1)}55%{transform:translateY(0) scaleY(1)}100%{transform:translateY(100%) scaleY(0)}}
+.amb-cue{transform-origin:top}
+
+/* The sculpture's entrance ended on filter:blur(0), which kept the whole sculpture going
+   through an off-screen render pass every frame. Its last frame is its resting style anyway. */
+.a-sculpt{animation-fill-mode:backwards}
+
+/* The hero's ambient motion pauses while the hero is off screen (main.js). */
+#top.pf-still [class*="amb-"]{animation-play-state:paused}
+
+/* Touch screens keep :hover on a tapped card, which left the other cards dimmed and the
+   card lifted after coming back to the page. There the design replays its hover moments
+   on scroll instead, so the hover state itself is neutralised. */
+@media (hover:none){
+.work-list:has(.card:hover) .card-wrap:not(:has(.card:hover)){opacity:1}
+.card:hover{transform:none;border-color:var(--card-line)}
+.theme-dark .card:hover{box-shadow:none}
+.theme-light .card:hover{box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 20px 50px -36px rgba(30,40,90,.35)}
+.card:hover .media-inner{transform:none}
+.card:hover:active{transform:scale(.985)}
+/* Phones and tablets: the "effortless." shimmer moves a gradient through text, which no
+   GPU can do; as a CSS animation it cost a main-thread frame on every screen refresh.
+   main.js moves it along the same eased path from a timer, about 24 times a second. */
+.amb-chrome{animation:none}
+}
+
+/* Phones and tablets: the scroll reveals keep their rise and fade, which the GPU runs, and
+   drop the three parts it cannot — the blur on text, the clip on card images and the drawn
+   underline — which made every scrolled frame main-thread work (41% of it, measured).
+   The arrow's turn moves from the icon to its round frame, which looks the same. */
+@keyframes sdUpInLite{from{opacity:0;translate:0 46px}to{opacity:1;translate:0 0}}
+@keyframes sdUpOutLite{from{opacity:1;translate:0 0}to{opacity:0;translate:0 -40px}}
+@media (hover:none){
+.sd-on .rv-up{animation-name:sdUpInLite,sdUpOutLite}
+.sd-on .rv-card .media{animation:none;clip-path:none}
+.sd-on .rv-card .title-u{animation:none;background-size:100% 1px}
+.sd-on .rv-card .arrow svg{animation:none}
+.sd-on .rv-card .arrow{animation:sdArrow linear both;animation-timeline:--card;animation-range:entry 70% cover 50%}
+.rv-on .rv-up:not(.in){filter:none}
+.rv-on .rv-card:not(.in) .media{clip-path:inset(0% 0% 0% 0% round 22px)}
+}
+
+/* Phones: the sculpture rises in without the blur, which meant blurring the whole
+   sculpture off screen on every frame of the entrance. */
+@media (max-width:760px){
+@keyframes sculptInLite{from{opacity:0;transform:translateY(56px) scale(.9)}to{opacity:1;transform:none}}
+.a-sculpt{animation-name:sculptInLite}
+}

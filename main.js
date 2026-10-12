@@ -90,6 +90,46 @@
     place(0, 0);
   });
 
+  // --- keeping it light on phones ---------------------------------------------------
+  //
+  // The hero's ambient motion is work nobody sees once the hero has scrolled away,
+  // so it pauses then (PERFORMANCE in styles.css). The entrance veil, once faded,
+  // would otherwise stay on as a transparent, page-wide layer.
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      hero.classList.toggle('pf-still', !entries[0].isIntersecting);
+    }).observe(hero);
+  }
+
+  var veil = hero.querySelector('.veil');
+  if (veil) veil.addEventListener('animationend', function () { veil.remove(); });
+
+  // Touch screens: the "effortless." shimmer moves a gradient through text, which no
+  // GPU can do, and as a CSS animation it costs a main-thread frame on every screen
+  // refresh. Here it follows the same path — the design's 9 s cycle, 0% to 100% and
+  // back, eased — from a timer about 24 times a second. styles.css switches the CSS
+  // animation off for touch screens.
+  var shimmer = root.querySelector('.amb-chrome');
+  if (shimmer && !reduce && window.matchMedia && matchMedia('(hover: none)').matches) {
+    var bezier = function (t, a, b) { return 3 * (1 - t) * (1 - t) * t * a + 3 * (1 - t) * t * t * b + t * t * t; };
+    var easeInOut = function (x) { // CSS ease-in-out, cubic-bezier(.42, 0, .58, 1)
+      var lo = 0;
+      var hi = 1;
+      for (var i = 0; i < 20; i++) {
+        var mid = (lo + hi) / 2;
+        if (bezier(mid, 0.42, 0.58) < x) lo = mid; else hi = mid;
+      }
+      return bezier((lo + hi) / 2, 0, 1);
+    };
+    var start = performance.now();
+    setInterval(function () {
+      if (document.hidden || hero.classList.contains('pf-still')) return;
+      var t = ((performance.now() - start) / 9000) % 1;
+      shimmer.style.backgroundPosition = (easeInOut(t < 0.5 ? t * 2 : (1 - t) * 2) * 100).toFixed(2) + '% 50%';
+    }, 42);
+  }
+
   // --- scroll reveals: IntersectionObserver fallback ------------------------------
   //
   // Elements carrying data-reveal are watched; every element sharing a group in

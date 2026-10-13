@@ -48,5 +48,5 @@ repository; this repository holds only the built output.
 | Demo | Path | How to rebuild |
 |---|---|---|
 | Naftal B2B — the mobile app and the agent console, answered by an in-browser port of the API | `demos/naftal-b2b/` | In `naftal-b2b`, branch `portfolio-demo`: `node demo/build.mjs <this repo>/demos/naftal-b2b`. It replaces `app/`, `console/` and `media/` and leaves the landing page (`index.html`) alone. |
-| Naftal AI platform — the real frontend on synthetic data | `demos/naftal/` | In `naftal-ai-platform`: `VITE_DEMO=1 npm run build` in `frontend/`, then copy `dist/` here. |
+| Naftal AI platform — the real frontend on synthetic data | `demos/naftal/` | In `naftal-ai-platform`, branch `portfolio-demo` (the demo layer on top of the app; merge the app's latest commits into it first): `VITE_DEMO=1 npx vite build` in `frontend/`, then replace this folder with `dist/`. |
 | Algerian Coast Marine Bot — the bot's own engine on a live forecast | `demos/marine-bot/` | Copy the bot's `src/` modules into `demos/marine-bot/engine/`. |

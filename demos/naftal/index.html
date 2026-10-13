@@ -38,23 +38,18 @@
         cursor: pointer;
       }
       #demo-banner button:hover { border-color: #c9a227; }
-      body { padding-bottom: 3.5rem; }
+      /* The banner takes its own row under the app instead of floating over it:
+         the app shell is exactly one screen tall (h-dvh), so a floating banner hid
+         the sidebar's logout and the bottom of every screen. #root fills what is
+         left, the shell fills #root, and the sign-in screens scroll inside it. */
+      body.demo { display: flex; flex-direction: column; height: 100dvh; overflow: hidden; }
+      body.demo #root { flex: 1 1 0; min-height: 0; height: auto; overflow-y: auto; }
+      body.demo #root .h-dvh { height: 100%; }
+      /* z-index back to auto: as a flex item it would still stack, over the phone menu. */
+      body.demo #demo-banner { position: static; z-index: auto; flex-shrink: 0; }
     </style>
-    <script type="module" crossorigin src="/demos/naftal/assets/index-DyYT-F3o.js"></script>
-    <link rel="stylesheet" crossorigin href="/demos/naftal/assets/index-CfEOtA61.css">
-    <style>
-      /* The sign-in header's badge ("NOUVEAU COMPTE", "ACCÈS SÉCURISÉ") was an inline
-         span, so when the row ran short its text wrapped and its border broke into two
-         boxes. It now keeps to one line; on phones it moves under the logo instead of
-         spilling out. The same change is in the source, components/BrandBar.tsx. */
-      .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .ml-auto { flex-shrink: 0; }
-      .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .ml-auto > span { display: inline-block; white-space: nowrap; }
-      @media (max-width: 420px) {
-        .flex.items-center.gap-5.bg-navy-900.px-8.py-5 { flex-wrap: wrap; row-gap: .875rem; padding-left: 1.25rem; padding-right: 1.25rem; }
-        .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .leading-tight { flex: 1 1 7rem; min-width: 0; }
-        .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .ml-auto { margin-left: 0; }
-      }
-    </style>
+    <script type="module" crossorigin src="/demos/naftal/assets/index-Dgd-YWOd.js"></script>
+    <link rel="stylesheet" crossorigin href="/demos/naftal/assets/index-DQYhA0u2.css">
   </head>
   <body>
     <div id="root"></div>
@@ -68,7 +63,7 @@
       </span>
       <span class="spacer"></span>
       <a href="../../">← Portfolio</a>
-      <button type="button" onclick="this.parentElement.remove(); document.body.style.paddingBottom='0'">Masquer</button>
+      <button type="button" onclick="this.parentElement.remove()">Masquer</button>
     </div>
 
   </body>

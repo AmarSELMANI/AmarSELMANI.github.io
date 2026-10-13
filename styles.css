@@ -416,6 +416,57 @@ html.pf-light body{background:#F1F2F6}
 .portrait-aura-glow .amb-aura-turn{background:conic-gradient(transparent 0deg,var(--sapphire) 70deg,var(--violet) 124deg,transparent 190deg,transparent 250deg,color-mix(in oklab,var(--violet) 70%,transparent) 310deg,transparent 360deg)}
 }
 
+/* Touch screens: one scroll animation per element. The design gives each revealing
+   element two — one as it comes in from below, one as it leaves past the top — and a
+   browser cannot hand two animations of the same property on one element to the GPU
+   ("incompatible animations" in Chrome's trace). So every reveal ran on the main thread
+   and the page re-rendered on every scrolled frame: the measured cause of the phone's
+   low frame rate. Here each element keeps only its way in, still scrubbed both ways
+   (scrolling back up plays it in reverse); what goes is the fade-out at the very top,
+   under the nav bar. The headline lines are left still: their spans are inline, which
+   cannot move, so in the design they never animated anyway. */
+@supports (animation-timeline: view()){
+@media (hover:none){
+.sd-on .rv-fade{animation:sdFadeIn linear both;animation-timeline:view();animation-range:cover 0% cover 22%}
+.sd-on footer.rv-fade{animation-range:entry 0% entry 100%}
+.sd-on .rv-up{animation:sdUpInLite linear both;animation-timeline:view();animation-range:cover 4% cover 28%}
+.sd-on .rv-lines .ln{animation:none}
+.sd-on .rv-rule{animation:sdRuleIn linear both;animation-timeline:view();animation-range:cover 0% cover 40%}
+.sd-on .rv-card{animation:sdCardIn linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+.sd-on .rv-card .media-inner{animation:sdZoomIn linear both;animation-timeline:--card;animation-range:entry 0% cover 50%}
+.sd-on .rv-card .asm-text{animation:asmTextIn linear both;animation-timeline:view();animation-range:cover 0% cover 16%}
+.sd-on .rv-card h3.asm-text{animation-range:cover 2% cover 19%}
+.sd-on .rv-card p.asm-text{animation-range:cover 4% cover 22%}
+.sd-on .rv-card .asm-chip{animation:asmChipIn linear both;animation-timeline:view();animation-range:cover 0% cover 13%}
+.sd-on .rv-card .asm-chip:nth-child(2){animation-range:cover 2% cover 15%}
+.sd-on .rv-card .asm-chip:nth-child(3){animation-range:cover 4% cover 17%}
+.sd-on .rv-card .asm-arrow{animation:asmArrowInTouch linear both;animation-timeline:view();animation-range:cover 1% cover 18%}
+.sd-on .rv-card .asm-rise{animation:asmRiseIn linear both;animation-timeline:--card;animation-range:entry 5% entry 85%}
+.sd-on .rv-card .asm-left{animation:asmLeftIn linear both;animation-timeline:--card;animation-range:entry 8% entry 90%}
+.sd-on .rv-card .asm-right{animation:asmRightIn linear both;animation-timeline:--card;animation-range:entry 14% entry 96%}
+/* The card's shell slides up without its fade: an animated opacity made the phone draw
+   each whole card off screen on every frame. Its parts still fade in as they assemble. */
+.sd-on .rv-card{animation-name:sdCardRise}
+}
+}
+@keyframes sdCardRise{from{translate:0 90px}to{translate:0 0}}
+
+/* Touch screens: no frosted glass. The live background never stops moving, so every
+   backdrop blur — the nav, the cards, the portrait's frame and its name plate — was
+   recomputed on every frame, by far the largest cost left on the GPU (measured). Over
+   the soft background a blur barely shows; the two panels that sit over sharp content,
+   the nav and the name plate, take a denser tint instead so text stays legible. The
+   portrait's glow keeps its place but stops turning (its blur is then drawn once); the
+   fine ring around the photo still turns. */
+@media (hover:none){
+.pf .nav-bar,.pf .card,.pf .portrait,.pf .plate{backdrop-filter:none;-webkit-backdrop-filter:none}
+.theme-dark .nav-bar{background:linear-gradient(180deg,rgba(7,9,16,.95),rgba(7,9,16,.88))}
+.theme-light .nav-bar{background:linear-gradient(180deg,rgba(241,242,246,.97),rgba(241,242,246,.9))}
+.theme-dark .plate{background:rgba(7,9,16,.74)}
+.theme-light .plate{background:rgba(255,255,255,.86)}
+.portrait-aura-glow .amb-aura-turn{animation:none}
+}
+
 /* Phones: the portrait rises in without the blur, which meant blurring the whole portrait
    off screen on every frame of the entrance. */
 @media (max-width:760px){

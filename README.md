@@ -14,7 +14,7 @@ build step; GitHub Pages serves the repository root from `main`.
 | `styles.css` | The design's CSS, verbatim, plus additions at the end, each explained in a comment: three small fixes; CARD ASSEMBLY, the project cards putting themselves together as they scroll in; and PERFORMANCE, which keeps the page smooth on phones. |
 | `main.js` | The theme switch with its circular reveal, the hero parallax (portrait, glow, background, text), and the scroll reveals — ported from the design's component logic — plus pausing the hero's motion off screen and the phone version of the headline shimmer. |
 | `favicon.svg` | The design's ring mark. |
-| `img/` | The portrait (`portrait.webp`, 4:5); screenshots inside the card mockups, taken from the live demos; the social preview (`og.jpg`); and `grain.webp`, the design's film-grain filter rendered once into a tile. |
+| `img/` | The portrait (`portrait.webp`, 4:5); screenshots inside the card mockups, taken from the live demos (the AI platform's at phone, tablet and desktop size, picked by screen width); the social preview (`og.jpg`); and `grain.webp`, the design's film-grain filter rendered once into a tile. |
 | `demos/` | The live demos the cards open. |
 
 ## Local preview

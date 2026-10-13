@@ -42,6 +42,19 @@
     </style>
     <script type="module" crossorigin src="/demos/naftal/assets/index-DyYT-F3o.js"></script>
     <link rel="stylesheet" crossorigin href="/demos/naftal/assets/index-CfEOtA61.css">
+    <style>
+      /* The sign-in header's badge ("NOUVEAU COMPTE", "ACCÈS SÉCURISÉ") was an inline
+         span, so when the row ran short its text wrapped and its border broke into two
+         boxes. It now keeps to one line; on phones it moves under the logo instead of
+         spilling out. The same change is in the source, components/BrandBar.tsx. */
+      .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .ml-auto { flex-shrink: 0; }
+      .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .ml-auto > span { display: inline-block; white-space: nowrap; }
+      @media (max-width: 420px) {
+        .flex.items-center.gap-5.bg-navy-900.px-8.py-5 { flex-wrap: wrap; row-gap: .875rem; padding-left: 1.25rem; padding-right: 1.25rem; }
+        .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .leading-tight { flex: 1 1 7rem; min-width: 0; }
+        .flex.items-center.gap-5.bg-navy-900.px-8.py-5 > .ml-auto { margin-left: 0; }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

@@ -451,6 +451,18 @@ html.pf-light body{background:#F1F2F6}
 }
 @keyframes sdCardRise{from{translate:0 90px}to{translate:0 0}}
 
+/* Touch screens: the hero still drifts and fades away as it scrolls off, without the
+   shrink. Scaling the portrait with its blurred glow and blended light layers made the
+   phone redraw them at a new size on every scrolled frame: the slow stretch between the
+   top of the page and the projects (measured: about 100 slow frames per pass, none
+   without the scale). */
+@keyframes heroOutTouch{to{transform:translateY(140px);opacity:.25}}
+@supports (animation-timeline: view()){
+@media (hover:none){
+.sv-hero{animation-name:heroOutTouch}
+}
+}
+
 /* Touch screens: no frosted glass. The live background never stops moving, so every
    backdrop blur — the nav, the cards, the portrait's frame and its name plate — was
    recomputed on every frame, by far the largest cost left on the GPU (measured). Over

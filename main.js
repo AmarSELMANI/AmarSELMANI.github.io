@@ -2,7 +2,8 @@
 // (Main.dc.html) to plain JavaScript:
 //
 //   - the theme switch, with the circular reveal from the toggle;
-//   - the hero parallax, four layers moving at different depths;
+//   - the hero parallax: the portrait tilting under its glare, the glow, the live
+//     background and the text, each moving at its own depth;
 //   - scroll reveals. Where the browser supports scroll-driven animations the
 //     CSS does all of it, scrubbed by scroll position (the `sd-on` class); a
 //     two-way IntersectionObserver is the fallback (`rv-on`). Both classes are
@@ -57,8 +58,9 @@
   var hero = document.getElementById('top');
   var layer = function (name) { return root.querySelector('[data-layer="' + name + '"]'); };
   var tilt = layer('tilt');
+  var glare = layer('glare');
   var glow = layer('glow');
-  var near = layer('near');
+  var bg = layer('bg');
   var text = layer('text');
   var mx = 0;
   var my = 0;
@@ -67,9 +69,10 @@
   function clamp(v) { return Math.max(-1, Math.min(1, v)); }
 
   function place(x, y) {
-    tilt.style.transform = 'rotateX(' + (-y * 7).toFixed(2) + 'deg) rotateY(' + (x * 10).toFixed(2) + 'deg)';
+    tilt.style.transform = 'rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 7).toFixed(2) + 'deg)';
+    glare.style.transform = 'translate3d(' + (x * 14).toFixed(1) + '%,' + (y * 12).toFixed(1) + '%,0)';
     glow.style.transform = 'translate3d(' + (x * -28).toFixed(1) + 'px,' + (y * -20).toFixed(1) + 'px,0)';
-    near.style.transform = 'translate3d(' + (x * 34).toFixed(1) + 'px,' + (y * 26).toFixed(1) + 'px,0)';
+    bg.style.transform = 'translate3d(' + (x * -22).toFixed(1) + 'px,' + (y * -16).toFixed(1) + 'px,0)';
     text.style.transform = 'translate3d(' + (x * -8).toFixed(1) + 'px,' + (y * -5).toFixed(1) + 'px,0)';
   }
 

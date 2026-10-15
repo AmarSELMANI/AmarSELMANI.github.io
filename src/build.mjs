@@ -66,6 +66,7 @@ function head(t, page) {
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('pf-theme')==='dark'){var h=document.documentElement;h.dataset.theme='dark';h.removeAttribute('data-tint')}}catch(e){}</script>
+<script>/* page cut safety net: when Chrome skips the cross-document transition (a slow first render), the page still opens out of black */try{if('CSSViewTransitionRule' in window&&document.referrer&&new URL(document.referrer).origin===location.origin)addEventListener('pagereveal',function(e){var n=performance.getEntriesByType('navigation')[0];if(!e.viewTransition&&(!n||n.type==='navigate'))document.documentElement.classList.add('pf-cut-in')},{once:true})}catch(e){}</script>
 <script>/* price list: the visitor's choice, else dinars for visitors in Algeria, else euros */(function(){var c='eur';try{c=localStorage.getItem('pf-cur')||((Intl.DateTimeFormat().resolvedOptions().timeZone||'')==='Africa/Algiers'?'dzd':'eur')}catch(e){}document.documentElement.dataset.cur=c})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -436,7 +437,7 @@ ${scripts(t)}`;
 
 // ------------------------------------------------------------------------ write
 // Cache version: bump when the demo pages or the stylesheets/scripts change, so no browser keeps a stale copy.
-const V = '5';
+const V = '6';
 // French pages open the French editions of the demos that have one (fr.html next to index.html).
 const frDemos = (html) => html.replace(/(demos\/(?:naftal-b2b|marine-bot)\/)"/g, '$1fr.html"');
 const bust = (html) => html

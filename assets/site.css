@@ -501,3 +501,16 @@ html[data-cur="dzd"] .cur-dzd { display: contents; }
 @keyframes pf-cut-out { to { opacity: 0.2; transform: translate3d(-5%, 0, 0) scale(0.97); } }
 @keyframes pf-cut-in { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
 @keyframes pf-cut-in-rtl { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* page cut safety net (see the inline script in each page's head) */
+html.pf-cut-in body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-shutter);
+  background: var(--void);
+  pointer-events: none;
+  animation: pf-uncover 640ms var(--ease-develop) 40ms both;
+}
+@keyframes pf-uncover { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { html.pf-cut-in body::after { animation-duration: 200ms; } }

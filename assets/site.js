@@ -19,6 +19,16 @@
   window.HalationGlyphs.mount();
   // remembered so pages without a language of their own (the Naftal AI app) can link back to the right portfolio
   try { localStorage.setItem('pf-lang', fr ? 'fr' : 'en'); } catch (e) { /* private mode */ }
+  // Links to another page of the site get Halation's film cut (a[data-cut]; browsers without
+  // cross-document view transitions use it). Links to a section of this same page never do:
+  // the shutter would cover the page and wait for a page load that never comes. Those are cut below.
+  Array.prototype.forEach.call(document.querySelectorAll('a[href]'), function (a) {
+    if (a.target === '_blank' || a.hasAttribute('download')) return;
+    var u; try { u = new URL(a.href, location.href); } catch (e) { return; }
+    if (u.origin !== location.origin || /\.(png|jpe?g|webp|pdf)$/i.test(u.pathname)) return;
+    if (u.pathname === location.pathname && u.search === location.search) a.removeAttribute('data-cut');
+    else a.setAttribute('data-cut', '');
+  });
   H.init({ vignette: false });
   var tier = H.tier, calm = tier === 'calm', full = tier === 'full';
   function $(s, r) { return (r || document).querySelector(s); }
@@ -61,6 +71,29 @@
       if (e.target === menu || e.target.closest('[data-menu-close]') || e.target.closest('a')) menu.close();
     });
   }
+
+  // ================================================================ section links: a film cut, not a long scroll
+  // Work, About, Contact and Back to top in the nav, the phone menu and the footer point at sections of the
+  // same page. They cover the screen, jump to the section and open on it, like a cut between pages.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.nav a[href*="#"], .menu a[href*="#"], footer a[href*="#"]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var u; try { u = new URL(a.href, location.href); } catch (err) { return; }
+    if (u.origin !== location.origin || u.pathname !== location.pathname || u.search !== location.search || !u.hash) return;
+    var id = decodeURIComponent(u.hash.slice(1));
+    var target = id === 'top' ? null : document.getElementById(id);
+    if (id !== 'top' && !target) return;
+    e.preventDefault();
+    H.cut(function () {
+      // jump while the screen is black; smooth scrolling off for that instant so nothing can animate it back
+      var smooth = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+      else window.scrollTo({ top: 0, behavior: 'instant' });
+      html.style.scrollBehavior = smooth;
+      try { history.pushState(null, '', u.hash); } catch (err) { /* file:// */ }
+    });
+  });
 
   // ================================================================ marks: grease pencil, drawn by hand
   var SVGNS = 'http://www.w3.org/2000/svg';

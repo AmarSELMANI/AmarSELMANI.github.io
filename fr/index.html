@@ -22,13 +22,14 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <script>try{if(localStorage.getItem('pf-theme')==='dark'){var h=document.documentElement;h.dataset.theme='dark';h.removeAttribute('data-tint')}}catch(e){}</script>
+<script>/* page cut safety net: when Chrome skips the cross-document transition (a slow first render), the page still opens out of black */try{if('CSSViewTransitionRule' in window&&document.referrer&&new URL(document.referrer).origin===location.origin)addEventListener('pagereveal',function(e){var n=performance.getEntriesByType('navigation')[0];if(!e.viewTransition&&(!n||n.type==='navigate'))document.documentElement.classList.add('pf-cut-in')},{once:true})}catch(e){}</script>
 <script>/* price list: the visitor's choice, else dinars for visitors in Algeria, else euros */(function(){var c='eur';try{c=localStorage.getItem('pf-cur')||((Intl.DateTimeFormat().resolvedOptions().timeZone||'')==='Africa/Algiers'?'dzd':'eur')}catch(e){}document.documentElement.dataset.cur=c})()</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap">
-<link rel="stylesheet" href="../assets/halation/halation.css?v=5">
-<link rel="stylesheet" href="../assets/halation/selmani.css?v=5">
-<link rel="stylesheet" href="../assets/site.css?v=5">
+<link rel="stylesheet" href="../assets/halation/halation.css?v=6">
+<link rel="stylesheet" href="../assets/halation/selmani.css?v=6">
+<link rel="stylesheet" href="../assets/site.css?v=6">
 </head>
 <body data-page="home" id="top">
 
@@ -92,7 +93,7 @@
         </div></span>
           <span class="print__edge" aria-hidden="true"><span class="print__no">14</span><span class="print__arrow">→</span><span>Naftal AI Platform</span></span>
         </a>
-        <a class="print" href="../demos/naftal-b2b/fr.html?v=5" data-cut data-i="1" aria-label="Naftal B2B">
+        <a class="print" href="../demos/naftal-b2b/fr.html?v=6" data-cut data-i="1" aria-label="Naftal B2B">
           <span class="print__mat"><div class="mock mock--browser" role="img" aria-label="L’application Naftal B2B : le catalogue de pneus et l’écran des commandes avec le crédit disponible">
           <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">amarselmani.github.io/demos/naftal-b2b</span></div>
           <div class="mock__screen"><img src="../img/b2b-console.webp" alt="" width="1600" height="1001" loading="lazy" decoding="async" style="object-position:0 0"></div>
@@ -100,7 +101,7 @@
         </div></span>
           <span class="print__edge" aria-hidden="true"><span class="print__no">15</span><span class="print__arrow">→</span><span>Naftal B2B</span></span>
         </a>
-        <a class="print" href="../demos/marine-bot/fr.html?v=5" data-cut data-i="2" aria-label="Algerian Coast Marine Bot">
+        <a class="print" href="../demos/marine-bot/fr.html?v=6" data-cut data-i="2" aria-label="Algerian Coast Marine Bot">
           <span class="print__mat"><div class="mock mock--browser" role="img" aria-label="Le moteur d’évaluation marine dans le navigateur, et le message du jour dans Telegram">
           <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">amarselmani.github.io/demos/marine-bot</span></div>
           <div class="mock__screen"><img src="../img/marine-web.webp" alt="" width="1100" height="1000" loading="lazy" decoding="async" style="object-position:0 0"></div>
@@ -130,13 +131,13 @@
             <p class="cap__kind h-eyebrow"><span class="cap__no"><span class="mark" data-mark="circle">15</span></span>Application mobile · iOS et Android</p>
             <h2 class="cap__title">Naftal B2B</h2>
             <p class="cap__line">La commande à crédit, avec un plafond qui tient même quand les commandes se croisent. La vraie application et la vraie console, dans votre navigateur.</p>
-            <a class="h-link h-link--key" href="../demos/naftal-b2b/fr.html?v=5" data-cut>Ouvrir la démo</a>
+            <a class="h-link h-link--key" href="../demos/naftal-b2b/fr.html?v=6" data-cut>Ouvrir la démo</a>
           </div>
           <div class="cap" data-i="2" hidden>
             <p class="cap__kind h-eyebrow"><span class="cap__no"><span class="mark" data-mark="circle">16</span></span>Bot Telegram · IA</p>
             <h2 class="cap__title">Algerian Coast Marine Bot</h2>
             <p class="cap__line">Un bulletin de sécurité en mer chaque jour sur la côte algérienne : le code décide, le LLM ne fait que rédiger.</p>
-            <a class="h-link h-link--key" href="../demos/marine-bot/fr.html?v=5" data-cut>Ouvrir la démo</a>
+            <a class="h-link h-link--key" href="../demos/marine-bot/fr.html?v=6" data-cut>Ouvrir la démo</a>
           </div>
           <div class="cap" data-i="3" hidden>
             <p class="cap__kind h-eyebrow"><span class="cap__no"><span class="mark" data-mark="circle">17</span></span>Concept et présentation · BN Hotel, Blida</p>
@@ -247,7 +248,7 @@
         <article class="proof__slide" data-i="0">
           <p class="proof__project h-eyebrow">01 · Naftal B2B</p>
           <p class="proof__text">Connectez-vous avec demo / demo1234 et commandez douze pneus ULTRACONTACT à crédit. Atlas Transport dispose encore de 150 000 DA ; la commande en coûte 162 000. « Acheter à crédit » reste fermé.</p>
-          <a class="h-link h-link--key" href="../demos/naftal-b2b/fr.html?v=5" data-cut>Ouvrir la démo</a>
+          <a class="h-link h-link--key" href="../demos/naftal-b2b/fr.html?v=6" data-cut>Ouvrir la démo</a>
         </article>
         <article class="proof__slide" data-i="1" hidden>
           <p class="proof__project h-eyebrow">02 · Naftal AI Platform</p>
@@ -257,7 +258,7 @@
         <article class="proof__slide" data-i="2" hidden>
           <p class="proof__project h-eyebrow">03 · Marine Bot</p>
           <p class="proof__text">Choisissez une ville et lancez la vraie prévision du jour. Quand les modèles météo divergent au-delà d’un seuil, la note reste à PRUDENCE, et le bulletin explique pourquoi.</p>
-          <a class="h-link h-link--key" href="../demos/marine-bot/fr.html?v=5" data-cut>Ouvrir la démo</a>
+          <a class="h-link h-link--key" href="../demos/marine-bot/fr.html?v=6" data-cut>Ouvrir la démo</a>
         </article>
         <article class="proof__slide" data-i="3" hidden>
           <p class="proof__project h-eyebrow">04 · BN Signature</p>
@@ -340,7 +341,7 @@
       <nav class="foot__col" aria-label="Pages"><p class="h-eyebrow">Pages</p>
         <a href="./#work">Projets</a><a href="services.html">Services</a><a href="./#about">À propos</a><a href="#contact">Contact</a></nav>
       <nav class="foot__col" aria-label="Démos en ligne"><p class="h-eyebrow">Démos en ligne</p>
-        <a href="../demos/naftal/" data-cut>Naftal AI Platform</a><a href="../demos/naftal-b2b/fr.html?v=5" data-cut>Naftal B2B</a><a href="../demos/marine-bot/fr.html?v=5" data-cut>Marine Bot</a><a href="../demos/bn-signature/" data-cut>BN Signature</a></nav>
+        <a href="../demos/naftal/" data-cut>Naftal AI Platform</a><a href="../demos/naftal-b2b/fr.html?v=6" data-cut>Naftal B2B</a><a href="../demos/marine-bot/fr.html?v=6" data-cut>Marine Bot</a><a href="../demos/bn-signature/" data-cut>BN Signature</a></nav>
       <nav class="foot__col" aria-label="Ailleurs"><p class="h-eyebrow">Ailleurs</p>
         <a href="mailto:selmanim183@gmail.com">E-mail</a><a href="https://wa.me/213552602642" rel="noopener">WhatsApp</a><a href="https://github.com/AmarSELMANI" rel="noopener">GitHub</a></nav>
     </div>
@@ -348,10 +349,10 @@
   </div>
 </footer>
 
-<script src="../assets/vendor/gsap.min.js?v=5"></script>
-<script src="../assets/vendor/ScrollTrigger.min.js?v=5"></script>
-<script src="../assets/halation/glyphs.js?v=5"></script>
-<script src="../assets/halation/halation-motion.js?v=5"></script>
-<script src="../assets/site.js?v=5"></script>
+<script src="../assets/vendor/gsap.min.js?v=6"></script>
+<script src="../assets/vendor/ScrollTrigger.min.js?v=6"></script>
+<script src="../assets/halation/glyphs.js?v=6"></script>
+<script src="../assets/halation/halation-motion.js?v=6"></script>
+<script src="../assets/site.js?v=6"></script>
 </body>
 </html>

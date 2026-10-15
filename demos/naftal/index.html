@@ -5,9 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/demos/naftal/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Naftal — Espace IA Interne</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&amp;family=Fragment+Mono&amp;display=swap">
     <style>
       /* Demo banner. Rendered outside React so no component needs to know
          about it; removed automatically when VITE_DEMO is not set. */
+      /* Contact Sheet banner (portfolio design). Halation 1.0.0, tint "selmani": paper #f6f4f0,
+         ink #100f0f, mute #535251, line #81807f, key-deep #90101a, key-ink #af2c1f. */
       #demo-banner {
         position: fixed;
         left: 0;
@@ -17,27 +22,44 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 0.4rem 1rem;
-        padding: 0.55rem 1rem;
-        padding-bottom: calc(0.55rem + env(safe-area-inset-bottom, 0px));
-        background: #14181f;
-        border-top: 1px solid #c9a227;
-        color: #d8dde4;
-        font: 500 12.5px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        gap: 0.5rem 1.25rem;
+        padding: 0.6rem 1.25rem;
+        padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
+        background: #f6f4f0;
+        border-top: 4px solid #90101a;
+        color: #272626;
+        font: 400 13px/1.5 'Archivo', 'Helvetica Neue', Arial, sans-serif;
       }
-      #demo-banner strong { color: #e8b93b; }
-      #demo-banner a { color: #e8b93b; }
+      #demo-banner strong { color: #af2c1f; font: 400 11px/1 'Fragment Mono', ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; margin-right: 0.35rem; }
+      #demo-banner code { font: 400 12px/1 'Fragment Mono', ui-monospace, monospace; color: #100f0f; background: #fcfaf6; border: 1px solid #81807f; border-radius: 2px; padding: 2px 5px; }
+      #demo-banner a { color: #100f0f; font-weight: 600; text-decoration: none; border-bottom: 2px solid #90101a; padding: 2px 0; }
+      #demo-banner a:hover { color: #af2c1f; }
       #demo-banner .spacer { margin-left: auto; }
       #demo-banner button {
-        padding: 0.2rem 0.6rem;
-        font: inherit;
-        color: inherit;
+        min-height: 32px;
+        padding: 0 0.9rem;
+        font: 600 12px/1 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #100f0f;
         background: transparent;
-        border: 1px solid #39414d;
-        border-radius: 6px;
+        border: 2px solid #100f0f;
+        border-radius: 999px;
         cursor: pointer;
       }
-      #demo-banner button:hover { border-color: #c9a227; }
+      #demo-banner button:hover { background: #100f0f; color: #f6f4f0; }
+      /* Page cut, the same as on the portfolio: the old page slides back into the dark, this one wipes in. */
+      @view-transition { navigation: auto; }
+      ::view-transition { background: #110f0d; }
+      ::view-transition-old(root) { animation: pf-cut-out 520ms cubic-bezier(0.5, 0, 0.75, 0) both; }
+      ::view-transition-new(root) { animation: pf-cut-in 760ms cubic-bezier(0.83, 0, 0.17, 1) 90ms both; }
+      @keyframes pf-cut-out { to { opacity: 0.2; transform: translate3d(-5%, 0, 0) scale(0.97); } }
+      @keyframes pf-cut-in { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+      }
+      /* Browsers without view transitions: the shutter Halation dropped on the way out lifts here. */
+      #pf-cut { position: fixed; inset: 0; z-index: 10000; background: #110f0d; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
       /* The banner takes its own row under the app instead of floating over it:
          the app shell is exactly one screen tall (h-dvh), so a floating banner hid
          the sidebar's logout and the bottom of every screen. #root fills what is
@@ -56,15 +78,36 @@
 
     <div id="demo-banner" hidden>
       <span>
-        <strong>Démonstration publique</strong> — données entièrement synthétiques,
-        aucune donnée Naftal. Comptes&nbsp;: <code>Admin</code>, <code>com212</code>,
-        <code>cdd208g</code> — mot de passe quelconque, code OTP
-        <code>482913</code>.
+        <strong>Démo publique</strong> Données entièrement synthétiques, aucune donnée Naftal.
+        Comptes&nbsp;: <code>Admin</code>, <code>com212</code>, <code>cdd208g</code>, mot de passe
+        quelconque, code OTP <code>482913</code>.
       </span>
       <span class="spacer"></span>
-      <a href="../../">← Portfolio</a>
+      <a href="../../#work" data-cut>← Portfolio</a>
       <button type="button" onclick="this.parentElement.remove()">Masquer</button>
     </div>
-
+    <script>
+      // Shutter hand-off for browsers without cross-document view transitions (Halation's a[data-cut]).
+      (function () {
+        var cut = null;
+        try { cut = sessionStorage.getItem('h-cut-in'); sessionStorage.removeItem('h-cut-in'); } catch (e) {}
+        if (cut) {
+          var s = document.createElement('div'); s.id = 'pf-cut'; document.body.appendChild(s);
+          requestAnimationFrame(function () { requestAnimationFrame(function () { s.style.opacity = '0'; setTimeout(function () { s.remove(); }, 600); }); });
+        }
+        var back = document.querySelector('#demo-banner a[data-cut]');
+        try { if (back && localStorage.getItem('pf-lang') === 'fr') back.setAttribute('href', '../../fr/#work'); } catch (e) {}
+        if (back && !('CSSViewTransitionRule' in window)) back.addEventListener('click', function (e) {
+          e.preventDefault();
+          try { sessionStorage.setItem('h-cut-in', 'fade'); } catch (err) {}
+          var s = document.createElement('div'); s.id = 'pf-cut'; s.style.opacity = '0'; document.body.appendChild(s);
+          requestAnimationFrame(function () { s.style.opacity = '1'; });
+          setTimeout(function () { location.href = back.href; }, 380);
+        });
+      })();
+    </script>
+
+
+
   </body>
 </html>

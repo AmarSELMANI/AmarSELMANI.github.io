@@ -1,14 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="m" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#F4F6FB"/>
-      <stop offset=".5" stop-color="#7C8295"/>
-      <stop offset="1" stop-color="#B2A1FF"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="8" fill="#070910"/>
-  <g transform="translate(3 3)">
-    <circle cx="13" cy="13" r="10.5" fill="none" stroke="url(#m)" stroke-width="2.2"/>
-    <ellipse cx="13" cy="13" rx="10.5" ry="3.6" fill="none" stroke="url(#m)" stroke-width="1" opacity=".7" transform="rotate(-24 13 13)"/>
-  </g>
+  <!-- Contact Sheet mark: an S circled in grease pencil. Colors: Halation thriller key (#cb2d26), ink (#100f0f), paper (#f6f4f0). -->
+  <style>
+    .ink { fill: #100f0f; } .paper { fill: #f6f4f0; }
+    @media (prefers-color-scheme: dark) { .ink { fill: #f5f1f0; } .paper { fill: #130807; } }
+  </style>
+  <rect class="paper" width="32" height="32" rx="7"/>
+  <text class="ink" x="16" y="23.2" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-weight="700">S</text>
+  <path d="M9.2 8.4 C13.6 4.6 23.6 5.2 26.4 11.6 C29 17.6 24.4 26.2 15.6 26.4 C7.6 26.6 4.4 20.4 5.6 15 C6.4 11.2 9.4 8.6 13.8 7.4"
+        fill="none" stroke="#cb2d26" stroke-width="2.1" stroke-linecap="round"/>
 </svg>

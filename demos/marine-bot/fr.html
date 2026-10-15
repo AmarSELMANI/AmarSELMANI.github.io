@@ -1,0 +1,186 @@
+<!doctype html>
+<!-- Contact Sheet · Halation 1.0.0 (Thriller · intensity 1 · light first, tint "selmani"), like the portfolio.
+     French edition of index.html: same structure, same ids (filled by app.js, which reads lang="fr"). -->
+<html lang="fr" data-genre="thriller" data-intensity="1" data-theme="light" data-tint="selmani">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Algerian Coast Marine Bot · Démo en ligne · Mohamed Amar Selmani</title>
+<meta name="description" content="Des évaluations de sécurité en mer en direct pour six villes de la côte méditerranéenne algérienne, produites par le vrai moteur déterministe du bot, dans votre navigateur.">
+<link rel="alternate" hreflang="en" href="https://amarselmani.github.io/demos/marine-bot/">
+<link rel="alternate" hreflang="fr" href="https://amarselmani.github.io/demos/marine-bot/fr.html">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<script>try{if(localStorage.getItem('pf-theme')==='dark'){var h=document.documentElement;h.dataset.theme='dark';h.removeAttribute('data-tint')}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/halation/halation.css?v=4">
+<link rel="stylesheet" href="../../assets/halation/selmani.css?v=4">
+<link rel="stylesheet" href="../../assets/site.css?v=4">
+<link rel="stylesheet" href="../demo.css?v=4">
+<link rel="stylesheet" href="app.css?v=4">
+</head>
+<body data-page="demo" id="top">
+
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="nav h-nav" data-nav>
+  <a class="brand" href="../../fr/" data-cut aria-label="Mohamed Amar Selmani, accueil"><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+  <nav class="nav__links" aria-label="Navigation principale">
+    <a href="../../fr/#work" data-cut aria-current="page">Projets</a>
+    <a href="../../fr/services.html" data-cut>Services</a>
+    <a href="../../fr/#about" data-cut>À propos</a>
+    <a href="../../fr/#contact" data-cut>Contact</a>
+  </nav>
+  <div class="nav__tools">
+    <a class="nav__lang" href="./?v=4" hreflang="en" lang="en" data-cut aria-label="English">EN</a>
+    <button class="icon-btn" type="button" data-motion data-pause="Mettre en pause l’animation de fond" data-play="Relancer l’animation de fond" aria-label="Mettre en pause l’animation de fond" aria-pressed="false"><svg class="h-glyph" aria-hidden="true"><use href="#g-pause"></use></svg></button>
+    <button class="icon-btn" type="button" data-theme-toggle data-to-dark="Allumer la lumière inactinique (mode sombre)" data-to-light="Rallumer la lumière (mode clair)" aria-label="Allumer la lumière inactinique (mode sombre)"><svg class="h-glyph" aria-hidden="true"><use href="#g-moon"></use></svg></button>
+    <a class="h-btn h-btn--primary h-btn--sm nav__talk" href="../../fr/#contact" data-cut>Parlons-en</a>
+    <button class="icon-btn nav__menu" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-label="Ouvrir le menu"><svg class="h-glyph" aria-hidden="true"><use href="#g-menu"></use></svg></button>
+  </div>
+</header>
+<dialog class="h-dialog menu" id="menu" data-sheet aria-label="Navigation principale">
+  <nav class="menu__links">
+    <a href="../../fr/#work">Projets</a><a href="../../fr/services.html">Services</a><a href="../../fr/#about">À propos</a><a href="../../fr/#contact">Contact</a>
+  </nav>
+  <div class="menu__foot"><a class="btn-ink btn-ink--sm" href="./?v=4" hreflang="en" lang="en">English</a><button class="h-btn h-btn--quiet h-btn--sm" type="button" data-menu-close><svg class="h-glyph" aria-hidden="true"><use href="#g-close"></use></svg>Fermer</button></div>
+</dialog>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero" data-ambient="light">
+    <div class="h-wrap hero__inner" data-reveal-group>
+      <p class="hero__kicker h-eyebrow" data-reveal>Démo en ligne · 16 · Bot Telegram et conception de système LLM</p>
+      <h1 class="hero__title">
+        <span class="hero__l1" data-reveal>Marine Bot</span>
+        <span class="hero__l2" data-reveal>le code <span class="mark" data-mark="circle">décide</span>, le modèle rédige.</span>
+      </h1>
+      <p class="hero__sub" data-reveal>Une vraie prévision, récupérée à l’instant, passée dans le moteur du bot <span class="kw">qui tourne dans votre navigateur.</span> Aucun modèle ne décide d’une note.</p>
+      <div class="hero__cta" data-reveal>
+        <a class="btn-ink" href="#forecast">Choisir une ville</a>
+        <a class="h-link" href="https://github.com/AmarSELMANI/algerian-coast-marine-bot" target="_blank" rel="noopener noreferrer">Code source sur GitHub</a>
+      </div>
+      <p class="hero__place h-eyebrow" data-reveal><svg class="h-glyph" aria-hidden="true"><use href="#g-globe"></use></svg>Six villes de la côte algérienne · Données Open-Meteo</p>
+    </div>
+  </section>
+
+  <!-- Controls -->
+  <section class="pick" id="forecast" aria-label="Réglages de la prévision">
+    <div class="h-wrap">
+      <span class="h-sr" id="city-label">Ville</span>
+      <div class="cityseg" role="group" aria-labelledby="city-label" id="cities"></div>
+      <div class="pick__more">
+        <div class="pick__group">
+          <span class="control-label" id="profile-label">Niveau</span>
+          <div class="chips" role="group" aria-labelledby="profile-label" id="profiles"></div>
+        </div>
+        <div class="pick__group">
+          <span class="control-label" id="lang-label">Langue du message</span>
+          <div class="chips" role="group" aria-labelledby="lang-label" id="languages"></div>
+        </div>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- Report -->
+  <div id="report" hidden>
+
+    <section class="rep-head">
+      <div class="h-wrap">
+        <p class="label h-eyebrow">Les notes du jour</p>
+        <h2 id="report-title"></h2>
+        <p id="report-sub" class="report-sub"></p>
+      </div>
+    </section>
+
+    <section class="rep-acts" aria-label="Notes par activité">
+      <div class="h-wrap"><div id="activities" class="activities"></div></div>
+    </section>
+
+    <section class="rep-metrics" aria-labelledby="metrics-title">
+      <div class="h-wrap">
+        <h3 class="h-sr" id="metrics-title">Prévisions clés</h3>
+        <div id="metrics" class="metrics"></div>
+      </div>
+    </section>
+
+    <section class="rep-read">
+      <div class="h-wrap rep-read__grid">
+        <div class="rep-msg">
+          <p class="label label--key h-eyebrow">Le message reçu par un abonné</p>
+          <div class="tg-phone">
+            <div class="tg-phone__bar"><b>Marine Bot</b><span>bot</span></div>
+            <div class="tg-phone__chat"><div id="telegram" class="telegram"></div></div>
+          </div>
+          <p class="panel-note">En production, un modèle reformule les motifs en meilleure prose, sans pouvoir changer une note&nbsp;: les notes sont réappliquées à partir de cette évaluation une fois sa réponse lue. Voici le rendu déterministe, celui qui est aussi envoyé dès que le modèle échoue à l’un de ses quatre contrôles de sortie.</p>
+        </div>
+        <div class="rep-why">
+          <div class="why" id="flags-panel">
+            <h3 class="why__h">Signaux levés</h3>
+            <div id="flags"></div>
+          </div>
+          <div class="why" id="ensemble-panel">
+            <h3 class="why__h">Là où les modèles divergent</h3>
+            <p class="panel-note">Le chiffre d’un seul modèle n’est pas la réponse. Le moteur en interroge plusieurs et les combine, pour chaque variable, dans le sens le plus prudent&nbsp;: les vagues les plus hautes, la période la plus courte, les rafales les plus fortes. Quand ils divergent au-delà d’un seuil, la note reste à PRUDENCE et le bulletin le dit.</p>
+            <div id="ensemble"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rep-day" aria-labelledby="day-title">
+      <div class="h-wrap">
+        <h3 class="sheet-h rep-day__h" id="day-title">Au fil <em>de la journée.</em></h3>
+        <div class="table-scroll">
+          <table id="windows-table" class="windows-table">
+            <thead>
+              <tr>
+                <th scope="col">Créneau</th>
+                <th scope="col">Rafale</th>
+                <th scope="col">Vague</th>
+                <th scope="col">Période</th>
+                <th scope="col">Voile</th>
+                <th scope="col">Baignade</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer class="dm-foot" data-theme="dark">
+  <div class="h-wrap dm-foot__inner">
+    <div class="dm-foot__top">
+      <a class="brand brand--lg" href="../../fr/" data-cut><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+      <nav class="dm-foot__links" aria-label="Démos en ligne">
+        <a href="../naftal/" data-cut>Naftal AI Platform</a><a href="../naftal-b2b/fr.html?v=4" data-cut>Naftal B2B</a><a href="../bn-signature/" data-cut>BN Signature</a><a href="../../fr/#contact" data-cut>Contact</a>
+      </nav>
+    </div>
+    <div class="dm-foot__note">
+      <p><strong>Une prévision, pas un état de la mer observé, et pas une autorité de sécurité.</strong>
+      Elle ne remplace ni les avis maritimes officiels, ni les consignes du port, ni les drapeaux de
+      baignade, ni votre jugement au bord de l’eau. L’ONM algérien ne publie aucun flux d’avis exploitable
+      par une machine&nbsp;: les avis officiels ne sont donc <em>pas</em> vérifiés ici, et sont signalés comme
+      non vérifiés plutôt que comme absents.</p>
+      <p>Données météo et marines d’<a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
+      (CC&nbsp;BY&nbsp;4.0). Les seuils sont des hypothèses de départ issues des échelles de Beaufort et de
+      Douglas, pas d’observations locales. Hauteur des vagues, période et température de la mer n’ont aucune
+      observation publique sur cette côte et restent non vérifiées.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/vendor/gsap.min.js"></script>
+<script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+<script src="../../assets/halation/glyphs.js?v=4"></script>
+<script src="../../assets/halation/halation-motion.js?v=4"></script>
+<script src="../../assets/site.js?v=4"></script>
+<script type="module" src="app.js?v=4"></script>
+</body>
+</html>

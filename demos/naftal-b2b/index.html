@@ -1,196 +1,235 @@
 <!doctype html>
-<html lang="en">
+<!-- Contact Sheet · Halation 1.0.0 (Thriller · intensity 1 · light first, tint "selmani"), like the portfolio.
+     Built from the portfolio's sections: centred hero, light table, numbers, tilted prints, statement, footer band. -->
+<html lang="en" data-genre="thriller" data-intensity="1" data-theme="light" data-tint="selmani">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Naftal B2B — live demo</title>
+<title>Naftal B2B · Live demo · Mohamed Amar Selmani</title>
 <meta name="description" content="The Naftal B2B mobile app and agent console, running in your browser against an in-browser port of the real API. Credit ceilings, document review and live approvals, with nothing sent anywhere.">
-<link rel="icon" href="../../favicon.svg">
+<link rel="alternate" hreflang="en" href="https://amarselmani.github.io/demos/naftal-b2b/">
+<link rel="alternate" hreflang="fr" href="https://amarselmani.github.io/demos/naftal-b2b/fr.html">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<script>try{localStorage.setItem('naftal.lang','en')}catch(e){}</script>
+<script>try{if(localStorage.getItem('pf-theme')==='dark'){var h=document.documentElement;h.dataset.theme='dark';h.removeAttribute('data-tint')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>
-:root{--bg:#070910;--ink:#F2F4FA;--text:#E8EBF4;--body:#A7ADBD;--mute:#7C8295;--line:rgba(255,255,255,.07);--hair:rgba(255,255,255,.14);--sapphire:#718BFF;--violet:#B2A1FF;--card:linear-gradient(180deg,rgba(255,255,255,.042),rgba(255,255,255,.012));--ease:cubic-bezier(.16,1,.3,1)}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--text)}
-body{font:400 16px/1.6 'Geist','Helvetica Neue',system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;
-  background:radial-gradient(60% 50% at 20% 0%,rgba(113,139,255,.10),transparent 70%),radial-gradient(40% 40% at 90% 10%,rgba(178,161,255,.07),transparent 70%),var(--bg)}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--sapphire);outline-offset:3px;border-radius:8px}
-.mono{font:500 12px/1 'Geist Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase}
-
-.top{max-width:1240px;margin:0 auto;padding:22px clamp(16px,4vw,48px);display:flex;justify-content:space-between;align-items:center;gap:16px}
-.top a{color:var(--body);text-decoration:none;font-size:14px;padding:8px 0;transition:color .3s}
-.top a:hover{color:var(--ink)}
-
-.wrap{max-width:1240px;margin:0 auto;padding:8px clamp(16px,4vw,48px) 72px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start}
-
-/* phone */
-.stage{position:sticky;top:24px}
-.phone{width:396px;padding:9px;border-radius:52px;background:linear-gradient(145deg,#DDE2EC,#5B6276 30%,#1A1E2A 55%,#9AA3B8 82%,#EEF1F8);box-shadow:0 50px 90px -30px rgba(0,0,0,.85),0 0 90px -30px rgba(113,139,255,.45)}
-.screen{position:relative;border-radius:44px;overflow:hidden;background:#FFD600;height:clamp(600px,calc(100vh - 150px),812px)}
-.screen iframe{display:block;width:100%;height:100%;border:0}
-.under{display:flex;justify-content:center;gap:10px;margin-top:16px}
-
-/* text column */
-.eyebrow{display:flex;align-items:center;gap:12px;color:var(--body);margin:6px 0 20px}
-.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--sapphire);box-shadow:0 0 12px var(--sapphire)}
-h1{margin:0 0 18px;font-weight:400;font-size:clamp(38px,4.4vw,58px);line-height:1.02;letter-spacing:-.04em;color:var(--ink)}
-.lede{margin:0 0 34px;max-width:36rem;font-size:17px;line-height:1.65;font-weight:300;color:var(--body);text-wrap:pretty}
-.lede strong{color:var(--text);font-weight:500}
-
-.steps{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:12px;counter-reset:step}
-.step{position:relative;padding:20px 22px 20px 62px;border-radius:20px;border:1px solid var(--line);background:var(--card)}
-.step::before{counter-increment:step;content:counter(step,decimal-leading-zero);position:absolute;left:22px;top:22px;font:500 12px/1 'Geist Mono',monospace;letter-spacing:.08em;color:var(--sapphire)}
-.step h2{margin:0 0 6px;font-size:16px;font-weight:500;color:var(--ink);letter-spacing:-.01em}
-.step p{margin:0;font-size:14.5px;line-height:1.6;color:var(--body)}
-code,kbd{font:500 13px/1 'Geist Mono',ui-monospace,monospace;color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:6px;padding:2px 6px;white-space:nowrap}
-
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 34px}
-.btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 20px;border-radius:999px;font:500 14px/1 'Geist',system-ui,sans-serif;text-decoration:none;cursor:pointer;border:1px solid var(--hair);background:rgba(255,255,255,.03);color:var(--text);transition:transform .5s var(--ease),border-color .4s,background .4s}
-.btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.3)}
-.btn-primary{border-color:transparent;color:#070910;background:linear-gradient(180deg,#F6F7FB 0%,#D4D9E4 46%,#B4BBCB 54%,#E4E8F1 100%);box-shadow:0 14px 44px -14px rgba(113,139,255,.7)}
-.btn-small{height:36px;padding:0 14px;font-size:13px}
-
-.panel{border-top:1px solid var(--line);padding-top:26px;margin-top:6px}
-.panel h3{margin:0 0 14px;color:var(--mute)}
-table{border-collapse:collapse;width:100%;font-size:14px;margin-bottom:28px}
-td{padding:10px 0;border-bottom:1px solid var(--line);color:var(--body);vertical-align:top}
-td:first-child{width:9.5rem;padding-right:16px}
-.files{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px;padding:0;list-style:none}
-.files a{display:inline-block;font:500 12px/1 'Geist Mono',monospace;letter-spacing:.04em;color:var(--body);padding:9px 12px;border-radius:999px;border:1px solid var(--line);text-decoration:none;transition:color .3s,border-color .3s}
-.files a:hover{color:var(--ink);border-color:var(--hair)}
-.note{font-size:13.5px;line-height:1.65;color:var(--mute);margin:0 0 12px;max-width:40rem}
-.note strong{color:var(--body);font-weight:500}
-
-.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;padding:12px 18px;border-radius:999px;background:#151a2b;border:1px solid var(--hair);color:var(--text);font-size:14px;transition:opacity .4s,transform .5s var(--ease);pointer-events:none}
-.toast.on{opacity:1;transform:translate(-50%,0)}
-
-.only-small{display:none}
-@media (max-width:900px){
-  .wrap{grid-template-columns:1fr}
-  .stage{display:none}
-  .only-small{display:inline-flex}
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/halation/halation.css?v=4">
+<link rel="stylesheet" href="../../assets/halation/selmani.css?v=4">
+<link rel="stylesheet" href="../../assets/site.css?v=4">
+<link rel="stylesheet" href="../demo.css?v=4">
+<link rel="stylesheet" href="b2b.css?v=4">
 </head>
-<body>
+<body data-page="demo" id="top">
 
-<header class="top">
-  <a href="../../">&larr; Mohamed Amar Selmani</a>
-  <a href="https://github.com/AmarSELMANI/naftal-b2b" target="_blank" rel="noopener noreferrer">Source &#8599;</a>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav h-nav" data-nav>
+  <a class="brand" href="../../" data-cut aria-label="Mohamed Amar Selmani, home"><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="../../#work" data-cut aria-current="page">Work</a>
+    <a href="../../services.html" data-cut>Services</a>
+    <a href="../../#about" data-cut>About</a>
+    <a href="../../#contact" data-cut>Contact</a>
+  </nav>
+  <div class="nav__tools">
+    <a class="nav__lang" href="fr.html?v=4" hreflang="fr" lang="fr" data-cut aria-label="Français">FR</a>
+    <button class="icon-btn" type="button" data-motion data-pause="Pause background motion" data-play="Play background motion" aria-label="Pause background motion" aria-pressed="false"><svg class="h-glyph" aria-hidden="true"><use href="#g-pause"></use></svg></button>
+    <button class="icon-btn" type="button" data-theme-toggle data-to-dark="Turn on the safelight (dark mode)" data-to-light="Turn the lights on (light mode)" aria-label="Turn on the safelight (dark mode)"><svg class="h-glyph" aria-hidden="true"><use href="#g-moon"></use></svg></button>
+    <a class="h-btn h-btn--primary h-btn--sm nav__talk" href="../../#contact" data-cut>Let’s talk</a>
+    <button class="icon-btn nav__menu" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-label="Open menu"><svg class="h-glyph" aria-hidden="true"><use href="#g-menu"></use></svg></button>
+  </div>
 </header>
+<dialog class="h-dialog menu" id="menu" data-sheet aria-label="Main">
+  <nav class="menu__links">
+    <a href="../../#work">Work</a><a href="../../services.html">Services</a><a href="../../#about">About</a><a href="../../#contact">Contact</a>
+  </nav>
+  <div class="menu__foot"><a class="btn-ink btn-ink--sm" href="fr.html?v=4" hreflang="fr" lang="fr">Français</a><button class="h-btn h-btn--quiet h-btn--sm" type="button" data-menu-close><svg class="h-glyph" aria-hidden="true"><use href="#g-close"></use></svg>Close</button></div>
+</dialog>
 
-<main class="wrap">
+<main id="main">
 
-  <section class="stage" aria-label="The mobile app">
-    <div class="phone">
-      <div class="screen">
-        <iframe id="app" src="app/" title="Naftal B2B mobile app"></iframe>
+  <!-- Hero: centred statement, one word circled -->
+  <section class="hero" data-ambient="light">
+    <div class="h-wrap hero__inner" data-reveal-group>
+      <p class="hero__kicker h-eyebrow" data-reveal>Live demo · 15 · Mobile app &amp; agent console</p>
+      <h1 class="hero__title">
+        <span class="hero__l1" data-reveal>Naftal B2B</span>
+        <span class="hero__l2" data-reveal>credit that <span class="mark" data-mark="circle">holds</span> when orders race.</span>
+      </h1>
+      <p class="hero__sub" data-reveal>The real app and the real agent console, <span class="kw">answered by the backend running in your browser.</span> Nothing you type or upload leaves this page.</p>
+      <div class="hero__cta" data-reveal>
+        <a class="h-btn h-btn--primary h-btn--lg" href="console/" target="_blank" rel="noopener" data-magnetic="0.3"><span data-magnetic-inner>Open the agent console</span><svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up-right"></use></svg></a>
+        <a class="btn-ink" href="#app-stage">Try the app</a>
       </div>
-    </div>
-    <div class="under">
-      <button class="btn btn-small" type="button" id="reload">&#8635; Reload app</button>
-      <a class="btn btn-small" href="app/" target="_blank" rel="noopener">Open full screen &#8599;</a>
+      <p class="hero__place h-eyebrow" data-reveal><svg class="h-glyph" aria-hidden="true"><use href="#g-lock"></use></svg>Sign in with <code>demo</code> / <code>demo1234</code></p>
     </div>
   </section>
 
-  <section aria-labelledby="title">
-    <p class="eyebrow mono">Live demo &middot; Mobile app &amp; agent console</p>
-    <h1 id="title">Naftal B2B</h1>
-    <p class="lede">
-      Companies apply for an account, a Naftal agent reviews their documents, and approved
-      companies order tires and lubricants &mdash; paying now, or on credit under a ceiling that
-      holds even when orders race. This is the <strong>real app and the real console</strong>;
-      their API is answered by a port of the backend running in your browser, so
-      <strong>nothing you type or upload leaves this page</strong>.
-    </p>
-
-    <div class="actions">
-      <a class="btn btn-primary" href="console/" target="_blank" rel="noopener">Open the agent console &#8599;</a>
-      <a class="btn only-small" href="app/">Open the app &rarr;</a>
-    </div>
-
-    <ol class="steps">
-      <li class="step">
-        <h2>Hit the credit ceiling</h2>
-        <p>In the app, sign in as <code>demo</code> / <code>demo1234</code>. Atlas Transport has
-        150,000 DA left of its 1,250,000 DA ceiling. Open Tires &rarr; Light Tires &rarr;
-        Continental &rarr; ULTRACONTACT and ask for 12: at 162,000 DA, &ldquo;Buy on credit&rdquo;
-        stays shut.</p>
-      </li>
-      <li class="step">
-        <h2>Free the credit from the console</h2>
-        <p>Open the agent console, sign in as <code>admin</code> / <code>demo1234</code>, and under
-        <em>Orders</em> confirm the 156,000 DA cheque Atlas declared. A declared payment frees
-        nothing until an agent confirms it &mdash; that is how cheques work in B2B.</p>
-      </li>
-      <li class="step">
-        <h2>Order again</h2>
-        <p>Reload the app: 306,000 DA is now available, and the same order goes through with a
-        30-day deadline counting down under <em>My orders</em>.</p>
-      </li>
-      <li class="step">
-        <h2>Or open an account</h2>
-        <p>Log out and apply as a new company, attaching the specimen documents below. Approve it
-        in the console and watch the phone: it moves on the moment you click.</p>
-      </li>
-    </ol>
-
-    <div class="panel">
-      <h3 class="mono">Accounts &middot; password <code>demo1234</code></h3>
-      <table>
-        <tr><td><code>demo</code></td><td>SARL Atlas Transport &mdash; approved, ordering on credit</td></tr>
-        <tr><td><code>hodna</code></td><td>EURL Hodna Pneus &mdash; still pending, 3 of 5 documents sent</td></tr>
-        <tr><td><code>admin</code></td><td>Naftal administrator &mdash; approvals, payments and the catalog</td></tr>
-        <tr><td><code>agent</code></td><td>Naftal agent &mdash; approvals and payments; the catalog is read-only</td></tr>
-      </table>
-
-      <h3 class="mono">Specimen documents</h3>
-      <ul class="files">
-        <li><a href="media/specimens/id_card.png" download>ID card</a></li>
-        <li><a href="media/specimens/proof_of_address.png" download>Proof of address</a></li>
-        <li><a href="media/specimens/business_registration.png" download>Trade register</a></li>
-        <li><a href="media/specimens/tin.png" download>Tax number</a></li>
-        <li><a href="media/specimens/bank_statement.png" download>Bank statement</a></li>
-      </ul>
-
-      <div class="actions">
-        <button class="btn btn-small" type="button" id="reset">Reset demo data</button>
+  <!-- Light table: the live app between two prints -->
+  <section class="lt" id="app-stage" aria-label="The live app">
+    <div class="h-wrap lt__row">
+      <div class="lt__side lt__side--l" data-reveal="rise">
+        <figure class="lt__print">
+          <div class="mock mock--browser">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">naftal-b2b / console / orders</span></div>
+            <div class="mock__screen"><img src="../../img/b2b-console.webp" alt="The agent console: Atlas Transport's 156,000 DA cheque waiting to be confirmed" width="1600" height="1001" loading="lazy" decoding="async" style="object-position:0 0"></div>
+          </div>
+        </figure>
+        <p class="lt__edge"><b>15A</b>→ Agent console · Orders</p>
       </div>
 
-      <p class="note"><strong>How it runs.</strong> Both clients are the project&rsquo;s own builds.
-      Their requests go to an in-browser port of the API: the same routes, error codes and rules
-      &mdash; the transactional credit check, declared-then-confirmed payments, single-use refresh
-      tokens. Data lives in this browser&rsquo;s storage, shared by the app and the console, and
-      &ldquo;Reset demo data&rdquo; starts it over.</p>
-      <p class="note"><strong>About this project.</strong> Academic work, built as a final-year
-      graduation project. It is not affiliated with, endorsed by, or an official product of Naftal;
-      company names, logos and product images belong to their respective owners and are used only
-      to model a realistic scenario. Every company, person and order here is fictitious.</p>
+      <div class="lt__live">
+        <div class="device"><div class="device__screen"><iframe id="app" src="app/" title="Naftal B2B mobile app"></iframe></div></div>
+        <p class="lt__edge"><b><span class="mark" data-mark="circle">15</span></b>→ Live app · tap to use it</p>
+        <div class="lt__under">
+          <button class="btn-ink btn-ink--sm" type="button" id="reload"><svg class="h-glyph" aria-hidden="true"><use href="#g-play"></use></svg>Reload app</button>
+          <a class="btn-ink btn-ink--sm" href="app/" target="_blank" rel="noopener">Full screen<svg class="h-glyph" aria-hidden="true"><use href="#g-expand"></use></svg></a>
+        </div>
+      </div>
+
+      <div class="lt__side lt__side--r" data-reveal="rise">
+        <figure class="lt__print"><img src="media/specimens/business_registration.png" alt="A specimen trade register, one of the documents a company sends" width="900" height="1273" loading="lazy" decoding="async"></figure>
+        <p class="lt__edge"><b>15B</b>→ Specimen document</p>
+      </div>
     </div>
   </section>
+
+  <!-- Numbers -->
+  <section class="counts counts--long" aria-label="The scenario in numbers">
+    <div class="h-wrap counts__row" data-assemble>
+      <div class="count" data-part="from-bottom"><span class="count__n"><span data-count="1250000">1,250,000</span><span class="count__unit">DA</span></span><span class="count__l">Atlas Transport’s credit ceiling</span></div>
+      <div class="count" data-part="from-top"><span class="count__n"><span data-count="150000">150,000</span><span class="count__unit">DA</span></span><span class="count__l">Left before the order</span></div>
+      <div class="count" data-part="from-bottom"><span class="count__n"><span data-count="162000">162,000</span><span class="count__unit">DA</span></span><span class="count__l">The order that stays shut</span></div>
+      <div class="count" data-part="from-top"><span class="count__n">0</span><span class="count__l">Requests that leave your browser</span></div>
+    </div>
+  </section>
+
+  <!-- Four steps, as prints pinned to the wall -->
+  <section class="svc" aria-labelledby="steps-title">
+    <div class="h-wrap">
+      <div class="svc__head" data-reveal-group>
+        <div data-reveal><p class="label h-eyebrow">Try it yourself</p></div>
+        <h2 class="sheet-h" id="steps-title" data-reveal>Four steps to <em><span class="mark" data-mark="circle">break</span> it.</em></h2>
+      </div>
+      <div class="svc__grid">
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="#app-stage">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">1</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">In the app</span></span>
+            <span class="card__pitch" data-part="from-bottom">Hit the credit ceiling</span>
+            <span class="card__body" data-part="from-bottom">Sign in as <code>demo</code> / <code>demo1234</code>. Open Tires → Light Tires → Continental → ULTRACONTACT and ask for 12: at 162,000 DA, “Buy on credit” stays shut.</span>
+            <span class="card__foot" data-part="scale">Open the app<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up"></use></svg></span>
+          </a>
+        </article>
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="console/" target="_blank" rel="noopener">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">2</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">In the console</span></span>
+            <span class="card__pitch" data-part="from-bottom">Free the credit</span>
+            <span class="card__body" data-part="from-bottom">Sign in as <code>admin</code> / <code>demo1234</code> and, under Orders, confirm the 156,000 DA cheque Atlas declared. A declared payment frees nothing until an agent confirms it.</span>
+            <span class="card__foot" data-part="scale">Open the console<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up-right"></use></svg></span>
+          </a>
+        </article>
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="#app-stage">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">3</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">In the app</span></span>
+            <span class="card__pitch" data-part="from-bottom">Order again</span>
+            <span class="card__body" data-part="from-bottom">Reload the app: 306,000 DA is now available, and the same order goes through with a 30-day deadline counting down under My orders.</span>
+            <span class="card__foot" data-part="scale">Back to the app<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up"></use></svg></span>
+          </a>
+        </article>
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="#documents">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">4</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">Both</span></span>
+            <span class="card__pitch" data-part="from-bottom">Open a new account</span>
+            <span class="card__body" data-part="from-bottom">Log out and apply as a new company with the specimen documents below. Approve it in the console and watch the phone move on the moment you click.</span>
+            <span class="card__foot" data-part="scale">Get the documents<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-down"></use></svg></span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statement -->
+  <section class="statement" data-ambient="light">
+    <div class="h-wrap statement__inner" data-reveal-group>
+      <span class="crop" aria-hidden="true" data-reveal></span>
+      <p class="statement__line" data-reveal="rise">A declared payment frees nothing <span class="mark mark--u" data-mark="underline">until an agent confirms it.</span></p>
+      <p class="statement__body" data-reveal>Both clients are the project’s own builds. Their requests go to an in-browser port of the API: the same routes, error codes and rules, including the transactional credit check, declared-then-confirmed payments and single-use refresh tokens.</p>
+      <p data-reveal><a class="btn-ink" href="console/" target="_blank" rel="noopener">Open the agent console</a></p>
+    </div>
+  </section>
+
+  <!-- Accounts and specimen documents -->
+  <section class="docs" id="documents" aria-labelledby="docs-title">
+    <div class="h-wrap docs__grid">
+      <div data-reveal-group>
+        <div data-reveal><p class="label h-eyebrow">Accounts · password <code>demo1234</code></p></div>
+        <h2 class="sheet-h" id="docs-title" data-reveal>Sign in as <em>anyone.</em></h2>
+        <table class="accounts" data-reveal>
+          <tr><td><code>demo</code></td><td>SARL Atlas Transport: approved, ordering on credit</td></tr>
+          <tr><td><code>hodna</code></td><td>EURL Hodna Pneus: still pending, 3 of 5 documents sent</td></tr>
+          <tr><td><code>admin</code></td><td>Naftal administrator: approvals, payments and the catalog</td></tr>
+          <tr><td><code>agent</code></td><td>Naftal agent: approvals and payments; the catalog is read-only</td></tr>
+        </table>
+        <div class="docs__reset" data-reveal>
+          <button class="btn-ink btn-ink--sm" type="button" id="reset">Reset demo data</button>
+          <span class="h-caption">Data lives in this browser, shared by the app and the console.</span>
+        </div>
+      </div>
+      <div data-reveal="rise">
+        <p class="label h-eyebrow">Specimen documents · tap to download</p>
+        <ul class="sheet">
+          <li class="is-card"><a href="media/specimens/id_card.png" download><img src="media/specimens/id_card.png" alt="" width="1012" height="640" loading="lazy" decoding="async"><span>ID card <b>D1</b></span></a></li>
+          <li class="is-card"><a href="media/specimens/tin.png" download><img src="media/specimens/tin.png" alt="" width="1012" height="640" loading="lazy" decoding="async"><span>Tax number <b>D2</b></span></a></li>
+          <li><a href="media/specimens/proof_of_address.png" download><img src="media/specimens/proof_of_address.png" alt="" width="900" height="1273" loading="lazy" decoding="async"><span>Address <b>D3</b></span></a></li>
+          <li><a href="media/specimens/business_registration.png" download><img src="media/specimens/business_registration.png" alt="" width="900" height="1273" loading="lazy" decoding="async"><span>Trade reg. <b>D4</b></span></a></li>
+          <li><a href="media/specimens/bank_statement.png" download><img src="media/specimens/bank_statement.png" alt="" width="900" height="1273" loading="lazy" decoding="async"><span>Bank <b>D5</b></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<footer class="dm-foot" data-theme="dark">
+  <div class="h-wrap dm-foot__inner">
+    <div class="dm-foot__top">
+      <a class="brand brand--lg" href="../../" data-cut><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+      <nav class="dm-foot__links" aria-label="Live demos">
+        <a href="../naftal/" data-cut>Naftal AI Platform</a><a href="../marine-bot/?v=4" data-cut>Marine Bot</a><a href="../bn-signature/" data-cut>BN Signature</a><a href="https://github.com/AmarSELMANI/naftal-b2b" rel="noopener">Source on GitHub</a><a href="../../#contact" data-cut>Contact</a>
+      </nav>
+    </div>
+    <div class="dm-foot__note">
+      <p><strong>About this project.</strong> Academic work, built as a final-year graduation project. It is not affiliated with, endorsed by, or an official product of Naftal; company names, logos and product images belong to their respective owners and are used only to model a realistic scenario. Every company, person and order here is fictitious.</p>
+    </div>
+  </div>
+</footer>
 
+<div class="h-toast toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../../assets/vendor/gsap.min.js"></script>
+<script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+<script src="../../assets/halation/glyphs.js?v=4"></script>
+<script src="../../assets/halation/halation-motion.js?v=4"></script>
+<script src="../../assets/site.js?v=4"></script>
 <script>
 (function () {
   var app = document.getElementById('app');
   var toast = document.getElementById('toast');
   var timer;
-
   function say(text) {
     toast.textContent = text;
     toast.classList.add('on');
     clearTimeout(timer);
     timer = setTimeout(function () { toast.classList.remove('on'); }, 2600);
   }
-
   document.getElementById('reload').addEventListener('click', function () {
     try { app.contentWindow.location.reload(); } catch (e) { app.src = app.src; }
   });
-
   // Starts the demo over in every open tab: the app and the console listen on
   // this channel and reload themselves (demo/app.js, demo/console.js).
   document.getElementById('reset').addEventListener('click', function () {

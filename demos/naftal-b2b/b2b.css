@@ -1,0 +1,23 @@
+/* Naftal B2B demo page (index.html and fr.html), on top of ../demo.css. Tokens only. */
+/* accounts + specimen documents */
+.docs { padding-block: var(--sec); border-block-start: var(--ink-line); }
+.docs__grid { display: grid; gap: var(--space-8); align-items: start; }
+.accounts { inline-size: 100%; margin-block-start: var(--space-6); border-collapse: collapse; }
+.accounts td { padding: 0.9rem 0; border-block-end: 1px solid var(--line); vertical-align: top; color: var(--fg); }
+.accounts tr:first-child td { border-block-start: var(--ink-line); }
+.accounts td:first-child { inline-size: 7.5rem; padding-inline-end: var(--space-4); }
+.docs__reset { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-block-start: var(--space-6); }
+/* the specimens laid out as a contact sheet: prints on the dark sheet, each one downloadable */
+.sheet { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-4); margin: 0; padding: var(--space-4); background: var(--void); list-style: none; }
+/* the two card-shaped documents side by side on top, the three page-shaped ones below */
+.sheet li { grid-column: span 2; }
+.sheet li.is-card { grid-column: span 3; }
+.sheet a { display: grid; gap: 0.5rem; text-decoration: none; color: var(--on-void); }
+.sheet img { display: block; inline-size: 100%; block-size: auto; aspect-ratio: 900 / 1000; object-fit: cover; object-position: top; background: var(--surface); transition: translate var(--dur-base) var(--ease-snap); }
+.sheet li.is-card img { aspect-ratio: 1012 / 640; }
+.sheet a:hover img { translate: 0 -0.25rem; }
+.sheet span { display: flex; justify-content: space-between; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.sheet span b { font-weight: 400; color: var(--fill); }
+@media (min-width: 60rem) { .docs__grid { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--space-9); } }
+.toast { position: fixed; inset-inline-start: 50%; inset-block-end: var(--space-6); z-index: var(--z-toast); translate: -50% 1rem; opacity: 0; pointer-events: none; transition: opacity var(--dur-panel) var(--ease-snap), translate var(--dur-panel) var(--ease-snap); }
+.toast.on { opacity: 1; translate: -50% 0; }

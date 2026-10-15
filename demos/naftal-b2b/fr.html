@@ -1,0 +1,250 @@
+<!doctype html>
+<!-- Contact Sheet · Halation 1.0.0 (Thriller · intensity 1 · light first, tint "selmani"), like the portfolio.
+     French edition of index.html: same sections. The app and the console open in French (localStorage "naftal.lang"). -->
+<html lang="fr" data-genre="thriller" data-intensity="1" data-theme="light" data-tint="selmani">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naftal B2B · Démo en ligne · Mohamed Amar Selmani</title>
+<meta name="description" content="L’application mobile et la console agent Naftal B2B, dans votre navigateur, servies par un portage du vrai back-end. Plafonds de crédit, vérification des documents et validations en direct, sans rien envoyer.">
+<link rel="alternate" hreflang="en" href="https://amarselmani.github.io/demos/naftal-b2b/">
+<link rel="alternate" hreflang="fr" href="https://amarselmani.github.io/demos/naftal-b2b/fr.html">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<script>try{localStorage.setItem('naftal.lang','fr')}catch(e){}</script>
+<script>try{if(localStorage.getItem('pf-theme')==='dark'){var h=document.documentElement;h.dataset.theme='dark';h.removeAttribute('data-tint')}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/halation/halation.css?v=4">
+<link rel="stylesheet" href="../../assets/halation/selmani.css?v=4">
+<link rel="stylesheet" href="../../assets/site.css?v=4">
+<link rel="stylesheet" href="../demo.css?v=4">
+<link rel="stylesheet" href="b2b.css?v=4">
+</head>
+<body data-page="demo" id="top">
+
+<a class="skip" href="#main">Aller au contenu</a>
+<header class="nav h-nav" data-nav>
+  <a class="brand" href="../../fr/" data-cut aria-label="Mohamed Amar Selmani, accueil"><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+  <nav class="nav__links" aria-label="Navigation principale">
+    <a href="../../fr/#work" data-cut aria-current="page">Projets</a>
+    <a href="../../fr/services.html" data-cut>Services</a>
+    <a href="../../fr/#about" data-cut>À propos</a>
+    <a href="../../fr/#contact" data-cut>Contact</a>
+  </nav>
+  <div class="nav__tools">
+    <a class="nav__lang" href="./?v=4" hreflang="en" lang="en" data-cut aria-label="English">EN</a>
+    <button class="icon-btn" type="button" data-motion data-pause="Mettre en pause l’animation de fond" data-play="Relancer l’animation de fond" aria-label="Mettre en pause l’animation de fond" aria-pressed="false"><svg class="h-glyph" aria-hidden="true"><use href="#g-pause"></use></svg></button>
+    <button class="icon-btn" type="button" data-theme-toggle data-to-dark="Allumer la lumière inactinique (mode sombre)" data-to-light="Rallumer la lumière (mode clair)" aria-label="Allumer la lumière inactinique (mode sombre)"><svg class="h-glyph" aria-hidden="true"><use href="#g-moon"></use></svg></button>
+    <a class="h-btn h-btn--primary h-btn--sm nav__talk" href="../../fr/#contact" data-cut>Parlons-en</a>
+    <button class="icon-btn nav__menu" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-label="Ouvrir le menu"><svg class="h-glyph" aria-hidden="true"><use href="#g-menu"></use></svg></button>
+  </div>
+</header>
+<dialog class="h-dialog menu" id="menu" data-sheet aria-label="Navigation principale">
+  <nav class="menu__links">
+    <a href="../../fr/#work">Projets</a><a href="../../fr/services.html">Services</a><a href="../../fr/#about">À propos</a><a href="../../fr/#contact">Contact</a>
+  </nav>
+  <div class="menu__foot"><a class="btn-ink btn-ink--sm" href="./?v=4" hreflang="en" lang="en">English</a><button class="h-btn h-btn--quiet h-btn--sm" type="button" data-menu-close><svg class="h-glyph" aria-hidden="true"><use href="#g-close"></use></svg>Fermer</button></div>
+</dialog>
+
+<main id="main">
+
+  <!-- Hero -->
+  <section class="hero" data-ambient="light">
+    <div class="h-wrap hero__inner" data-reveal-group>
+      <p class="hero__kicker h-eyebrow" data-reveal>Démo en ligne · 15 · Application mobile et console agent</p>
+      <h1 class="hero__title">
+        <span class="hero__l1" data-reveal>Naftal B2B</span>
+        <span class="hero__l2" data-reveal>un crédit qui <span class="mark" data-mark="circle">tient</span> quand les commandes se croisent.</span>
+      </h1>
+      <p class="hero__sub" data-reveal>La vraie application et la vraie console agent, <span class="kw">servies par le back-end qui tourne dans votre navigateur.</span> Rien de ce que vous saisissez ou envoyez ne quitte cette page.</p>
+      <div class="hero__cta" data-reveal>
+        <a class="h-btn h-btn--primary h-btn--lg" href="console/" target="_blank" rel="noopener" data-magnetic="0.3"><span data-magnetic-inner>Ouvrir la console agent</span><svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up-right"></use></svg></a>
+        <a class="btn-ink" href="#app-stage">Essayer l’application</a>
+      </div>
+      <p class="hero__place h-eyebrow" data-reveal><svg class="h-glyph" aria-hidden="true"><use href="#g-lock"></use></svg>Connexion avec <code>demo</code> / <code>demo1234</code></p>
+    </div>
+  </section>
+
+  <!-- Light table -->
+  <section class="lt" id="app-stage" aria-label="L’application en direct">
+    <div class="h-wrap lt__row">
+      <div class="lt__side lt__side--l" data-reveal="rise">
+        <figure class="lt__print">
+          <div class="mock mock--browser">
+            <div class="mock__bar" aria-hidden="true"><i></i><i></i><i></i><span class="mock__url">naftal-b2b / console / commandes</span></div>
+            <div class="mock__screen"><img src="../../img/b2b-console-fr.webp" alt="La console agent : le chèque de 156 000 DA d’Atlas Transport attend d’être confirmé" width="1600" height="1001" loading="lazy" decoding="async" style="object-position:0 0"></div>
+          </div>
+        </figure>
+        <p class="lt__edge"><b>15A</b>→ Console agent · Commandes</p>
+      </div>
+
+      <div class="lt__live">
+        <div class="device"><div class="device__screen"><iframe id="app" src="app/" title="Application mobile Naftal B2B"></iframe></div></div>
+        <p class="lt__edge"><b><span class="mark" data-mark="circle">15</span></b>→ Application en direct · touchez pour l’utiliser</p>
+        <div class="lt__under">
+          <button class="btn-ink btn-ink--sm" type="button" id="reload"><svg class="h-glyph" aria-hidden="true"><use href="#g-play"></use></svg>Recharger</button>
+          <a class="btn-ink btn-ink--sm" href="app/" target="_blank" rel="noopener">Plein écran<svg class="h-glyph" aria-hidden="true"><use href="#g-expand"></use></svg></a>
+        </div>
+      </div>
+
+      <div class="lt__side lt__side--r" data-reveal="rise">
+        <figure class="lt__print"><img src="media/specimens/business_registration.png" alt="Un registre du commerce spécimen, l’un des documents qu’une entreprise envoie" width="900" height="1273" loading="lazy" decoding="async"></figure>
+        <p class="lt__edge"><b>15B</b>→ Document spécimen</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section class="counts counts--long" aria-label="Le scénario en chiffres">
+    <div class="h-wrap counts__row" data-assemble>
+      <div class="count" data-part="from-bottom"><span class="count__n"><span data-count="1250000">1 250 000</span><span class="count__unit">DA</span></span><span class="count__l">Le plafond de crédit d’Atlas Transport</span></div>
+      <div class="count" data-part="from-top"><span class="count__n"><span data-count="150000">150 000</span><span class="count__unit">DA</span></span><span class="count__l">Disponibles avant la commande</span></div>
+      <div class="count" data-part="from-bottom"><span class="count__n"><span data-count="162000">162 000</span><span class="count__unit">DA</span></span><span class="count__l">La commande qui reste bloquée</span></div>
+      <div class="count" data-part="from-top"><span class="count__n">0</span><span class="count__l">Requête qui quitte votre navigateur</span></div>
+    </div>
+  </section>
+
+  <!-- Four steps -->
+  <section class="svc" aria-labelledby="steps-title">
+    <div class="h-wrap">
+      <div class="svc__head" data-reveal-group>
+        <div data-reveal><p class="label h-eyebrow">À vous d’essayer</p></div>
+        <h2 class="sheet-h" id="steps-title" data-reveal>Quatre étapes pour le <em><span class="mark" data-mark="circle">casser</span>.</em></h2>
+      </div>
+      <div class="svc__grid">
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="#app-stage">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">1</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">Dans l’application</span></span>
+            <span class="card__pitch" data-part="from-bottom">Atteindre le plafond de crédit</span>
+            <span class="card__body" data-part="from-bottom">Connectez-vous avec <code>demo</code> / <code>demo1234</code>. Ouvrez Pneus → Pneus tourisme → Continental → ULTRACONTACT et demandez-en 12&nbsp;: à 162&#8239;000 DA, «&nbsp;Acheter à crédit&nbsp;» reste bloqué.</span>
+            <span class="card__foot" data-part="scale">Ouvrir l’application<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up"></use></svg></span>
+          </a>
+        </article>
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="console/" target="_blank" rel="noopener">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">2</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">Dans la console</span></span>
+            <span class="card__pitch" data-part="from-bottom">Libérer le crédit</span>
+            <span class="card__body" data-part="from-bottom">Connectez-vous avec <code>admin</code> / <code>demo1234</code> et, dans Commandes, confirmez la réception du chèque de 156&#8239;000 DA déclaré par Atlas. Un paiement déclaré ne libère rien tant qu’un agent ne l’a pas confirmé.</span>
+            <span class="card__foot" data-part="scale">Ouvrir la console<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up-right"></use></svg></span>
+          </a>
+        </article>
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="#app-stage">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">3</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">Dans l’application</span></span>
+            <span class="card__pitch" data-part="from-bottom">Commander à nouveau</span>
+            <span class="card__body" data-part="from-bottom">Rechargez l’application&nbsp;: 306&#8239;000 DA sont maintenant disponibles, et la même commande passe, avec une échéance de 30 jours qui défile dans Mes commandes.</span>
+            <span class="card__foot" data-part="scale">Retour à l’application<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up"></use></svg></span>
+          </a>
+        </article>
+        <article class="card" data-assemble data-light>
+          <a class="card__link" href="#documents">
+            <span class="card__no" data-part="from-top"><span class="mark" data-mark="circle">4</span></span>
+            <span class="card__tag" data-part="from-start"><span class="mark mark--u" data-mark="underline">Les deux</span></span>
+            <span class="card__pitch" data-part="from-bottom">Ouvrir un nouveau compte</span>
+            <span class="card__body" data-part="from-bottom">Déconnectez-vous et demandez l’ouverture d’un compte pour une nouvelle entreprise, avec les documents spécimens ci-dessous. Validez-la dans la console et regardez le téléphone avancer dès que vous cliquez.</span>
+            <span class="card__foot" data-part="scale">Voir les documents<svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-down"></use></svg></span>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statement -->
+  <section class="statement" data-ambient="light">
+    <div class="h-wrap statement__inner" data-reveal-group>
+      <span class="crop" aria-hidden="true" data-reveal></span>
+      <p class="statement__line" data-reveal="rise">Un paiement déclaré ne libère rien <span class="mark mark--u" data-mark="underline">tant qu’un agent ne l’a pas confirmé.</span></p>
+      <p class="statement__body" data-reveal>Les deux clients sont les builds du projet. Leurs requêtes passent par un portage de l’API dans le navigateur&nbsp;: mêmes routes, mêmes codes d’erreur, mêmes règles, dont la vérification transactionnelle du crédit, les paiements déclarés puis confirmés et les jetons de rafraîchissement à usage unique.</p>
+      <p data-reveal><a class="btn-ink" href="console/" target="_blank" rel="noopener">Ouvrir la console agent</a></p>
+    </div>
+  </section>
+
+  <!-- Accounts and specimen documents -->
+  <section class="docs" id="documents" aria-labelledby="docs-title">
+    <div class="h-wrap docs__grid">
+      <div data-reveal-group>
+        <div data-reveal><p class="label h-eyebrow">Comptes · mot de passe <code>demo1234</code></p></div>
+        <h2 class="sheet-h" id="docs-title" data-reveal>Choisissez <em>votre rôle.</em></h2>
+        <table class="accounts" data-reveal>
+          <tr><td><code>demo</code></td><td>SARL Atlas Transport&nbsp;: compte validé, commande à crédit</td></tr>
+          <tr><td><code>hodna</code></td><td>EURL Hodna Pneus&nbsp;: en attente, 3 documents envoyés sur 5</td></tr>
+          <tr><td><code>admin</code></td><td>Administrateur Naftal&nbsp;: validations, paiements et catalogue</td></tr>
+          <tr><td><code>agent</code></td><td>Agent Naftal&nbsp;: validations et paiements&#8239;; catalogue en lecture seule</td></tr>
+        </table>
+        <div class="docs__reset" data-reveal>
+          <button class="btn-ink btn-ink--sm" type="button" id="reset">Réinitialiser la démo</button>
+          <span class="h-caption">Les données restent dans ce navigateur, partagées par l’application et la console.</span>
+        </div>
+      </div>
+      <div data-reveal="rise">
+        <p class="label h-eyebrow">Documents spécimens · touchez pour télécharger</p>
+        <ul class="sheet">
+          <li class="is-card"><a href="media/specimens/id_card.png" download><img src="media/specimens/id_card.png" alt="" width="1012" height="640" loading="lazy" decoding="async"><span>Carte d’identité <b>D1</b></span></a></li>
+          <li class="is-card"><a href="media/specimens/tin.png" download><img src="media/specimens/tin.png" alt="" width="1012" height="640" loading="lazy" decoding="async"><span>N° fiscal <b>D2</b></span></a></li>
+          <li><a href="media/specimens/proof_of_address.png" download><img src="media/specimens/proof_of_address.png" alt="" width="900" height="1273" loading="lazy" decoding="async"><span>Résidence <b>D3</b></span></a></li>
+          <li><a href="media/specimens/business_registration.png" download><img src="media/specimens/business_registration.png" alt="" width="900" height="1273" loading="lazy" decoding="async"><span>Registre <b>D4</b></span></a></li>
+          <li><a href="media/specimens/bank_statement.png" download><img src="media/specimens/bank_statement.png" alt="" width="900" height="1273" loading="lazy" decoding="async"><span>Banque <b>D5</b></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="dm-foot" data-theme="dark">
+  <div class="h-wrap dm-foot__inner">
+    <div class="dm-foot__top">
+      <a class="brand brand--lg" href="../../fr/" data-cut><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+      <nav class="dm-foot__links" aria-label="Démos en ligne">
+        <a href="../naftal/" data-cut>Naftal AI Platform</a><a href="../marine-bot/fr.html?v=4" data-cut>Marine Bot</a><a href="../bn-signature/" data-cut>BN Signature</a><a href="https://github.com/AmarSELMANI/naftal-b2b" rel="noopener">Code source sur GitHub</a><a href="../../fr/#contact" data-cut>Contact</a>
+      </nav>
+    </div>
+    <div class="dm-foot__note">
+      <p><strong>À propos de ce projet.</strong> Travail universitaire, réalisé comme projet de fin d’études. Il n’est ni affilié à Naftal, ni approuvé par Naftal, ni un produit officiel de Naftal&#8239;; les noms d’entreprises, logos et images de produits appartiennent à leurs propriétaires et servent seulement à modéliser un scénario réaliste. Toutes les entreprises, personnes et commandes présentées ici sont fictives.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="h-toast toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../../assets/vendor/gsap.min.js"></script>
+<script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+<script src="../../assets/halation/glyphs.js?v=4"></script>
+<script src="../../assets/halation/halation-motion.js?v=4"></script>
+<script src="../../assets/site.js?v=4"></script>
+<script>
+(function () {
+  var app = document.getElementById('app');
+  var toast = document.getElementById('toast');
+  var timer;
+  function say(text) {
+    toast.textContent = text;
+    toast.classList.add('on');
+    clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove('on'); }, 2600);
+  }
+  document.getElementById('reload').addEventListener('click', function () {
+    try { app.contentWindow.location.reload(); } catch (e) { app.src = app.src; }
+  });
+  // Starts the demo over in every open tab: the app and the console listen on
+  // this channel and reload themselves (demo/app.js, demo/console.js).
+  document.getElementById('reset').addEventListener('click', function () {
+    try {
+      localStorage.removeItem('naftal-b2b-demo:v1');
+      localStorage.removeItem('naftal.session');
+    } catch (e) { /* storage blocked: nothing to clear */ }
+    try { new BroadcastChannel('naftal-b2b-demo').postMessage({ type: 'reset' }); } catch (e) { /* no channel */ }
+    try { indexedDB.deleteDatabase('naftal-b2b-demo'); } catch (e) { /* no IndexedDB */ }
+    setTimeout(function () {
+      try { app.contentWindow.location.reload(); } catch (e) { app.src = app.src; }
+    }, 150);
+    say('Démo réinitialisée');
+  });
+})();
+</script>
+</body>
+</html>

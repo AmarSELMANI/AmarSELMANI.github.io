@@ -1,174 +1,190 @@
 <!doctype html>
-<html lang="en">
+<!-- Contact Sheet · Halation 1.0.0 (Thriller · intensity 1 · light first, tint "selmani"), like the portfolio.
+     Built from the portfolio's sections: centred hero, segmented bar, tilted prints, numbers row, footer band.
+     Every id below is filled by app.js (the bot's engine): keep them. -->
+<html lang="en" data-genre="thriller" data-intensity="1" data-theme="light" data-tint="selmani">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Algerian Coast Marine Bot — live demo</title>
+<title>Algerian Coast Marine Bot · Live demo · Mohamed Amar Selmani</title>
 <meta name="description" content="Live marine safety ratings for six cities on the Algerian Mediterranean coast, produced by the bot's real deterministic engine running in your browser.">
-<meta name="theme-color" content="#070910">
+<link rel="alternate" hreflang="en" href="https://amarselmani.github.io/demos/marine-bot/">
+<link rel="alternate" hreflang="fr" href="https://amarselmani.github.io/demos/marine-bot/fr.html">
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<script>try{if(localStorage.getItem('pf-theme')==='dark'){var h=document.documentElement;h.dataset.theme='dark';h.removeAttribute('data-tint')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<script>
-  // The theme chosen on the portfolio, before first paint. Dark is the default.
-  try { if (localStorage.getItem('pf-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
-</script>
-<link rel="stylesheet" href="../demo.css">
-<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap">
+<link rel="stylesheet" href="../../assets/halation/halation.css?v=4">
+<link rel="stylesheet" href="../../assets/halation/selmani.css?v=4">
+<link rel="stylesheet" href="../../assets/site.css?v=4">
+<link rel="stylesheet" href="../demo.css?v=4">
+<link rel="stylesheet" href="app.css?v=4">
 </head>
-<body>
+<body data-page="demo" id="top">
 
-<header class="nav-bar">
-  <nav aria-label="Primary">
-    <a class="brand" href="../../">
-      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
-        <defs><linearGradient id="mark-dark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: var(--mark-a)"></stop><stop offset=".5" stop-color="#7C8295"></stop><stop offset="1" style="stop-color: var(--violet)"></stop></linearGradient></defs>
-        <circle cx="13" cy="13" r="10.5" fill="none" stroke="url(#mark-dark)" stroke-width="2.2"></circle>
-        <ellipse cx="13" cy="13" rx="10.5" ry="3.6" fill="none" stroke="url(#mark-dark)" stroke-width="1" opacity=".7" transform="rotate(-24 13 13)"></ellipse>
-      </svg>
-      <span class="brand-name">Mohamed Amar Selmani</span>
-    </a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a class="nav-link" href="../../#work">All work</a>
-      </div>
-      <span class="nav-divider" aria-hidden="true"></span>
-      <button class="toggle" type="button" aria-label="Switch to light theme" aria-pressed="false">
-        <span class="icon-in" aria-hidden="true" data-icon="sun">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"></path></svg>
-        </span>
-        <span class="icon-in" aria-hidden="true" data-icon="moon" hidden>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg>
-        </span>
-      </button>
-    </div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav h-nav" data-nav>
+  <a class="brand" href="../../" data-cut aria-label="Mohamed Amar Selmani, home"><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="../../#work" data-cut aria-current="page">Work</a>
+    <a href="../../services.html" data-cut>Services</a>
+    <a href="../../#about" data-cut>About</a>
+    <a href="../../#contact" data-cut>Contact</a>
   </nav>
-</header>
-
-<main class="wrap">
-
-  <div class="demo-intro">
-    <p class="eyebrow">Live demo &middot; LLM system design</p>
-    <h1>Algerian Coast Marine Bot</h1>
-    <p>
-      Pick a city and this runs a <strong>real forecast, fetched right now</strong>, through the
-      bot's actual assessment engine &mdash; the same <code>src/</code> modules the Telegram bot
-      runs, unmodified, executing in your browser. Every rating below comes from plain JavaScript
-      over the numbers. No model is involved in deciding anything.
-    </p>
-    <div class="intro-links">
-      <a class="text-link" href="https://github.com/AmarSELMANI/algerian-coast-marine-bot" target="_blank" rel="noopener noreferrer">Source on GitHub
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg>
-      </a>
-    </div>
+  <div class="nav__tools">
+    <a class="nav__lang" href="fr.html?v=4" hreflang="fr" lang="fr" data-cut aria-label="Français">FR</a>
+    <button class="icon-btn" type="button" data-motion data-pause="Pause background motion" data-play="Play background motion" aria-label="Pause background motion" aria-pressed="false"><svg class="h-glyph" aria-hidden="true"><use href="#g-pause"></use></svg></button>
+    <button class="icon-btn" type="button" data-theme-toggle data-to-dark="Turn on the safelight (dark mode)" data-to-light="Turn the lights on (light mode)" aria-label="Turn on the safelight (dark mode)"><svg class="h-glyph" aria-hidden="true"><use href="#g-moon"></use></svg></button>
+    <a class="h-btn h-btn--primary h-btn--sm nav__talk" href="../../#contact" data-cut>Let’s talk</a>
+    <button class="icon-btn nav__menu" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-label="Open menu"><svg class="h-glyph" aria-hidden="true"><use href="#g-menu"></use></svg></button>
   </div>
+</header>
+<dialog class="h-dialog menu" id="menu" data-sheet aria-label="Main">
+  <nav class="menu__links">
+    <a href="../../#work">Work</a><a href="../../services.html">Services</a><a href="../../#about">About</a><a href="../../#contact">Contact</a>
+  </nav>
+  <div class="menu__foot"><a class="btn-ink btn-ink--sm" href="fr.html?v=4" hreflang="fr" lang="fr">Français</a><button class="h-btn h-btn--quiet h-btn--sm" type="button" data-menu-close><svg class="h-glyph" aria-hidden="true"><use href="#g-close"></use></svg>Close</button></div>
+</dialog>
 
-  <!-- Controls -->
-  <section class="controls card">
-    <div class="control-row">
-      <span class="control-label" id="city-label">City</span>
-      <div class="chips" role="group" aria-labelledby="city-label" id="cities"></div>
-    </div>
+<main id="main">
 
-    <div class="control-row control-row-split">
-      <div>
-        <span class="control-label" id="profile-label">Experience</span>
-        <div class="chips" role="group" aria-labelledby="profile-label" id="profiles"></div>
+  <!-- Hero: centred statement, one word circled -->
+  <section class="hero" data-ambient="light">
+    <div class="h-wrap hero__inner" data-reveal-group>
+      <p class="hero__kicker h-eyebrow" data-reveal>Live demo · 16 · Telegram bot &amp; LLM system design</p>
+      <h1 class="hero__title">
+        <span class="hero__l1" data-reveal>Marine Bot</span>
+        <span class="hero__l2" data-reveal>code <span class="mark" data-mark="circle">decides</span>, the model writes.</span>
+      </h1>
+      <p class="hero__sub" data-reveal>A real forecast, fetched right now, through the bot’s own engine <span class="kw">running in your browser.</span> No model decides a rating.</p>
+      <div class="hero__cta" data-reveal>
+        <a class="btn-ink" href="#forecast">Pick a city</a>
+        <a class="h-link" href="https://github.com/AmarSELMANI/algerian-coast-marine-bot" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
       </div>
-      <div>
-        <span class="control-label" id="lang-label">Language</span>
-        <div class="chips" role="group" aria-labelledby="lang-label" id="languages"></div>
-      </div>
+      <p class="hero__place h-eyebrow" data-reveal><svg class="h-glyph" aria-hidden="true"><use href="#g-globe"></use></svg>Six cities on the Algerian coast · Data from Open-Meteo</p>
     </div>
   </section>
 
-  <!-- Status -->
-  <p id="status" class="status" role="status" aria-live="polite"></p>
+  <!-- Controls: the city as the reference's segmented bar, experience and language under it -->
+  <section class="pick" id="forecast" aria-label="Forecast settings">
+    <div class="h-wrap">
+      <span class="h-sr" id="city-label">City</span>
+      <div class="cityseg" role="group" aria-labelledby="city-label" id="cities"></div>
+      <div class="pick__more">
+        <div class="pick__group">
+          <span class="control-label" id="profile-label">Experience</span>
+          <div class="chips" role="group" aria-labelledby="profile-label" id="profiles"></div>
+        </div>
+        <div class="pick__group">
+          <span class="control-label" id="lang-label">Message language</span>
+          <div class="chips" role="group" aria-labelledby="lang-label" id="languages"></div>
+        </div>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
 
   <!-- Report -->
-  <section id="report" hidden>
+  <div id="report" hidden>
 
-    <div class="report-head">
-      <h2 id="report-title"></h2>
-      <p id="report-sub" class="report-sub"></p>
-    </div>
-
-    <div id="activities" class="activities"></div>
-
-    <div class="panel">
-      <h3>Key forecast</h3>
-      <div id="metrics" class="metrics"></div>
-    </div>
-
-    <div class="panel" id="flags-panel">
-      <h3>Flags raised</h3>
-      <div id="flags"></div>
-    </div>
-
-    <div class="panel" id="ensemble-panel">
-      <h3>What the models actually disagree about</h3>
-      <p class="panel-note">
-        One model's number is not the answer. The engine queries several and combines them in
-        whichever direction is conservative for each variable &mdash; highest waves, shortest
-        period, strongest gusts. Where they disagree beyond a threshold, the rating is held at
-        CAUTION and the report says so.
-      </p>
-      <div id="ensemble"></div>
-    </div>
-
-    <div class="panel">
-      <h3>Through the day</h3>
-      <div class="table-scroll">
-        <table id="windows-table" class="windows-table">
-          <thead>
-            <tr>
-              <th scope="col">Window</th>
-              <th scope="col">Gust</th>
-              <th scope="col">Wave</th>
-              <th scope="col">Period</th>
-              <th scope="col">Sailing</th>
-              <th scope="col">Swimming</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+    <section class="rep-head">
+      <div class="h-wrap">
+        <p class="label h-eyebrow">Today’s ratings</p>
+        <h2 id="report-title"></h2>
+        <p id="report-sub" class="report-sub"></p>
       </div>
-    </div>
+    </section>
 
-    <div class="panel">
-      <h3>The message a subscriber receives</h3>
-      <p class="panel-note">
-        In production a model rewrites the reason lines into better prose &mdash; and cannot change
-        a rating, because the ratings are re-stamped from this assessment after its response is
-        parsed. This is the deterministic rendering, which is also what gets sent whenever the model
-        fails any of its four output gates.
-      </p>
-      <div id="telegram" class="telegram"></div>
-    </div>
+    <!-- four activities, as prints pinned to the wall -->
+    <section class="rep-acts" aria-label="Ratings by activity">
+      <div class="h-wrap"><div id="activities" class="activities"></div></div>
+    </section>
 
-  </section>
+    <!-- the key numbers, as the home page's numbers row -->
+    <section class="rep-metrics" aria-labelledby="metrics-title">
+      <div class="h-wrap">
+        <h3 class="h-sr" id="metrics-title">Key forecast</h3>
+        <div id="metrics" class="metrics"></div>
+      </div>
+    </section>
+
+    <!-- the message, on a phone; why, beside it -->
+    <section class="rep-read">
+      <div class="h-wrap rep-read__grid">
+        <div class="rep-msg">
+          <p class="label label--key h-eyebrow">The message a subscriber receives</p>
+          <div class="tg-phone">
+            <div class="tg-phone__bar"><b>Marine Bot</b><span>bot</span></div>
+            <div class="tg-phone__chat"><div id="telegram" class="telegram"></div></div>
+          </div>
+          <p class="panel-note">In production a model rewrites the reason lines into better prose, and cannot change a rating: the ratings are re-stamped from this assessment after its response is parsed. This is the deterministic rendering, also what is sent whenever the model fails any of its four output gates.</p>
+        </div>
+        <div class="rep-why">
+          <div class="why" id="flags-panel">
+            <h3 class="why__h">Flags raised</h3>
+            <div id="flags"></div>
+          </div>
+          <div class="why" id="ensemble-panel">
+            <h3 class="why__h">What the models disagree about</h3>
+            <p class="panel-note">One model’s number is not the answer. The engine queries several and combines them in whichever direction is conservative for each variable: highest waves, shortest period, strongest gusts. Where they disagree beyond a threshold, the rating is held at CAUTION and the report says so.</p>
+            <div id="ensemble"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- through the day -->
+    <section class="rep-day" aria-labelledby="day-title">
+      <div class="h-wrap">
+        <h3 class="sheet-h rep-day__h" id="day-title">Through <em>the day.</em></h3>
+        <div class="table-scroll">
+          <table id="windows-table" class="windows-table">
+            <thead>
+              <tr>
+                <th scope="col">Window</th>
+                <th scope="col">Gust</th>
+                <th scope="col">Wave</th>
+                <th scope="col">Period</th>
+                <th scope="col">Sailing</th>
+                <th scope="col">Swimming</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
 
 </main>
 
-<footer class="demo-footer">
- <div class="demo-footer-inner">
-  <p>
-    <strong>Forecast only, not an observed sea state, and not a safety authority.</strong>
-    It does not replace official marine warnings, harbour guidance, lifeguard flags, or your own
-    judgement at the water's edge. Algeria's ONM publishes no machine-readable warning feed, so
-    official warnings are <em>not</em> checked here &mdash; reported as unchecked rather than clear.
-  </p>
-  <p>
-    Weather and marine data from <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
-    (CC&nbsp;BY&nbsp;4.0). Thresholds are starting assumptions from Beaufort and Douglas conventions,
-    not local observation. Wave height, period and sea temperature have no public observation on this
-    coast and remain unverified.
-  </p>
- </div>
+<footer class="dm-foot" data-theme="dark">
+  <div class="h-wrap dm-foot__inner">
+    <div class="dm-foot__top">
+      <a class="brand brand--lg" href="../../" data-cut><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
+      <nav class="dm-foot__links" aria-label="Live demos">
+        <a href="../naftal/" data-cut>Naftal AI Platform</a><a href="../naftal-b2b/?v=4" data-cut>Naftal B2B</a><a href="../bn-signature/" data-cut>BN Signature</a><a href="../../#contact" data-cut>Contact</a>
+      </nav>
+    </div>
+    <div class="dm-foot__note">
+      <p><strong>Forecast only, not an observed sea state, and not a safety authority.</strong>
+      It does not replace official marine warnings, harbour guidance, lifeguard flags, or your own
+      judgement at the water’s edge. Algeria’s ONM publishes no machine-readable warning feed, so
+      official warnings are <em>not</em> checked here: they are reported as unchecked rather than clear.</p>
+      <p>Weather and marine data from <a href="https://open-meteo.com" target="_blank" rel="noopener noreferrer">Open-Meteo</a>
+      (CC&nbsp;BY&nbsp;4.0). Thresholds are starting assumptions from Beaufort and Douglas conventions,
+      not local observation. Wave height, period and sea temperature have no public observation on this
+      coast and remain unverified.</p>
+    </div>
+  </div>
 </footer>
 
-<script src="../demo.js"></script>
-<script type="module" src="app.js"></script>
+<script src="../../assets/vendor/gsap.min.js"></script>
+<script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+<script src="../../assets/halation/glyphs.js?v=4"></script>
+<script src="../../assets/halation/halation-motion.js?v=4"></script>
+<script src="../../assets/site.js?v=4"></script>
+<script type="module" src="app.js?v=4"></script>
 </body>
 </html>

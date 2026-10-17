@@ -2,17 +2,33 @@
 
 My portfolio: <https://amarselmani.github.io>, in English (root) and French (`/fr/`).
 
-**Design: "Contact Sheet".** A photographer's contact sheet: warm paper, ink-black condensed capitals,
-safelight-red grease-pencil circles drawn around key words, projects laid out like prints on a light table
-with a loupe. Dark mode is the darkroom under the safelight. Structure inspired by kayleighnoele.com.
-Built on Halation, my design system (Thriller genre · intensity 1 · light mode first, tint `selmani`).
+**Design: "Clean Sheet"** (since 2026-10-17), the simpler edition of "Contact Sheet". Warm paper and ink, one
+readable typeface (Plus Jakarta Sans) with a few accent words in Instrument Serif italic, red pencil circles
+drawn around key words, projects laid out like prints on a light table. Dark mode is the darkroom
+under the safelight. Built on Halation, my design system (Thriller genre · intensity 1 · light mode first,
+tint `selmani`): its colours and motion, with the fonts overridden in `assets/site.css`.
+
+The home page stays short and in plain words, for business clients: who I am, what I build, the work, prices,
+contact. Add to it only what a client needs to decide.
+
+### The previous design, "Contact Sheet"
+
+Condensed serif capitals and more sections (a statement, "Try to break it" challenges, a contact-sheet footer).
+Kept three ways:
+
+- **To look at:** `archive/contact-sheet/`, a frozen copy of the four pages (`noindex`), online at
+  <https://amarselmani.github.io/archive/contact-sheet/> once pushed.
+- **In git:** the tag `design-contact-sheet` and the branch `design/contact-sheet` (commit `8da12bc`).
+- **To go back:** check out from the tag the files this redesign changed, then rebuild:
+  `git checkout design-contact-sheet -- src assets/site.css assets/site.js demos/demo.css demos/marine-bot/app.css demos/naftal-b2b/index.html demos/naftal-b2b/fr.html demos/marine-bot/index.html demos/marine-bot/fr.html`
+  and `node src/build.mjs`. If a demo page changed since, restore only its font `<link>` and `?v=` instead.
 
 ## Pages
 
 | Page | Sections |
 |---|---|
-| `index.html`, `fr/index.html` | Centred statement (one word circled) · light table of four live demos (arrows, drag, swipe, keys, loupe) · numbers · statement · four service cards · "Try to break it" challenges · about · contact form · footer |
-| `services.html`, `fr/services.html` | Split hero with a fan of phones · services in tabs (`services.html#mobile` opens that tab) with prices · process as contact-sheet frames · contact form · footer |
+| `index.html`, `fr/index.html` | Centred sentence (one word circled) · light table of four live demos (arrows, drag, swipe, keys), sized so its title, print and caption fit one screen · three numbers · four service cards as tilted prints, each with an animated ink-and-pencil drawing of its promise (built in `src/build.mjs`, animated in `assets/site.css`) · about · contact form · footer. Buttons don't follow the pointer: ink rises in them and the arrow steps forward. |
+| `services.html`, `fr/services.html` | Split hero with a fan of phones · services in tabs (`services.html#mobile` opens that tab) with prices · four steps · contact form · footer |
 
 The contact form sends nothing itself: it opens WhatsApp or the visitor's e-mail app with the message written.
 
@@ -22,12 +38,13 @@ The contact form sends nothing itself: it opens WhatsApp or the visitor's e-mail
 |---|---|
 | `src/content.mjs` | **All words and prices**, English and French. `{c:word}` circles a word, `{u:words}` underlines, `{k:words}` sets red, `{em:words}` the italic voice. |
 | `src/build.mjs` | Renders the four pages: `node src/build.mjs` after any content change. |
-| `assets/site.css` | Layout. Halation tokens only: no literal colors, fonts or radii. |
-| `assets/site.js` | Grease-pencil marks, light table and loupe, counters, challenges, tabs, form, theme and motion toggles. |
+| `assets/site.css` | Layout and type. Halation tokens only: no literal colors or radii; the fonts are set once as tokens at the top. The demo pages load the same fonts: keep their `<link>` in step with `FONTS` in `src/build.mjs`. |
+| `assets/site.js` | Red pencil marks, light table, service drawings, counters, tabs, form, theme and motion toggles. |
 | `assets/halation/` | Copied from Halation 1.0.0 (`Documents\Motion design`), including `selmani.css` (the paper tint). Re-copy to update; don't edit here. |
 | `assets/vendor/` | GSAP 3.13 + ScrollTrigger. |
 | `img/` | Real captures of the demos, the portrait (`portrait-halation.webp`), BN Signature stills in `bn/`, link previews `og.jpg` / `og-fr.jpg`. |
 | `demos/` | The live demos. `bn-signature/` is the presentation deck (speaker notes removed). |
+| `archive/contact-sheet/` | The previous design, frozen (see above). Not generated: `src/build.mjs` leaves it alone. |
 
 ## Prices
 

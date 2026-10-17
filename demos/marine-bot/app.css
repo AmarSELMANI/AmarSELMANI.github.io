@@ -58,7 +58,7 @@
 /* ---------- report head ---------- */
 .rep-head { padding-block: var(--space-8) var(--space-6); border-block-start: var(--ink-line); text-align: center; }
 .rep-head .label { margin-block-end: var(--space-3); }
-.rep-head h2 { font-family: var(--font-display); font-weight: var(--title-weight); font-stretch: var(--title-width); text-transform: uppercase; font-size: clamp(2.75rem, 1.4rem + 4.6vw, 6.25rem); line-height: 0.9; color: var(--fg-strong); text-wrap: balance; }
+.rep-head h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.25rem, 1.3rem + 3.4vw, 4.5rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--fg-strong); text-wrap: balance; }
 .report-sub { margin-block-start: var(--space-3); font: 400 var(--fs-micro)/1.5 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-mute); }
 
 /* ---------- activities: four prints pinned to the wall, each with its rating as a stamp ---------- */
@@ -84,7 +84,7 @@
 .activity.warn { --rating: var(--warn); }
 .activity.bad { --rating: var(--bad); }
 .activity-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); margin-block-end: var(--space-4); }
-.activity-name { font-family: var(--font-display); font-weight: 800; font-stretch: 62.5%; text-transform: uppercase; font-size: 1.85rem; line-height: 0.95; color: var(--fg-strong); }
+.activity-name { font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; line-height: 1.15; letter-spacing: -0.02em; color: var(--fg-strong); }
 /* the rating, as a stamp */
 .pill { display: inline-block; padding: 0.4rem 0.75rem; border: 2px solid currentColor; border-radius: var(--r-field); font: 700 0.875rem/1 var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; rotate: -3deg; }
 .good .pill, .pill-good { color: var(--good); background: var(--good-bg); }
@@ -104,7 +104,7 @@
 .metric { display: grid; align-content: start; justify-items: center; gap: 0.5rem; padding: var(--space-5) var(--space-3); text-align: center; border-block-end: 1px solid var(--line); }
 .metric:nth-child(even) { border-inline-start: 1px solid var(--line); }
 .metric-label { order: 2; font-size: var(--fs-caption); font-weight: 600; color: var(--fg); }
-.metric-value { order: 1; font-family: var(--font-display); font-weight: 800; font-stretch: 62.5%; font-size: clamp(2.25rem, 1.6rem + 2vw, 3.5rem); line-height: 0.9; color: var(--fg-strong); font-variant-numeric: tabular-nums; }
+.metric-value { order: 1; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.75rem); line-height: 1; letter-spacing: -0.03em; color: var(--fg-strong); font-variant-numeric: tabular-nums; }
 @media (min-width: 48rem) {
   .metrics { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .metric { border-inline-start: 1px solid var(--line); }
@@ -128,7 +128,7 @@
 .panel-note { max-inline-size: 60ch; margin: 0 0 var(--space-5); font-size: var(--fs-small); line-height: 1.65; color: var(--fg); text-wrap: pretty; }
 .rep-msg .panel-note { margin: var(--space-3) 0 0; text-align: center; color: var(--fg-mute); }
 .why + .why { margin-block-start: var(--space-8); }
-.why__h { margin-block-end: var(--space-4); font-family: var(--font-display); font-weight: 800; font-stretch: 62.5%; text-transform: uppercase; font-size: clamp(1.9rem, 1.4rem + 1.4vw, 2.75rem); line-height: 0.95; color: var(--fg-strong); }
+.why__h { margin-block-end: var(--space-4); font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.25rem); line-height: 1.15; letter-spacing: -0.025em; color: var(--fg-strong); }
 
 /* flags */
 .flag-list { display: grid; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }

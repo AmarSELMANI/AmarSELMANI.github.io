@@ -1,10 +1,11 @@
-/* Mohamed Amar Selmani · portfolio · "Contact Sheet".
- * The Halation runtime (assets/halation/halation-motion.js) does the reveals, assembly, cursor light, magnet,
- * grain and film cuts. This file adds the page's own moves:
- *   marks      grease-pencil circles and underlines, drawn by hand around [data-mark]
- *   table      the work carousel: prints on a light table (arrows, drag, swipe, keys) and a loupe on desktop
+/* Mohamed Amar Selmani · portfolio · "Clean Sheet" (the simpler edition of "Contact Sheet").
+ * The Halation runtime (assets/halation/halation-motion.js) does the reveals, assembly, cursor light, grain
+ * and film cuts (no magnet: buttons stay put). This file adds the page's own moves:
+ *   marks      red pencil circles and underlines, drawn by hand around [data-mark]
+ *   table      the work carousel: prints on a light table (arrows, drag, swipe, keys), sized so the whole
+ *              showcase fits one screen
+ *   drawings   the service cards' animations, paused while off screen
  *   counts     numbers that count up once
- *   proof      the "try to break it" challenges
  *   tabs       the services panels (deep links: services.html#mobile)
  *   inquiry    a form that opens WhatsApp or e-mail with the message ready (nothing is stored)
  *   chrome     theme (paper / safelight), ambient pause, phone menu
@@ -95,7 +96,7 @@
     });
   });
 
-  // ================================================================ marks: grease pencil, drawn by hand
+  // ================================================================ marks: red pencil, drawn by hand
   var SVGNS = 'http://www.w3.org/2000/svg';
   function hash(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0) % 2147483646 + 1; }
   function rng(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
@@ -206,7 +207,7 @@
   else watchMarks();
   // hovering a circled word in a heading redraws it
   marks.forEach(function (el) {
-    if (el.getAttribute('data-mark') !== 'circle' || !full || el.closest('.cap, .about__print, .frame, .thumb')) return;
+    if (el.getAttribute('data-mark') !== 'circle' || !full || el.closest('.cap, .frame')) return;
     el.addEventListener('pointerenter', function () { if (el._drawn) drawMark(el, true); });
   });
 
@@ -226,6 +227,7 @@
       var G = geom();
       var h = Math.max.apply(null, prints.map(function (p) { return p.offsetHeight; }));
       stage.style.height = Math.round(h * 1.04) + 'px';
+      if (section) section.style.setProperty('--stage-mid', Math.round(stage.offsetTop + stage.offsetHeight / 2) + 'px');
       prints.forEach(function (p, i) {
         var r = relOf(i), was = rel[i], hidden = Math.abs(r) >= 2;
         var x = hidden ? (dir > 0 ? -2 : 2) * G.spacing : r * G.spacing;
@@ -250,7 +252,7 @@
       });
       if (status && titles.length) status.textContent = (fr ? 'Projet ' : 'Project ') + (cur + 1) + (fr ? ' sur ' : ' of ') + n + (fr ? ' : ' : ': ') + titles[cur];
     }
-    function go(to, dir) { cur = (to % n + n) % n; place(true, dir); caption(); hideLoupe(); }
+    function go(to, dir) { cur = (to % n + n) % n; place(true, dir); caption(); }
     function step(d) { go(cur + d, d); }
     $('[data-prev]').addEventListener('click', function () { step(-1); });
     $('[data-next]').addEventListener('click', function () { step(1); });
@@ -267,7 +269,7 @@
     window.addEventListener('pointermove', function (e) {
       if (!down) return;
       dx = e.clientX - sx;
-      if (!dragging && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(e.clientY - sy)) { dragging = true; stage.classList.add('is-dragging'); hideLoupe(); }
+      if (!dragging && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(e.clientY - sy)) { dragging = true; stage.classList.add('is-dragging'); }
       if (dragging && gsap && !calm) prints.forEach(function (p, i) { var r = rel[i]; if (Math.abs(r) < 2) gsap.set(p, { x: r * G0.spacing + dx * 0.6 }); });
     }, { passive: true });
     window.addEventListener('pointerup', function () {
@@ -283,49 +285,46 @@
       var i = +p.getAttribute('data-i');
       if (i !== cur) { e.preventDefault(); go(i, relOf(i) > 0 ? 1 : -1); }
     });
-    window.addEventListener('resize', function () { place(false, 0); });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { place(false, 0); });
-    place(false, 0); caption();
+    // one screen: the title, the print and its caption fit under the nav, so the print takes the height left
+    var section = stage.closest('.table'), head = $('.table__head', section), bar = $('.table__bar', section), navEl = $('[data-nav]');
+    var lastW = 0, lastH = 0;
+    function fit(force) {
+      var vw = window.innerWidth, vh = window.innerHeight;
+      // on phones the address bar coming and going is not a reason to resize the prints
+      if (!force && vw === lastW && Math.abs(vh - lastH) < 120) return;
+      lastW = vw; lastH = vh;
+      var navH = navEl ? navEl.offsetHeight : 0;
+      html.style.setProperty('--nav-h', navH + 'px');
+      // room for the tallest caption, so the prints keep their size from one project to the next
+      var shown = caps.filter(function (c) { return !c.hidden; })[0], capH = 0;
+      caps.forEach(function (c) { var was = c.hidden; c.hidden = false; capH = Math.max(capH, c.offsetHeight); c.hidden = was; });
+      var px = function (el, prop) { return parseFloat(getComputedStyle(el)[prop]) || 0; };
+      var chrome = navH + px(section, 'paddingTop') + px(section, 'paddingBottom') + head.offsetHeight + px(head, 'marginBottom')
+        + px(bar, 'marginTop') + bar.offsetHeight - (shown ? shown.offsetHeight : 0) + capH;
+      // a print is a 16:10 screen plus its bar and mat: height = 0.625 × width + a constant; the stage adds 4%
+      var p = prints[0], k = p.offsetHeight - 0.625 * p.offsetWidth;
+      var w = ((vh - chrome) / 1.04 - k) / 0.625;
+      w = Math.min(w, vw * 0.84, 864);
+      stage.style.setProperty('--print-w', Math.round(Math.max(w, Math.min(260, vw * 0.84))) + 'px');
+    }
+    window.addEventListener('resize', function () { fit(false); place(false, 0); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fit(true); place(false, 0); });
+    fit(true); place(false, 0); caption();
     // the first caption's frame number is circled when the table comes into view
     var firstMark = $('.cap:not([hidden]) [data-mark]');
     if (firstMark) {
       if (calm || !ST) firstMark._drawn = drawMark(firstMark, false);
       else ST.create({ trigger: stage, start: 'top 70%', once: true, onEnter: function () { setTimeout(function () { firstMark._drawn = drawMark(firstMark, true); }, 400); } });
     }
-
-    // ---------------------------------------------------------- loupe (fine pointer, full tier)
-    var loupe = null, Z = 2.4;
-    function hideLoupe() { if (loupe) loupe.classList.remove('is-on'); }
-    if (!full) return;
-    loupe = document.createElement('div'); loupe.className = 'loupe'; loupe.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(loupe);
-    var R = 0, raf = 0, ev = null, active = null;
-    function paint() {
-      raf = 0; if (!active || !ev) return;
-      var img = active, b = img.getBoundingClientRect();
-      var nw = img.naturalWidth, nh = img.naturalHeight; if (!nw) return;
-      var s = Math.max(b.width / nw, b.height / nh), cw = nw * s, ch = nh * s;
-      var pos = (getComputedStyle(img).objectPosition || '0 0').split(' ');
-      var px = parseFloat(pos[0]) / 100 || 0, py = parseFloat(pos[1]) / 100 || 0;
-      var ox = (b.width - cw) * px, oy = (b.height - ch) * py;
-      var mx = ev.clientX - b.left - ox, my = ev.clientY - b.top - oy;
-      loupe.style.backgroundImage = 'url("' + (img.currentSrc || img.src) + '")';
-      loupe.style.backgroundSize = (cw * Z) + 'px ' + (ch * Z) + 'px';
-      loupe.style.backgroundPosition = (R - mx * Z) + 'px ' + (R - my * Z) + 'px';
-      loupe.style.transform = 'translate3d(' + (ev.clientX - R) + 'px,' + (ev.clientY - R) + 'px,0)';
-    }
-    stage.addEventListener('pointermove', function (e) {
-      if (dragging || e.pointerType !== 'mouse') return;
-      var scr = e.target.closest('.mock__screen');
-      var p = e.target.closest('.print');
-      if (!scr || !p || +p.getAttribute('data-i') !== cur) { active = null; hideLoupe(); return; }
-      active = $('img', scr); ev = e; R = loupe.offsetWidth / 2;
-      loupe.classList.add('is-on');
-      if (!raf) raf = requestAnimationFrame(paint);
-    });
-    stage.addEventListener('pointerleave', function () { active = null; hideLoupe(); });
-    window.addEventListener('scroll', hideLoupe, { passive: true });
   })();
+
+  // ================================================================ service drawings: they play only while their card is on screen
+  if ('IntersectionObserver' in window) {
+    var artIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { e.target.closest('.card').classList.toggle('is-off', !e.isIntersecting); });
+    }, { threshold: 0.15 });
+    $$('.card .art').forEach(function (a) { artIO.observe(a); });
+  }
 
   // ================================================================ counts
   // thousands separated the way the page's language writes them (1,250,000 / 1 250 000)
@@ -340,28 +339,6 @@
       gsap.to(o, { v: to, duration: 1.4, ease: 'power3.out', delay: 0.25, onUpdate: function () { el.textContent = fmt(o.v); } });
     } });
   });
-
-  // ================================================================ proof (challenges)
-  var proof = $('[data-proof]');
-  if (proof) (function () {
-    var slides = $$('.proof__slide', proof), n = slides.length, cur = 0, count = $('[data-proof-count]');
-    var pad = function (v) { return (v < 10 ? '0' : '') + v; };
-    function show(to, dir) {
-      var a = slides[cur]; cur = (to % n + n) % n; var b = slides[cur];
-      if (count) count.textContent = pad(cur + 1) + ' / ' + pad(n);
-      if (!gsap || calm) { a.hidden = true; b.hidden = false; return; }
-      var w = full;
-      gsap.to(a, w ? { clipPath: dir > 0 ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)', duration: 0.4, ease: 'power4.inOut', onComplete: done } : { autoAlpha: 0, x: -24 * dir, duration: 0.25, ease: 'power3.in', onComplete: done });
-      function done() {
-        a.hidden = true; gsap.set(a, { clearProps: 'all' });
-        b.hidden = false;
-        gsap.fromTo(b, w ? { clipPath: dir > 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' } : { autoAlpha: 0, x: 24 * dir },
-          w ? { clipPath: 'inset(0 0% 0 0%)', duration: 0.5, ease: 'power4.inOut', clearProps: 'clipPath' } : { autoAlpha: 1, x: 0, duration: 0.35, ease: 'power3.out', clearProps: 'all' });
-      }
-    }
-    $('[data-proof-prev]').addEventListener('click', function () { show(cur - 1, -1); });
-    $('[data-proof-next]').addEventListener('click', function () { show(cur + 1, 1); });
-  })();
 
   // ================================================================ price list toggle (services page)
   var curBox = $('[data-currency]');

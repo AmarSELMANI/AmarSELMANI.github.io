@@ -1,4 +1,4 @@
-/* Live demo pages, built from the portfolio's own sections ("Contact Sheet"):
+/* Live demo pages, built from the portfolio's own sections ("Clean Sheet"):
    the centred hero, the light table, the numbers row, the tilted prints, the statement and the footer band
    all come from ../../assets/site.css. This file adds what only the demos need.
    Load order: Halation (halation.css + selmani.css) -> ../../assets/site.css -> this file -> the demo's CSS.
@@ -72,7 +72,7 @@ code, kbd {
 .device__screen iframe { display: block; inline-size: 100%; block-size: 100%; border: 0; }
 
 /* ---------------------------------------------------------------- cards without an image: a circled number on top */
-.card__no { display: block; padding: var(--space-6) var(--space-5) 0; font-family: var(--font-display); font-weight: 800; font-stretch: 62.5%; font-size: 3.5rem; line-height: 1; color: var(--key-ink); }
+.card__no { display: block; padding: var(--space-6) var(--space-5) 0; font-family: var(--font-display); font-weight: 700; font-size: 2.25rem; line-height: 1; letter-spacing: -0.03em; color: var(--key-ink); }
 .card__no .mark { padding-inline: 0.35rem; }
 .card__body code { font-size: 0.82em; }
 

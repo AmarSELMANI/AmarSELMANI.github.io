@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- Contact Sheet · Halation 1.0.0 (Thriller · intensity 1 · light first, tint "selmani"), like the portfolio.
+<!-- Clean Sheet · Halation 1.0.0 (Thriller · intensity 1 · light first, tint "selmani"), like the portfolio.
      French edition of index.html: same sections. The app and the console open in French (localStorage "naftal.lang"). -->
 <html lang="fr" data-genre="thriller" data-intensity="1" data-theme="light" data-tint="selmani">
 <head>
@@ -15,12 +15,12 @@
 <script>/* page cut safety net: when Chrome skips the cross-document transition (a slow first render), the page still opens out of black */try{if('CSSViewTransitionRule' in window&&document.referrer&&new URL(document.referrer).origin===location.origin)addEventListener('pagereveal',function(e){var n=performance.getEntriesByType('navigation')[0];if(!e.viewTransition&&(!n||n.type==='navigate'))document.documentElement.classList.add('pf-cut-in')},{once:true})}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Fragment+Mono:ital@0;1&display=swap">
-<link rel="stylesheet" href="../../assets/halation/halation.css?v=6">
-<link rel="stylesheet" href="../../assets/halation/selmani.css?v=6">
-<link rel="stylesheet" href="../../assets/site.css?v=6">
-<link rel="stylesheet" href="../demo.css?v=6">
-<link rel="stylesheet" href="b2b.css?v=6">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Instrument+Serif:ital@0;1&family=Fragment+Mono&display=swap">
+<link rel="stylesheet" href="../../assets/halation/halation.css?v=7">
+<link rel="stylesheet" href="../../assets/halation/selmani.css?v=7">
+<link rel="stylesheet" href="../../assets/site.css?v=7">
+<link rel="stylesheet" href="../demo.css?v=7">
+<link rel="stylesheet" href="b2b.css?v=7">
 </head>
 <body data-page="demo" id="top">
 
@@ -34,7 +34,7 @@
     <a href="../../fr/#contact" data-cut>Contact</a>
   </nav>
   <div class="nav__tools">
-    <a class="nav__lang" href="./?v=6" hreflang="en" lang="en" data-cut aria-label="English">EN</a>
+    <a class="nav__lang" href="./?v=7" hreflang="en" lang="en" data-cut aria-label="English">EN</a>
     <button class="icon-btn" type="button" data-motion data-pause="Mettre en pause l’animation de fond" data-play="Relancer l’animation de fond" aria-label="Mettre en pause l’animation de fond" aria-pressed="false"><svg class="h-glyph" aria-hidden="true"><use href="#g-pause"></use></svg></button>
     <button class="icon-btn" type="button" data-theme-toggle data-to-dark="Allumer la lumière inactinique (mode sombre)" data-to-light="Rallumer la lumière (mode clair)" aria-label="Allumer la lumière inactinique (mode sombre)"><svg class="h-glyph" aria-hidden="true"><use href="#g-moon"></use></svg></button>
     <a class="h-btn h-btn--primary h-btn--sm nav__talk" href="../../fr/#contact" data-cut>Parlons-en</a>
@@ -45,7 +45,7 @@
   <nav class="menu__links">
     <a href="../../fr/#work">Projets</a><a href="../../fr/services.html">Services</a><a href="../../fr/#about">À propos</a><a href="../../fr/#contact">Contact</a>
   </nav>
-  <div class="menu__foot"><a class="btn-ink btn-ink--sm" href="./?v=6" hreflang="en" lang="en">English</a><button class="h-btn h-btn--quiet h-btn--sm" type="button" data-menu-close><svg class="h-glyph" aria-hidden="true"><use href="#g-close"></use></svg>Fermer</button></div>
+  <div class="menu__foot"><a class="btn-ink btn-ink--sm" href="./?v=7" hreflang="en" lang="en">English</a><button class="h-btn h-btn--quiet h-btn--sm" type="button" data-menu-close><svg class="h-glyph" aria-hidden="true"><use href="#g-close"></use></svg>Fermer</button></div>
 </dialog>
 
 <main id="main">
@@ -60,7 +60,7 @@
       </h1>
       <p class="hero__sub" data-reveal>La vraie application et la vraie console agent, <span class="kw">servies par le back-end qui tourne dans votre navigateur.</span> Rien de ce que vous saisissez ou envoyez ne quitte cette page.</p>
       <div class="hero__cta" data-reveal>
-        <a class="h-btn h-btn--primary h-btn--lg" href="console/" target="_blank" rel="noopener" data-magnetic="0.3"><span data-magnetic-inner>Ouvrir la console agent</span><svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up-right"></use></svg></a>
+        <a class="h-btn h-btn--primary h-btn--lg" href="console/" target="_blank" rel="noopener"><span data-magnetic-inner>Ouvrir la console agent</span><svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-up-right"></use></svg></a>
         <a class="btn-ink" href="#app-stage">Essayer l’application</a>
       </div>
       <p class="hero__place h-eyebrow" data-reveal><svg class="h-glyph" aria-hidden="true"><use href="#g-lock"></use></svg>Connexion avec <code>demo</code> / <code>demo1234</code></p>
@@ -201,7 +201,7 @@
     <div class="dm-foot__top">
       <a class="brand brand--lg" href="../../fr/" data-cut><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></a>
       <nav class="dm-foot__links" aria-label="Démos en ligne">
-        <a href="../naftal/" data-cut>Naftal AI Platform</a><a href="../marine-bot/fr.html?v=6" data-cut>Marine Bot</a><a href="../bn-signature/" data-cut>BN Signature</a><a href="https://github.com/AmarSELMANI/naftal-b2b" rel="noopener">Code source sur GitHub</a><a href="../../fr/#contact" data-cut>Contact</a>
+        <a href="../naftal/" data-cut>Naftal AI Platform</a><a href="../marine-bot/fr.html?v=7" data-cut>Marine Bot</a><a href="../bn-signature/" data-cut>BN Signature</a><a href="https://github.com/AmarSELMANI/naftal-b2b" rel="noopener">Code source sur GitHub</a><a href="../../fr/#contact" data-cut>Contact</a>
       </nav>
     </div>
     <div class="dm-foot__note">
@@ -214,9 +214,9 @@
 
 <script src="../../assets/vendor/gsap.min.js"></script>
 <script src="../../assets/vendor/ScrollTrigger.min.js"></script>
-<script src="../../assets/halation/glyphs.js?v=6"></script>
-<script src="../../assets/halation/halation-motion.js?v=6"></script>
-<script src="../../assets/site.js?v=6"></script>
+<script src="../../assets/halation/glyphs.js?v=7"></script>
+<script src="../../assets/halation/halation-motion.js?v=7"></script>
+<script src="../../assets/site.js?v=7"></script>
 <script>
 (function () {
   var app = document.getElementById('app');

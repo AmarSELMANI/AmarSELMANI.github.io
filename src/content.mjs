@@ -44,7 +44,6 @@ export const T = {
     nav: { work: 'Work', services: 'Services', about: 'About', contact: 'Contact', talk: 'Let’s talk', menu: 'Open menu', close: 'Close', main: 'Main', home: 'Mohamed Amar Selmani, home' },
     skip: 'Skip to content',
     theme: { toDark: 'Turn on the safelight (dark mode)', toLight: 'Turn the lights on (light mode)' },
-    motion: { pause: 'Pause background motion', play: 'Play background motion' },
     home: {
       title: 'Mohamed Amar Selmani · Full-stack & AI engineer',
       description: 'Full-stack and AI engineer in Blida, Algeria. Web platforms, mobile apps and AI systems that hold when it counts, each with a live demo.',
@@ -176,7 +175,6 @@ export const T = {
     nav: { work: 'Projets', services: 'Services', about: 'À propos', contact: 'Contact', talk: 'Parlons-en', menu: 'Ouvrir le menu', close: 'Fermer', main: 'Navigation principale', home: 'Mohamed Amar Selmani, accueil' },
     skip: 'Aller au contenu',
     theme: { toDark: 'Allumer la lumière inactinique (mode sombre)', toLight: 'Rallumer la lumière (mode clair)' },
-    motion: { pause: 'Mettre en pause l’animation de fond', play: 'Relancer l’animation de fond' },
     home: {
       title: 'Mohamed Amar Selmani · Ingénieur full-stack et IA',
       description: 'Ingénieur full-stack et IA à Blida, en Algérie. Plateformes web, applications mobiles et systèmes d’IA qui tiennent quand ça compte, chacun avec une démo en ligne.',

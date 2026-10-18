@@ -96,7 +96,6 @@ function nav(t, page) {
   </nav>
   <div class="nav__tools">
     <a class="nav__lang" href="${otherHref(t, page)}" hreflang="${t.other}" lang="${t.other}" data-cut aria-label="${t.otherName}">${t.otherLabel}</a>
-    <button class="icon-btn" type="button" data-motion data-pause="${t.motion.pause}" data-play="${t.motion.play}" aria-label="${t.motion.pause}" aria-pressed="false">${g('pause')}</button>
     <button class="icon-btn" type="button" data-theme-toggle data-to-dark="${t.theme.toDark}" data-to-light="${t.theme.toLight}" aria-label="${t.theme.toDark}">${g('moon')}</button>
     <a class="h-btn h-btn--primary h-btn--sm nav__talk" href="#contact">${t.nav.talk}</a>
     <button class="icon-btn nav__menu" type="button" data-menu-open aria-haspopup="dialog" aria-controls="menu" aria-label="${t.nav.menu}">${g('menu')}</button>
@@ -158,11 +157,11 @@ function footer(t) {
         <p>${f.bio}</p>
       </div>
       <nav class="foot__col" aria-label="${f.pages}"><p class="h-eyebrow">${f.pages}</p>
-        <a href="./#work">${t.nav.work}</a><a href="services.html">${t.nav.services}</a><a href="./#about">${t.nav.about}</a><a href="#contact">${t.nav.contact}</a></nav>
+        <a class="h-link" href="./#work">${t.nav.work}</a><a class="h-link" href="services.html">${t.nav.services}</a><a class="h-link" href="./#about">${t.nav.about}</a><a class="h-link" href="#contact">${t.nav.contact}</a></nav>
       <nav class="foot__col" aria-label="${f.demos}"><p class="h-eyebrow">${f.demos}</p>
-        ${projects.map((pr, i) => `<a href="${p}${pr.demo}" data-cut>${f.demoNames[i]}</a>`).join('')}</nav>
+        ${projects.map((pr, i) => `<a class="h-link" href="${p}${pr.demo}" data-cut>${f.demoNames[i]}</a>`).join('')}</nav>
       <nav class="foot__col" aria-label="${f.elsewhere}"><p class="h-eyebrow">${f.elsewhere}</p>
-        <a href="mailto:${site.email}">E-mail</a><a href="https://wa.me/${site.wa}" rel="noopener">WhatsApp</a><a href="${site.github}" rel="noopener">GitHub</a></nav>
+        <a class="h-link" href="mailto:${site.email}">E-mail</a><a class="h-link" href="https://wa.me/${site.wa}" rel="noopener">WhatsApp</a><a class="h-link" href="${site.github}" rel="noopener">GitHub</a></nav>
     </div>
     <p class="foot__end h-caption"><span>© ${site.year} ${site.name} · ${f.made}</span><a href="#top">${f.top} ${g('arrow-up')}</a></p>
   </div>
@@ -460,7 +459,7 @@ ${scripts(t)}`;
 
 // ------------------------------------------------------------------------ write
 // Cache version: bump when the demo pages or the stylesheets/scripts change, so no browser keeps a stale copy.
-const V = '7';
+const V = '8';
 // French pages open the French editions of the demos that have one (fr.html next to index.html).
 const frDemos = (html) => html.replace(/(demos\/(?:naftal-b2b|marine-bot)\/)"/g, '$1fr.html"');
 const bust = (html) => html

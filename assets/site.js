@@ -8,7 +8,7 @@
  *   counts     numbers that count up once
  *   tabs       the services panels (deep links: services.html#mobile)
  *   inquiry    a form that opens WhatsApp or e-mail with the message ready (nothing is stored)
- *   chrome     theme (paper / safelight), ambient pause, phone menu
+ *   chrome     theme (paper / safelight), phone menu
  */
 (function () {
   'use strict';
@@ -54,15 +54,6 @@
       try { localStorage.setItem('pf-theme', dark ? 'dark' : 'light'); } catch (e) { /* private mode */ }
       syncTheme();
     });
-  });
-
-  var motionBtn = $('[data-motion]');
-  if (motionBtn) motionBtn.addEventListener('click', function () {
-    var paused = motionBtn.getAttribute('aria-pressed') !== 'true';
-    if (paused) H.pause(); else H.resume();
-    motionBtn.setAttribute('aria-pressed', String(paused));
-    motionBtn.setAttribute('aria-label', motionBtn.getAttribute(paused ? 'data-play' : 'data-pause'));
-    glyph(motionBtn, paused ? 'play' : 'pause');
   });
 
   var menu = $('#menu'), openBtn = $('[data-menu-open]');

@@ -38,6 +38,7 @@ The contact form sends nothing itself: it opens WhatsApp or the visitor's e-mail
 |---|---|
 | `src/content.mjs` | **All words and prices**, English and French. `{c:word}` circles a word, `{u:words}` underlines, `{k:words}` sets red, `{em:words}` the italic voice. |
 | `src/build.mjs` | Renders the four pages: `node src/build.mjs` after any content change. |
+| `src/og.html` | The link preview (`img/og.jpg`, `img/og-fr.jpg`, 1200 × 630) in the site's design. Serve the repo, open `src/og.html` (or `?fr`) in a 1200 × 630 window, save a JPEG screenshot over the image, then bump `V` so WhatsApp, LinkedIn and Facebook fetch the new one (`og:image` carries `?v=`). |
 | `assets/site.css` | Layout and type. Halation tokens only: no literal colors or radii; the fonts are set once as tokens at the top. The demo pages load the same fonts: keep their `<link>` in step with `FONTS` in `src/build.mjs`. |
 | `assets/site.js` | Red pencil marks, light table, service drawings, counters, tabs, form, theme and motion toggles. |
 | `assets/halation/` | Copied from Halation 1.0.0 (`Documents\Motion design`), including `selmani.css` (the paper tint). Re-copy to update; don't edit here. |

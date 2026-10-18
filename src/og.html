@@ -1,0 +1,110 @@
+<!doctype html>
+<!-- Link preview image (img/og.jpg, img/og-fr.jpg), 1200 × 630, in the site's own design ("Clean Sheet").
+     Render: serve the repo (python -m http.server 8000), open src/og.html (English) or src/og.html?fr
+     (French) in a 1200 × 630 window, wait for body[data-ready], save a JPEG screenshot over img/og.jpg or
+     img/og-fr.jpg. Not linked from the site. -->
+<html lang="en" data-genre="thriller" data-intensity="1" data-theme="light" data-tint="selmani">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Link preview</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Instrument+Serif:ital@0;1&family=Fragment+Mono&display=swap">
+<link rel="stylesheet" href="../assets/halation/halation.css">
+<link rel="stylesheet" href="../assets/halation/selmani.css">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  html, body { margin: 0; inline-size: 1200px; block-size: 630px; overflow: hidden; }
+  body {
+    position: relative;
+    background:
+      radial-gradient(520px 380px at 14% 10%, color-mix(in oklch, var(--fill) 22%, transparent), transparent 70%),
+      radial-gradient(560px 420px at 92% 96%, color-mix(in oklch, var(--key) 9%, transparent), transparent 70%),
+      var(--bg);
+  }
+  .og { position: absolute; inset: 0; display: grid; grid-template-columns: 640px 1fr; }
+  .og__copy { display: flex; flex-direction: column; padding: 70px 0 58px 72px; }
+  .og .hero__kicker { align-self: flex-start; margin: 0 0 30px; padding: 9px 18px; gap: 11px; font-size: 19px; }
+  .og .hero__kicker::before { inline-size: 9px; block-size: 9px; }
+  .og__title { margin: 0; font-size: 58px; font-weight: 700; line-height: 1.06; letter-spacing: -0.032em; word-spacing: 0.06em; color: var(--fg-strong); }
+  .og__title .mark { position: relative; margin-inline: 0.1em 0.03em; font-family: var(--font-accent); font-style: italic; font-weight: 400; font-size: 1.12em; letter-spacing: -0.005em; }
+  .og__who { display: flex; flex-direction: column; gap: 10px; margin-block-start: auto; }
+  .og .brand { font-size: 32px; letter-spacing: -0.025em; }
+  .og__url { font-size: 20px; font-weight: 500; color: var(--fg-mute); }
+  /* two real captures on the light table, the front one with its phone */
+  .og__table { position: relative; }
+  .og__print { position: absolute; display: block; inline-size: 470px; }
+  .og__print--back { inset-block-start: 58px; inset-inline-start: 120px; rotate: 6deg; opacity: 0.96; }
+  .og__print--front { inset-block-start: 196px; inset-inline-start: 18px; rotate: -3.5deg; }
+  .og .print__mat { padding: 10px; }
+  .og .mock__url { font-size: 10px; }
+  .mark-svg { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="og">
+  <div class="og__copy">
+    <p class="hero__kicker" data-t="kicker">Full-stack &amp; AI engineer · Blida, Algeria</p>
+    <h1 class="og__title" data-t="title">Let’s build software<br>that <span class="mark">holds</span><br>when it counts.</h1>
+    <div class="og__who">
+      <span class="brand"><span class="brand__first">Mohamed Amar</span><span class="brand__last">Selmani</span></span>
+      <span class="og__url">amarselmani.github.io</span>
+    </div>
+  </div>
+  <div class="og__table" aria-hidden="true">
+    <span class="og__print og__print--back"><span class="print__mat"><span class="mock mock--browser">
+      <span class="mock__bar"><i></i><i></i><i></i><span class="mock__url">amarselmani.github.io/demos/bn-signature</span></span>
+      <span class="mock__screen"><img src="../img/bn/deck-01.webp" alt="" style="object-position:50% 50%"></span>
+    </span></span></span>
+    <span class="og__print og__print--front"><span class="print__mat"><span class="mock mock--browser">
+      <span class="mock__bar"><i></i><i></i><i></i><span class="mock__url">amarselmani.github.io/demos/naftal</span></span>
+      <span class="mock__screen"><img src="../img/naftal-ai.webp" alt="" style="object-position:0 0"></span>
+      <span class="mock mock--phone mock--over" style="--ar:780 / 1410"><span class="mock__screen"><img src="../img/naftal-ai-phone.webp" alt=""></span></span>
+    </span></span></span>
+  </div>
+</div>
+<script>
+  // French: src/og.html?fr
+  if (/[?&]fr\b/.test(location.search)) {
+    document.documentElement.lang = 'fr';
+    document.querySelector('[data-t="kicker"]').textContent = 'Ingénieur full-stack et IA · Blida, Algérie';
+    document.querySelector('[data-t="title"]').innerHTML = 'Construisons un<br>logiciel qui <span class="mark">tient</span><br>quand ça compte.';
+  }
+  // the red pencil loop around the key word, drawn the way assets/site.js draws it
+  function smooth(p) {
+    var d = 'M' + p[0][0].toFixed(1) + ' ' + p[0][1].toFixed(1);
+    for (var i = 0; i < p.length - 1; i++) {
+      var a = p[i - 1] || p[i], b = p[i], c = p[i + 1], e = p[i + 2] || c;
+      d += ' C' + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + ' ' + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + ' ' +
+        (c[0] - (e[0] - b[0]) / 6).toFixed(1) + ' ' + (c[1] - (e[1] - b[1]) / 6).toFixed(1) + ' ' + c[0].toFixed(1) + ' ' + c[1].toFixed(1);
+    }
+    return d;
+  }
+  function loop(x, y, w, h) {
+    var cx = x + w / 2, cy = y + h / 2, rx = w / 2 + Math.max(8, h * 0.16), ry = Math.max(h * 0.42, 12);
+    var a0 = -Math.PI * 0.68, turn = 1.13, tilt = -0.02, pts = [];
+    for (var i = 0; i <= 40; i++) {
+      var t = i / 40, ang = a0 + t * turn * 2 * Math.PI;
+      var k = 1 + 0.035 * Math.sin(3 * ang + 1.3) + 0.02 * Math.sin(5 * ang + 4.1) + t * 0.08;
+      var px = Math.cos(ang) * rx * k, py = Math.sin(ang) * ry * k;
+      pts.push([cx + px * Math.cos(tilt) - py * Math.sin(tilt), cy + px * Math.sin(tilt) + py * Math.cos(tilt)]);
+    }
+    return smooth(pts);
+  }
+  document.fonts.ready.then(function () {
+    var el = document.querySelector('.og__title .mark'), host = el.parentElement;
+    host.style.position = 'relative';
+    var hb = host.getBoundingClientRect(), b = el.getBoundingClientRect();
+    var d = loop(b.left - hb.left, b.top - hb.top, b.width, b.height);
+    var NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'mark-svg'); svg.setAttribute('width', host.offsetWidth); svg.setAttribute('height', host.offsetHeight);
+    [['mark-svg__main', ''], ['mark-svg__ghost', 'translate(1.2 0.9)']].forEach(function (c) {
+      var p = document.createElementNS(NS, 'path'); p.setAttribute('class', c[0]); p.setAttribute('d', d);
+      if (c[1]) p.setAttribute('transform', c[1]); svg.appendChild(p);
+    });
+    host.appendChild(svg);
+    Promise.all(Array.prototype.map.call(document.images, function (i) { return i.decode ? i.decode().catch(function () {}) : null; }))
+      .then(function () { document.body.dataset.ready = '1'; });
+  });
+</script>
+</body>
+</html>

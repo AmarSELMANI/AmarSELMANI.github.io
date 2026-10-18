@@ -61,9 +61,10 @@ function head(t, page) {
 <meta property="og:title" content="${esc(c.title)}">
 <meta property="og:description" content="${esc(c.description)}">
 <meta property="og:url" content="${pageUrl(t.lang, page)}">
-<meta property="og:image" content="${site.url}img/og${t.lang === 'fr' ? '-fr' : ''}.jpg">
+<meta property="og:image" content="${site.url}img/og${t.lang === 'fr' ? '-fr' : ''}.jpg?v=${V}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(`${site.name} · ${t.home.hero.kicker}`)}">
 <meta property="og:locale" content="${t.locale}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">

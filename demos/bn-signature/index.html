@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Halation 1.0.0 (copied 2026-10-14) · Drama · intensity 1 · dark · no project tint -->
-<html lang="fr" data-edition="owner" data-genre="drama" data-intensity="1" data-theme="dark">
+<html lang="fr" data-edition="owner" data-exit="../../" data-genre="drama" data-intensity="1" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1713,6 +1713,30 @@ body { background: var(--void); }
   pointer-events: none;
 }
 .chrome__mark { color: var(--fg-mute); }
+.chrome__left { display: flex; align-items: center; gap: 1.75rem; }
+/* exit, in the copy on the portfolio only. max() keeps it tappable when the stage is shrunk onto a phone */
+.chrome__exit {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: max(2.75rem, 34px);
+  padding-inline: max(1.1rem, 12px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-control);
+  background: color-mix(in oklch, var(--void) 55%, transparent);
+  color: var(--fg-strong);
+  font-family: var(--font-mono);
+  font-size: max(var(--fs-micro), 11px);
+  letter-spacing: var(--tr-micro);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color var(--dur-quick) var(--ease-snap), color var(--dur-quick) var(--ease-snap);
+}
+.chrome__exit[hidden] { display: none; }
+.chrome__exit:hover, .chrome__exit:focus-visible { border-color: var(--key-ink); color: var(--key-ink); }
+.chrome__exit .h-glyph { inline-size: 1.2em; block-size: 1.2em; transition: translate var(--dur-base) var(--ease-snap); }
+.chrome__exit:hover .h-glyph { translate: -0.25em 0; }
 .chrome__right { display: flex; align-items: center; gap: 1.5rem; }
 .chrome__count { font-size: var(--fs-micro); color: var(--fg-mute); }
 .chrome .h-reel { pointer-events: auto; min-height: 2rem; }
@@ -1735,6 +1759,83 @@ body { background: var(--void); }
   transition: opacity var(--g-transition) var(--ease-exit);
 }
 .hint.is-gone { opacity: 0; }
+.hint[hidden] { display: none; }
+
+/* cue: how to move on. A key-light dot with two rings rippling out like a tap, and an arrow nudging forward.
+   Transform and opacity only; still in calm mode. */
+.cue {
+  position: absolute;
+  inset-inline-start: 6rem;
+  inset-block-end: max(3.25rem, 16px);
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: max(1.25rem, 10px);
+  padding: max(0.9rem, 7px) max(1.6rem, 14px) max(0.9rem, 7px) max(1rem, 8px);
+  border: 1px solid color-mix(in oklch, var(--key) 45%, var(--line));
+  border-radius: var(--r-control);
+  background: color-mix(in oklch, var(--void) 84%, transparent);
+  box-shadow: 0 0 3rem -0.5rem var(--glow), var(--raise-2);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 500ms var(--ease-exit), transform 500ms var(--ease-exit);
+}
+.cue.is-on { opacity: 1; transform: none; transition: opacity 700ms var(--ease-develop), transform 900ms var(--ease-develop); }
+.cue__spot { position: relative; flex: none; inline-size: max(2.75rem, 24px); block-size: max(2.75rem, 24px); }
+.cue__spot b { position: absolute; inset: 32%; border-radius: 50%; background: var(--key); box-shadow: 0 0 1rem var(--glow); }
+.cue__spot i { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--key); opacity: 0; animation: cue-ring 1.8s var(--ease-develop) infinite; }
+.cue__spot i + i { animation-delay: 0.9s; }
+@keyframes cue-ring { from { transform: scale(0.35); opacity: 0.9; } to { transform: scale(1.65); opacity: 0; } }
+.cue__text { display: grid; gap: 0.2em; }
+.cue__main { font-family: var(--font-sans); font-weight: 500; font-size: max(1.375rem, 12px); line-height: 1.2; color: var(--fg-strong); white-space: nowrap; }
+.cue__sub { font-family: var(--font-mono); font-size: max(var(--fs-micro), 9px); letter-spacing: var(--tr-micro); text-transform: uppercase; color: var(--fg-mute); white-space: nowrap; }
+.cue__arrow { flex: none; inline-size: max(1.75rem, 14px); block-size: max(1.75rem, 14px); color: var(--key-ink); animation: cue-nudge 1.8s var(--ease-drift) infinite; }
+@keyframes cue-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(0.6em); } }
+.cue:not(.is-on) .cue__spot i, .cue:not(.is-on) .cue__arrow { animation-play-state: paused; }
+[data-tier="calm"] .cue__spot i, [data-tier="calm"] .cue__arrow { animation: none; }
+[data-tier="calm"] .cue__spot i:first-child { opacity: 0.6; transform: scale(1.25); }
+
+/* edges (mouse): a faint arrow at the side the pointer is on, so the click zones read */
+.edge {
+  position: absolute;
+  inset-block-start: 50%;
+  z-index: 22;
+  display: grid;
+  place-items: center;
+  inline-size: 4.5rem;
+  block-size: 4.5rem;
+  margin-block-start: -2.25rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--void) 70%, transparent);
+  color: var(--fg-strong);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-panel) var(--ease-snap), transform var(--dur-panel) var(--ease-snap);
+}
+.edge .h-glyph { inline-size: 1.75rem; block-size: 1.75rem; }
+.edge--prev { inset-inline-start: 2rem; transform: translateX(-0.75rem); }
+.edge--next { inset-inline-end: 2rem; transform: translateX(0.75rem); }
+.stage[data-hover="prev"] .edge--prev, .stage[data-hover="next"] .edge--next { opacity: 1; transform: none; }
+.stage[data-hover] { cursor: pointer; }
+
+/* tap: a ring of light where the finger or the click landed */
+.tap {
+  position: absolute;
+  z-index: 24;
+  inline-size: max(5rem, 44px);
+  block-size: max(5rem, 44px);
+  margin: calc(max(5rem, 44px) * -0.5) 0 0 calc(max(5rem, 44px) * -0.5);
+  border: 2px solid var(--key);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--glow), transparent);
+  pointer-events: none;
+  animation: tap 560ms var(--ease-develop) forwards;
+}
+@keyframes tap { from { transform: scale(0.3); opacity: 1; } to { transform: scale(1.4); opacity: 0; } }
+[data-tier="calm"] .tap { animation: tap-calm 400ms linear forwards; }
+@keyframes tap-calm { from { opacity: 0.8; } to { opacity: 0; } }
 .blackout { position: absolute; inset: 0; z-index: 30; background: var(--void); opacity: 0; pointer-events: none; transition: opacity var(--dur-panel) var(--ease-snap); }
 .blackout.is-on { opacity: 1; pointer-events: auto; }
 
@@ -1843,7 +1944,7 @@ body { background: var(--void); }
   .s15__back img { opacity: 0.32 !important; }
   .s15 .credits > :not(.credits__fine) { display: none; }
   .s15 .credits { place-content: end center; padding-block-end: 4rem; }
-  .print-wash, .h-frame__bar, .chrome, .progress, .hint, .blackout, .h-grain, .h-vignette, .h-shutter, .h-intro, .h-ambient, .bld-tap { display: none !important; }
+  .print-wash, .h-frame__bar, .chrome, .progress, .hint, .cue, .edge, .tap, .blackout, .h-grain, .h-vignette, .h-shutter, .h-intro, .h-ambient, .bld-tap { display: none !important; }
   .strip__frames li { background: var(--surface); }
   .track__beam { transform: none !important; }
 }
@@ -2131,7 +2232,11 @@ body { background: var(--void); }
 
   <!-- ============================================================ chrome -->
   <header class="chrome" aria-hidden="false">
-    <p class="chrome__mark h-eyebrow">BN Signature</p>
+    <div class="chrome__left">
+      <!-- shown only in the copy on the portfolio (html[data-exit], see scripts/bundle.mjs --portfolio) -->
+      <a class="chrome__exit" id="exit" href="../../#work" data-cut hidden><svg class="h-glyph" aria-hidden="true"><use href="#g-arrow-left"></use></svg><span>Portfolio</span></a>
+      <p class="chrome__mark h-eyebrow">BN Signature</p>
+    </div>
     <div class="chrome__right">
       <p class="chrome__count h-tc" aria-live="polite"><span id="count-now">01</span> / <span id="count-all">15</span></p>
       <button class="h-reel" type="button" data-reel data-runtime="720"><span data-reel-time>00:00:00:00</span><span class="h-sr">Mettre en pause l’ambiance</span></button>
@@ -2139,6 +2244,14 @@ body { background: var(--void); }
   </header>
   <div class="progress" aria-hidden="true"><span class="progress__bar" id="progress"></span></div>
   <p class="hint h-eyebrow" id="hint">Espace ou flèches · F plein écran · P notes · B écran noir</p>
+  <!-- how to move on, for someone viewing alone (shared editions): a pulsing light, then gone at the first move -->
+  <div class="cue" id="cue" role="status" aria-live="polite">
+    <span class="cue__spot" aria-hidden="true"><i></i><i></i><b></b></span>
+    <span class="cue__text"><span class="cue__main" id="cue-main">Touchez pour avancer</span><span class="cue__sub" id="cue-sub">À gauche pour revenir</span></span>
+    <svg class="h-glyph cue__arrow" aria-hidden="true"><use href="#g-arrow-right"></use></svg>
+  </div>
+  <span class="edge edge--prev" aria-hidden="true"><svg class="h-glyph"><use href="#g-chevron-left"></use></svg></span>
+  <span class="edge edge--next" aria-hidden="true"><svg class="h-glyph"><use href="#g-chevron-right"></use></svg></span>
   <div class="blackout" id="blackout" aria-hidden="true"></div>
 </main>
 <p class="rotate" aria-hidden="true">Tournez le téléphone pour voir la présentation en grand</p>
@@ -3231,12 +3344,14 @@ body { background: var(--void); }
   }
 
   function next() {
+    hideCue();
     if (busy || introRunning) return;
     var s = slides[cur];
     if (beat < maxBeat(s)) { beat++; playBeat(s, beat); chrome(); }
     else go(cur + 1);
   }
   function prev() {
+    hideCue();
     if (busy || introRunning) return;
     var s = slides[cur];
     if (beat > 0) { unBeat(s, beat); beat--; chrome(); }
@@ -3274,6 +3389,44 @@ body { background: var(--void); }
   // blackout
   var black = document.getElementById('blackout');
   function blackout() { black.classList.toggle('is-on'); }
+
+  // ---------------------------------------------------------------- exit (the copy on the portfolio: html[data-exit])
+  // Back to the portfolio's work, in the language the visitor came from (site.js remembers it as pf-lang).
+  var exitEl = document.getElementById('exit');
+  var EXIT = html.getAttribute('data-exit');
+  if (exitEl && EXIT) {
+    var frSite = false;
+    try { frSite = localStorage.getItem('pf-lang') === 'fr'; } catch (e) { /* private mode */ }
+    exitEl.href = EXIT + (frSite ? 'fr/' : '') + '#work';
+    exitEl.hidden = false;
+  }
+  function exit() { if (exitEl && !exitEl.hidden) exitEl.click(); }
+
+  // ---------------------------------------------------------------- cue: how to move on (shared editions)
+  // Someone viewing alone does not know the deck moves by tap, click or arrow keys. A pulsing light says so
+  // once the title has played, leaves at the first move, and comes back after a long pause (never on the
+  // last slide, nor on the live demo, where watching is the point).
+  var cue = document.getElementById('cue'), lastMove = performance.now();
+  function hideCue() { lastMove = performance.now(); if (cue) cue.classList.remove('is-on'); }
+  function showCue() { if (cue && OWNER) cue.classList.add('is-on'); }
+  if (cue && OWNER) {
+    hint.hidden = true;
+    var byTouch = tier() === 'touch';
+    document.getElementById('cue-main').textContent = byTouch ? 'Touchez pour avancer' : 'Cliquez pour avancer';
+    document.getElementById('cue-sub').textContent = byTouch ? 'À gauche pour revenir'
+      : (exitEl && !exitEl.hidden ? 'Ou touche \u2192 \u00b7 Échap pour quitter' : 'Ou touche \u2192 \u00b7 \u2190 pour revenir');
+    (function first() {
+      if (introRunning) { setTimeout(first, 300); return; }
+      setTimeout(function () { if (cur === 0 && beat === 0) showCue(); }, 1400);
+    })();
+    setInterval(function () {
+      if (cue.classList.contains('is-on') || introRunning || busy || black.classList.contains('is-on')) return;
+      if (cur >= N - 1 || slides[cur].hasAttribute('data-demo')) return;
+      if (performance.now() - lastMove > 15000) showCue();
+    }, 1000);
+  } else if (cue) {
+    cue.hidden = true;
+  }
 
   function fullscreen() {
     if (!document.fullscreenElement) { if (html.requestFullscreen) html.requestFullscreen().catch(function () {}); }
@@ -3343,16 +3496,37 @@ body { background: var(--void); }
     else if (k === 'f' || k === 'F') fullscreen();
     else if ((k === 'p' || k === 'P') && !OWNER) presenter();
     else if (k === 'b' || k === 'B' || k === '.') blackout();
+    else if (k === 'Escape' && !document.fullscreenElement) exit();
   }
   document.addEventListener('keydown', onKey);
 
   var IGNORE = 'a, button, input, textarea, select, label, .bld, .h-reel';
+  // a ring of light where the tap or click landed, so it reads as received
+  function tapAt(x, y) {
+    var t = document.createElement('span');
+    t.className = 'tap'; t.setAttribute('aria-hidden', 'true');
+    t.style.left = x + 'px'; t.style.top = y + 'px';
+    stage.appendChild(t);
+    setTimeout(function () { t.remove(); }, 700);
+  }
   stage.addEventListener('click', function (e) {
     if (e.target.closest(IGNORE)) return;
     if (black.classList.contains('is-on')) { blackout(); return; }
     var r = stage.getBoundingClientRect();
+    tapAt(e.clientX - r.left, e.clientY - r.top);
     if (e.clientX - r.left < r.width / 3) prev(); else next();
   });
+  // mouse: a faint arrow at the edge the pointer is near (left third goes back, right third goes on)
+  if (tier() === 'full') {
+    stage.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      var r = stage.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+      var atEnd = cur >= N - 1 && beat >= maxBeat(slides[cur]), atStart = cur === 0 && beat === 0;
+      var side = e.target.closest(IGNORE) ? '' : x < 1 / 3 ? (atStart ? '' : 'prev') : x > 2 / 3 ? (atEnd ? '' : 'next') : '';
+      if (side) stage.setAttribute('data-hover', side); else stage.removeAttribute('data-hover');
+    }, { passive: true });
+    stage.addEventListener('pointerleave', function () { stage.removeAttribute('data-hover'); });
+  }
   var sx = 0, sy = 0;
   stage.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') { sx = e.clientX; sy = e.clientY; } }, { passive: true });
   stage.addEventListener('pointerup', function (e) {

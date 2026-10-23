@@ -10,6 +10,9 @@
       // Dark first; a viewer who chose print mode gets it before the first paint.
       try { var m = localStorage.getItem("naftal.theme"); if (m === "light" || m === "dark") document.documentElement.dataset.theme = m; } catch (e) {}
     </script>
+    <!-- the portfolio's page cut (keep these two lines when rebuilding the demo) -->
+    <link rel="stylesheet" href="/demos/cut.css?v=9" />
+    <script>/* page cut safety net: when Chrome skips the cross-document transition (a slow first render), the page still opens out of black */try{if('CSSViewTransitionRule' in window&&document.referrer&&new URL(document.referrer).origin===location.origin)addEventListener('pagereveal',function(e){var n=performance.getEntriesByType('navigation')[0];if(!e.viewTransition&&(!n||n.type==='navigate'))document.documentElement.classList.add('pf-cut-in')},{once:true})}catch(e){}</script>
     <style>
       /* Demo banner. Rendered outside React so no component needs to know
          about it; removed automatically when VITE_DEMO is not set. */

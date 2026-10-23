@@ -27,8 +27,9 @@ Kept three ways:
 
 | Page | Sections |
 |---|---|
-| `index.html`, `fr/index.html` | Centred sentence (one word circled) · light table of four live demos (arrows, drag, swipe, keys), sized so its title, print and caption fit one screen · three numbers · four service cards as tilted prints, each with an animated ink-and-pencil drawing of its promise (built in `src/build.mjs`, animated in `assets/site.css`) · about · contact form · footer. Buttons don't follow the pointer: ink rises in them and the arrow steps forward. |
+| `index.html`, `fr/index.html` | Centred sentence (one word circled) · light table of five projects, Triple A first (arrows, drag, swipe, keys), sized so its title, print and caption fit one screen; each print opens the project's description page · three numbers · four service cards as tilted prints, each with an animated ink-and-pencil drawing of its promise (built in `src/build.mjs`, animated in `assets/site.css`) · about · contact form · footer. Buttons don't follow the pointer: ink rises in them and the arrow steps forward. |
 | `services.html`, `fr/services.html` | Split hero with a fan of phones · services in tabs (`services.html#mobile` opens that tab) with prices · four steps · contact form · footer |
+| `work/<slug>/`, `fr/work/<slug>/` | One description page per project before its demo (Triple A, Naftal AI, Marine Bot, BN Signature; the B2B demo is its own description page): the pitch and the way in · the capture on the light table · three numbers · what it does, as four pinned prints · more screens · try it yourself / my part and stack · the demo again or the next project · contact · footer. Words in `src/content.mjs` → `T[lang].pages`, extra captures in `shots`. Triple A links out to its live site, which can't be embedded (`X-Frame-Options: SAMEORIGIN`). |
 
 The contact form sends nothing itself: it opens WhatsApp or the visitor's e-mail app with the message written.
 
@@ -36,15 +37,16 @@ The contact form sends nothing itself: it opens WhatsApp or the visitor's e-mail
 
 | File | What it is |
 |---|---|
-| `src/content.mjs` | **All words and prices**, English and French. `{c:word}` circles a word, `{u:words}` underlines, `{k:words}` sets red, `{em:words}` the italic voice. |
-| `src/build.mjs` | Renders the four pages: `node src/build.mjs` after any content change. |
+| `src/content.mjs` | **All words and prices**, English and French. `{c:word}` circles a word, `{u:words}` underlines, `{k:words}` sets red, `{em:words}` the italic voice, `{code:x}` sets x as code. |
+| `src/build.mjs` | Renders every page (home, services and the description pages, in both languages): `node src/build.mjs` after any content change. |
 | `src/og.html` | The link preview (`img/og.jpg`, `img/og-fr.jpg`, 1200 × 630) in the site's design. Serve the repo, open `src/og.html` (or `?fr`) in a 1200 × 630 window, save a JPEG screenshot over the image, then bump `V` so WhatsApp, LinkedIn and Facebook fetch the new one (`og:image` carries `?v=`). |
 | `assets/site.css` | Layout and type. Halation tokens only: no literal colors or radii; the fonts are set once as tokens at the top. The demo pages load the same fonts: keep their `<link>` in step with `FONTS` in `src/build.mjs`. |
 | `assets/site.js` | Red pencil marks, light table, service drawings, counters, tabs, form, theme and motion toggles. |
 | `assets/halation/` | Copied from Halation 1.0.0 (`Documents\Motion design`), including `selmani.css` (the paper tint). Re-copy to update; don't edit here. |
 | `assets/vendor/` | GSAP 3.13 + ScrollTrigger. |
-| `img/` | Real captures of the demos, the portrait (`portrait-halation.webp`), BN Signature stills in `bn/`, link previews `og.jpg` / `og-fr.jpg`. |
+| `img/` | Real captures of the demos (October 2026: `triple-a*.webp`, `naftal-ai-v2*.webp` and `naftal-ai-assistant.webp`, `marine-v2.webp`, `marine-phone-v2.webp`, `marine-ratings.webp`, `marine-message.webp`; the older captures stay for the archived design), the portrait (`portrait-halation.webp`), BN Signature stills in `bn/`, link previews `og.jpg` / `og-fr.jpg`. Desktop captures are 1600 × 1000, phone captures 780 × 1410 (390 wide at 2×), without the browser's scrollbar. |
 | `demos/` | The live demos. `bn-signature/` is the presentation deck (speaker notes removed). |
+| `demos/cut.css` | The portfolio's page cut for the demos that keep their own styles (Naftal AI, Marine Bot): the cross-document opt-in, the same wipe as `assets/site.css`, and the safety net. |
 | `archive/contact-sheet/` | The previous design, frozen (see above). Not generated: `src/build.mjs` leaves it alone. |
 
 ## Prices
@@ -76,14 +78,17 @@ language. The Marine Bot's `app.js` reads the page's `lang`: on `fr.html` it lab
 translates the engine's English limit and flag sentences for display (the `engine/` files stay verbatim, so a
 new sentence in the engine shows in English until a rule is added to `FR_RULES` in `app.js`).
 After changing demo pages or assets, bump `V` in `src/build.mjs` and the `?v=` on the demo pages.
-Every page joins the same page transition (cross-document view transitions in `assets/site.css`; `a[data-cut]`
-plays Halation's shutter in other browsers). The Naftal AI demo is the app's own build: only its banner and the
-transition were edited in `demos/naftal/index.html`. **Port that `<style>` block and banner to the
-`portfolio-demo` branch's `frontend/index.html` before rebuilding the demo, or a rebuild will undo them.**
+Every page joins the same page transition. A cross-document view transition plays only when both pages opt in,
+and the arriving page's rules animate it, so every page carries the cut: the portfolio's pages through
+`assets/site.css`, the Naftal AI and Marine Bot demos through `demos/cut.css` plus the safety-net script in their
+`<head>`. `a[data-cut]` plays Halation's shutter in browsers without view transitions. The Naftal AI demo is the
+app's own build: only its banner and the two cut lines (the `cut.css` link and the script) were edited in
+`demos/naftal/index.html`. **Port those lines and the banner to the branch's `frontend/index.html` before
+rebuilding the demo, or a rebuild will undo them** (the October 2026 rebuild from `halation-redesign` did).
 
 | Demo | Path | How to rebuild |
 |---|---|---|
 | Naftal B2B | `demos/naftal-b2b/` | In `naftal-b2b`, branch `portfolio-demo`: `node demo/build.mjs <this repo>/demos/naftal-b2b`. |
-| Naftal AI platform | `demos/naftal/` | In `naftal-ai-platform`, branch `portfolio-demo`: `VITE_DEMO=1 npx vite build` in `frontend/`, then replace this folder with `dist/`. |
+| Naftal AI platform | `demos/naftal/` | In `naftal-ai-platform`, branch `halation-redesign` (the current design): `VITE_DEMO=1 npx vite build` in `frontend/`, then replace this folder with `dist/` and put back the cut lines (see above). |
 | Algerian Coast Marine Bot | `demos/marine-bot/` | Copy the bot's `src/` modules into `demos/marine-bot/engine/`. |
 | BN Signature | `demos/bn-signature/` | In `Documents\bn hotel`: `node scripts/bundle.mjs --owner`, copy `build/owner.html` here as `index.html`. |

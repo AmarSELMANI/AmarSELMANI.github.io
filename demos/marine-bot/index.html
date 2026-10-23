@@ -20,6 +20,9 @@
 <link rel="stylesheet" href="halation/halation.css?v=9">
 <link rel="stylesheet" href="halation/marine.css?v=9">
 <link rel="stylesheet" href="app.css?v=9">
+<!-- the portfolio's page cut -->
+<link rel="stylesheet" href="../cut.css?v=9">
+<script>/* page cut safety net: when Chrome skips the cross-document transition (a slow first render), the page still opens out of black */try{if('CSSViewTransitionRule' in window&&document.referrer&&new URL(document.referrer).origin===location.origin)addEventListener('pagereveal',function(e){var n=performance.getEntriesByType('navigation')[0];if(!e.viewTransition&&(!n||n.type==='navigate'))document.documentElement.classList.add('pf-cut-in')},{once:true})}catch(e){}</script>
 </head>
 <body>
 
@@ -34,7 +37,7 @@
     <a class="h-btn h-btn--quiet h-btn--sm" href="fr.html" hreflang="fr" lang="fr" aria-label="Français">FR</a>
     <button class="h-btn h-btn--quiet h-btn--sm h-btn--icon" type="button" data-theme-toggle data-to-light="Switch to light mode" data-to-dark="Switch to dark mode" aria-label="Switch to light mode"><svg class="h-glyph" aria-hidden="true"><use href="#g-sun"></use></svg></button>
     <button class="h-reel" type="button" data-reel data-runtime="150" aria-pressed="false"><span data-reel-time>00:00:00:00</span><span class="h-sr">Pause ambient motion</span></button>
-    <a class="h-btn h-btn--ghost h-btn--sm nav__back" href="../../"><svg class="h-glyph" aria-hidden="true" data-mirror><use href="#g-arrow-left"></use></svg><span>Portfolio</span></a>
+    <a class="h-btn h-btn--ghost h-btn--sm nav__back" href="../../" data-cut><svg class="h-glyph" aria-hidden="true" data-mirror><use href="#g-arrow-left"></use></svg><span>Portfolio</span></a>
   </div>
 </header>
 
@@ -199,9 +202,9 @@
     </div>
     <nav class="credits__links" aria-label="More" data-reveal>
       <a class="h-link h-link--key" href="https://github.com/AmarSELMANI/algerian-coast-marine-bot" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
-      <a class="h-link" href="../../">Portfolio</a>
-      <a class="h-link" href="../naftal/">Naftal AI Platform</a>
-      <a class="h-link" href="../naftal-b2b/">Naftal B2B</a>
+      <a class="h-link" href="../../" data-cut>Portfolio</a>
+      <a class="h-link" href="../../work/naftal-ai/" data-cut>Naftal AI Platform</a>
+      <a class="h-link" href="../naftal-b2b/" data-cut>Naftal B2B</a>
     </nav>
   </div>
 </footer>

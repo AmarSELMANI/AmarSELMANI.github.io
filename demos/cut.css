@@ -1,0 +1,36 @@
+/* The portfolio's page cut, for demo pages that keep their own styles and don't load assets/site.css
+   (Naftal AI is the app's own build; Marine Bot is a standalone Halation page in Drama).
+   Same cut as assets/site.css: the old page slides back into the dark, the new one wipes in from the
+   reading side. A cross-document transition plays only when both pages opt in, and the arriving page's
+   rules animate both snapshots, so every page of the site loads this cut (or site.css).
+   The fallbacks stand in where a page has no Halation tokens. */
+
+@view-transition { navigation: auto; }
+
+::view-transition { background: var(--void, #0c0b0a); }
+::view-transition-old(root) { animation: pf-cut-out 520ms var(--ease-exit, cubic-bezier(0.5, 0, 0.75, 0)) both; }
+::view-transition-new(root) { animation: pf-cut-in 760ms var(--ease-cut, cubic-bezier(0.83, 0, 0.17, 1)) 90ms both; }
+:root[dir="rtl"]::view-transition-new(root) { animation-name: pf-cut-in-rtl; }
+
+@keyframes pf-cut-out { to { opacity: 0.2; transform: translate3d(-5%, 0, 0) scale(0.97); } }
+@keyframes pf-cut-in { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
+@keyframes pf-cut-in-rtl { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+
+/* page cut safety net: when Chrome skips the transition (a slow first render), the page opens out of black */
+html.pf-cut-in body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  background: var(--void, #0c0b0a);
+  pointer-events: none;
+  animation: pf-uncover 640ms var(--ease-develop, cubic-bezier(0.19, 1, 0.22, 1)) 40ms both;
+}
+@keyframes pf-uncover { to { opacity: 0; visibility: hidden; } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: pf-fade 200ms linear both; }
+  ::view-transition-old(root) { animation-direction: reverse; }
+  html.pf-cut-in body::after { animation-duration: 200ms; }
+}
+@keyframes pf-fade { from { opacity: 0; } }

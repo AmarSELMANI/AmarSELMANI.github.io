@@ -257,7 +257,7 @@ em { font-style: italic; }
 .mock__bar i { inline-size: 0.5rem; block-size: 0.5rem; border-radius: 50%; background: var(--line-strong); }
 .mock__bar i:nth-child(1) { background: var(--key); }
 .mock__bar i:nth-child(2) { background: var(--fill); }
-.mock__url { overflow: hidden; margin-inline-start: 0.6rem; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.04em; white-space: nowrap; text-overflow: ellipsis; color: var(--fg-mute); }
+.mock__url { min-inline-size: 0; overflow: hidden; margin-inline-start: 0.6rem; font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.04em; white-space: nowrap; text-overflow: ellipsis; color: var(--fg-mute); }
 .mock__screen { position: relative; display: block; overflow: hidden; }
 .mock--browser > .mock__screen { aspect-ratio: 16 / 10; border-radius: 0 0 var(--r-mock) var(--r-mock); }
 .mock__screen img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: top; }
@@ -558,6 +558,59 @@ html[data-cur="dzd"] .cur-dzd { display: contents; }
 .frame__d { color: var(--fg); text-wrap: pretty; }
 @media (min-width: 48rem) { .frames { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 72rem) { .frames { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ------------------------------------------------------------------ project pages (work/<slug>/, built by src/build.mjs) */
+.hero--work { padding-block-end: var(--space-6); }
+.hero--work .hero__title { font-size: clamp(2.4rem, 1rem + 4.2vw, 4.75rem); }
+.hero--work .hero__sub { max-inline-size: 52ch; }
+/* the print: one capture on the light table, room below for the phone that stands in front of it */
+.pj-print { padding-block: var(--space-6) calc(var(--space-9) + 2rem); }
+.pj-print__mat { max-inline-size: 62rem; margin-inline: auto; }
+.pj-shots { padding-block: 0 var(--sec); }
+.pj-shots__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-7) var(--space-6); }
+@media (min-width: 52rem) {
+  .pj-shots__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pj-shots__grid > :only-child { grid-column: 1 / -1; inline-size: min(100%, 56rem); justify-self: center; }
+}
+/* a block, not a grid: a grid item would grow to the browser bar's address and push the page sideways */
+.pj-shot { display: block; min-inline-size: 0; margin: 0; }
+.pj-shot figcaption { margin-block-start: var(--space-3); text-align: center; text-wrap: balance; }
+.pj-try { padding-block: var(--sec); border-block-start: 1px solid var(--line); }
+.pj-try__grid { display: grid; gap: var(--space-8); }
+@media (min-width: 60rem) { .pj-try__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-9); } }
+/* the steps are a real sequence: numbered */
+.pj-steps { list-style: none; margin: var(--space-6) 0 0; padding: 0; counter-reset: s; display: grid; }
+.pj-steps li { counter-increment: s; display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: var(--space-3); padding-block: var(--space-4); border-block-end: 1px solid var(--line); color: var(--fg); text-wrap: pretty; }
+.pj-steps li:first-child { border-block-start: 1px solid var(--line); }
+.pj-steps li::before { content: counter(s, decimal-leading-zero); padding-block-start: 0.3em; font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: 0.06em; color: var(--key-ink); }
+.pj-try__go { margin-block-start: var(--space-5); }
+.pj-role { display: grid; gap: var(--space-4); align-content: start; }
+.pj-role h3 { font-size: 1.125rem; font-weight: 700; letter-spacing: -0.015em; color: var(--fg-strong); }
+.pj-role h3 + p, .pj-role h3 + ul { margin-block-start: calc(-1 * var(--space-2)); }
+.pj-role p { max-inline-size: 58ch; color: var(--fg); text-wrap: pretty; }
+.pj-role .chips { margin: 0; }
+.pj-note { padding-inline-start: var(--space-3); border-inline-start: 2px solid var(--pencil); font-size: var(--fs-small); color: var(--fg-mute); }
+:is(.pj-steps, .pj-role) code { padding: 0.1em 0.45em; border: 1px solid var(--line-strong); border-radius: var(--r-field); background: var(--sunk); font: 400 0.85em/1 var(--font-mono); color: var(--fg-strong); white-space: nowrap; }
+/* the way in, and the next project: two bars that fill with ink from below, like the cards' foot */
+.pj-next { padding-block: var(--space-8); border-block-start: 1px solid var(--line); }
+.pj-next__in { display: grid; gap: var(--space-4); }
+@media (min-width: 52rem) { .pj-next__in { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pj-next__go {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 2px solid var(--fg-strong);
+  background: linear-gradient(var(--fg-strong), var(--fg-strong)) no-repeat 50% 100% / 100% 0%;
+  color: var(--fg-strong);
+  text-decoration: none;
+  transition: background-size var(--dur-panel) var(--ease-snap), color var(--dur-quick) var(--ease-snap);
+}
+.pj-next__go:hover, .pj-next__go:focus-visible { background-size: 100% 100%; color: var(--bg); }
+.pj-next__go:hover .h-eyebrow, .pj-next__go:focus-visible .h-eyebrow { color: inherit; }
+.pj-next__t { display: inline-flex; align-items: center; gap: 0.4em; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; }
+.pj-next__t .h-glyph { inline-size: 0.8em; block-size: 0.8em; }
+.pj-next__go:hover .h-glyph:has(> use[href="#g-arrow-right"]) { animation: pf-step 520ms var(--ease-snap); }
+.pj-next__go:hover .h-glyph:has(> use[href="#g-arrow-up-right"]) { animation: pf-step-up 520ms var(--ease-snap); }
 
 /* ------------------------------------------------------------------ tiers */
 [data-tier="touch"] .card, [data-tier="calm"] .card { transition: none; }

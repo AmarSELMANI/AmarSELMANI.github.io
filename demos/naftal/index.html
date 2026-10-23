@@ -1,65 +1,52 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-genre="drama" data-intensity="0" data-theme="dark" data-tint="naftal">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/demos/naftal/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Naftal — Espace IA Interne</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&amp;family=Fragment+Mono&amp;display=swap">
+    <title>Naftal · Espace IA interne</title>
+    <meta name="theme-color" content="#040b18" />
+    <script>
+      // Dark first; a viewer who chose print mode gets it before the first paint.
+      try { var m = localStorage.getItem("naftal.theme"); if (m === "light" || m === "dark") document.documentElement.dataset.theme = m; } catch (e) {}
+    </script>
     <style>
       /* Demo banner. Rendered outside React so no component needs to know
          about it; removed automatically when VITE_DEMO is not set. */
-      /* Contact Sheet banner (portfolio design). Halation 1.0.0, tint "selmani": paper #f6f4f0,
-         ink #100f0f, mute #535251, line #81807f, key-deep #90101a, key-ink #af2c1f. */
+      /* Demo banner, outside React so no component needs to know about it; removed when VITE_DEMO
+         is not set. Halation tokens come from the app stylesheet. */
       #demo-banner {
         position: fixed;
-        left: 0;
-        right: 0;
+        inset-inline: 0;
         bottom: 0;
         z-index: 9999;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         gap: 0.5rem 1.25rem;
-        padding: 0.6rem 1.25rem;
+        padding: 0.6rem 1rem;
         padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
-        background: #f6f4f0;
-        border-top: 4px solid #90101a;
-        color: #272626;
-        font: 400 13px/1.5 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+        background: var(--void);
+        border-top: 1px solid var(--key);
+        color: var(--on-void);
+        font: 400 0.8125rem/1.5 var(--font-sans);
       }
-      #demo-banner strong { color: #af2c1f; font: 400 11px/1 'Fragment Mono', ui-monospace, monospace; letter-spacing: 0.14em; text-transform: uppercase; margin-right: 0.35rem; }
-      #demo-banner code { font: 400 12px/1 'Fragment Mono', ui-monospace, monospace; color: #100f0f; background: #fcfaf6; border: 1px solid #81807f; border-radius: 2px; padding: 2px 5px; }
-      #demo-banner a { color: #100f0f; font-weight: 600; text-decoration: none; border-bottom: 2px solid #90101a; padding: 2px 0; }
-      #demo-banner a:hover { color: #af2c1f; }
-      #demo-banner .spacer { margin-left: auto; }
+      #demo-banner .tag { font-family: var(--font-mono); font-size: var(--fs-micro); letter-spacing: var(--tr-micro); text-transform: uppercase; color: var(--key-ink); }
+      #demo-banner code { padding: 0.05em 0.4em; border: 1px solid var(--line-strong); border-radius: var(--r-field); font: 400 0.75rem/1.4 var(--font-mono); color: var(--fg-strong); }
+      #demo-banner .spacer { margin-inline-start: auto; }
+      #demo-banner a { color: var(--fg-strong); text-decoration: none; }
+      #demo-banner a:hover { color: var(--key-ink); }
       #demo-banner button {
-        min-height: 32px;
-        padding: 0 0.9rem;
-        font: 600 12px/1 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #100f0f;
+        min-height: 2rem;
+        padding-inline: 0.9rem;
+        font: 500 0.8125rem/1 var(--font-sans);
+        color: var(--fg);
         background: transparent;
-        border: 2px solid #100f0f;
-        border-radius: 999px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--r-control);
         cursor: pointer;
       }
-      #demo-banner button:hover { background: #100f0f; color: #f6f4f0; }
-      /* Page cut, the same as on the portfolio: the old page slides back into the dark, this one wipes in. */
-      @view-transition { navigation: auto; }
-      ::view-transition { background: #110f0d; }
-      ::view-transition-old(root) { animation: pf-cut-out 520ms cubic-bezier(0.5, 0, 0.75, 0) both; }
-      ::view-transition-new(root) { animation: pf-cut-in 760ms cubic-bezier(0.83, 0, 0.17, 1) 90ms both; }
-      @keyframes pf-cut-out { to { opacity: 0.2; transform: translate3d(-5%, 0, 0) scale(0.97); } }
-      @keyframes pf-cut-in { from { clip-path: inset(0 0 0 100%); } to { clip-path: inset(0 0 0 0); } }
-      @media (prefers-reduced-motion: reduce) {
-        ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
-      }
-      /* Browsers without view transitions: the shutter Halation dropped on the way out lifts here. */
-      #pf-cut { position: fixed; inset: 0; z-index: 10000; background: #110f0d; pointer-events: none; transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
+      #demo-banner button:hover { border-color: var(--key-ink); color: var(--fg-strong); }
       /* The banner takes its own row under the app instead of floating over it:
          the app shell is exactly one screen tall (h-dvh), so a floating banner hid
          the sidebar's logout and the bottom of every screen. #root fills what is
@@ -70,44 +57,23 @@
       /* z-index back to auto: as a flex item it would still stack, over the phone menu. */
       body.demo #demo-banner { position: static; z-index: auto; flex-shrink: 0; }
     </style>
-    <script type="module" crossorigin src="/demos/naftal/assets/index-DUO-V9sU.js"></script>
-    <link rel="stylesheet" crossorigin href="/demos/naftal/assets/index-DQYhA0u2.css">
+    <script type="module" crossorigin src="/demos/naftal/assets/index-nUoMeCXV.js"></script>
+    <link rel="stylesheet" crossorigin href="/demos/naftal/assets/index-vVvN5J7f.css">
   </head>
   <body>
     <div id="root"></div>
 
-    <div id="demo-banner" hidden>
+    <div id="demo-banner" data-theme="dark" hidden>
+      <span class="tag">Démonstration publique</span>
       <span>
-        <strong>Démo publique</strong> Données entièrement synthétiques, aucune donnée Naftal.
-        Comptes&nbsp;: <code>Admin</code>, <code>com212</code>, <code>cdd208g</code>, mot de passe
-        quelconque, code OTP <code>482913</code>.
+        Données entièrement synthétiques, aucune donnée Naftal. Comptes&nbsp;: <code>Admin</code>,
+        <code>com212</code>, <code>cdd208g</code>, n’importe quel mot de passe, code
+        <code>482913</code>.
       </span>
       <span class="spacer"></span>
-      <a href="../../#work" data-cut>← Portfolio</a>
+      <a href="../../">Portfolio</a>
       <button type="button" onclick="this.parentElement.remove()">Masquer</button>
     </div>
-    <script>
-      // Shutter hand-off for browsers without cross-document view transitions (Halation's a[data-cut]).
-      (function () {
-        var cut = null;
-        try { cut = sessionStorage.getItem('h-cut-in'); sessionStorage.removeItem('h-cut-in'); } catch (e) {}
-        if (cut) {
-          var s = document.createElement('div'); s.id = 'pf-cut'; document.body.appendChild(s);
-          requestAnimationFrame(function () { requestAnimationFrame(function () { s.style.opacity = '0'; setTimeout(function () { s.remove(); }, 600); }); });
-        }
-        var back = document.querySelector('#demo-banner a[data-cut]');
-        try { if (back && localStorage.getItem('pf-lang') === 'fr') back.setAttribute('href', '../../fr/#work'); } catch (e) {}
-        if (back && !('CSSViewTransitionRule' in window)) back.addEventListener('click', function (e) {
-          e.preventDefault();
-          try { sessionStorage.setItem('h-cut-in', 'fade'); } catch (err) {}
-          var s = document.createElement('div'); s.id = 'pf-cut'; s.style.opacity = '0'; document.body.appendChild(s);
-          requestAnimationFrame(function () { s.style.opacity = '1'; });
-          setTimeout(function () { location.href = back.href; }, 380);
-        });
-      })();
-    </script>
-
-
 
   </body>
 </html>
